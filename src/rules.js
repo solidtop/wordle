@@ -1,24 +1,34 @@
-
-
-
 export default function checkGuess(guess, wordToGuess) {    
     
-    const res = [];
+    const results = [];
     const letters = guess.split('');
 
     letters.forEach((letter, i) => {
         if (letter === wordToGuess.charAt(i)) {
-            res.push({letter, result: 'correct'});
-        } else if (letterExists(letter, wordToGuess)) {
-            res.push({letter, result: 'misplaced'});
+            results.push({letter, result: 'correct'});
         } else {
-            res.push({letter, result: 'incorrect'});
+            results.push({letter, result: 'incorrect'});
         }
     });
 
-    return res;
+    letters.forEach((letter, i) => {
+        if (wordToGuess.includes(letter) && !hasCorrectResult(letter, results)) {
+            results[i] = {letter, result: 'misplaced'};
+        }
+    });
+
+    return results;
 }
 
-function letterExists(letter, word) {
-    return word.includes(letter);
+function hasCorrectResult(letter, results) {
+    for (let i = 0; i < results.length; i++) {
+        if (results[i].letter === letter && results[i].result === 'correct') {
+            return true;
+        }
+    }
+
+    return false;
 }
+
+
+console.log(checkGuess('ismisppsiis', 'mississippi'));

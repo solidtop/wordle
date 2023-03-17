@@ -35,7 +35,7 @@ describe('checkGuess()', () => {
     });
 
     it('Should return first result with "misplaced"', () => {
-        const response = checkGuess('LYKLA', mockWord)[0];
+        const response = checkGuess('LYKCA', mockWord)[0];
         expect(response).toEqual({...response, result: 'misplaced'});
     });
 
