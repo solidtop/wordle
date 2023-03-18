@@ -1,5 +1,11 @@
 export default function checkGuess(guess, wordToGuess) {    
     
+    guess = guess.toUpperCase();
+    const regex = /^[A-ZÄÖÅ]+$/;
+    if (guess.length !== wordToGuess.length || !regex.test(guess)) {
+        return 'invalid guess';
+    }
+
     const results = [];
     for (let i = 0; i < guess.length; i++) {
         const letter = guess.charAt(i);
