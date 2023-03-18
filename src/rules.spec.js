@@ -3,17 +3,7 @@ import checkGuess from './rules.js';
 const mockWord = 'CYKLA';
 
 describe('checkGuess()', () => {
-    /*it('Should return an array of objects', () => {
-        expect(checkGuess('CYKLA', mockWord)).toEqual(
-            expect.arrayContaining([
-                expect.objectContaining({
-                    letter: 'C',
-                    result: 'incorrect'
-                })
-            ])
-        );
-    });*/
-
+   
     it('Should return letters in correct order', () => {
         const expected = ['C', 'Y', 'K', 'L', 'A'];
         const response = checkGuess('CYKLA', mockWord);
@@ -47,5 +37,14 @@ describe('checkGuess()', () => {
             expect(obj).toEqual({...obj, result: expected[i]});
         });
     });
+
+    /*it('Should return results with "incorrect", "misplaced", "incorrect", "correct", "incorrect"', () => {
+        const expected = ['incorrect', 'misplaced', 'incorrect', 'correct', 'incorrect'];
+        
+        const response = checkGuess('analallaa', 'analkanal');
+        response.forEach((obj, i) => {
+            expect(obj).toEqual({...obj, result: expected[i]});
+        });
+    });*/
 });
 
