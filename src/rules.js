@@ -8,8 +8,8 @@ export default function checkGuess(guess, wordToGuess) {
 
     const results = [];
     for (let i = 0; i < guess.length; i++) {
-        const letter = guess[i];
-        const targetLetter = wordToGuess[i];
+        const letter = guess.charAt(i);
+        const targetLetter = wordToGuess.charAt(i);
         const isCorrect = letter === targetLetter;
         const isMisplaced = !isCorrect && hasMisplaced(letter, guess, wordToGuess);
         
