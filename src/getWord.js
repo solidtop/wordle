@@ -12,7 +12,7 @@ export default function getWord(wordList, wordLength, allowRepeats) {
         excludedIndices.push(index);
     }
     if (!chosenWord) throw new Error('Could not find word with matching criteria');
-    return chosenWord;
+    return chosenWord.toUpperCase();
 }
 
 export function hasRepeats(word) {
