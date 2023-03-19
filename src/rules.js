@@ -11,7 +11,7 @@ export default function checkGuess(guess, wordToGuess) {
         const letter = guess.charAt(i);
         const targetLetter = wordToGuess.charAt(i);
         const isCorrect = letter === targetLetter;
-        const isMisplaced = !isCorrect && hasMisplaced(letter, guess, wordToGuess);
+        const isMisplaced = !isCorrect && checkMisplaced(letter, guess, wordToGuess);
         
         results.push({ letter, result: isCorrect ? 'correct' : isMisplaced ? 'misplaced' : 'incorrect' });
     }
@@ -19,13 +19,11 @@ export default function checkGuess(guess, wordToGuess) {
     return results;
 }
 
-function hasMisplaced(letter, guess, wordToGuess) {
-    let index = wordToGuess.indexOf(letter);
-    while (index !== -1) {
-        if (guess.charAt(index) !== letter) {
+function checkMisplaced(letter, guess, wordToGuess) {
+    for (let i = 0; i < wordToGuess.length; i++) {
+        if (wordToGuess.charAt(i) === letter && guess.charAt(i) !== letter) {
             return true;
         }
-        index = wordToGuess.indexOf(letter, index + 1);
     }
     return false;
 }
