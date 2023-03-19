@@ -11,7 +11,7 @@ export default function checkGuess(guess, wordToGuess) {
         const letter = guess.charAt(i);
         if (letter === wordToGuess.charAt(i)) {
             results.push({letter, result: 'correct'});
-        } else if (isMisplaced(letter, guess, wordToGuess)) {
+        } else if (isMisplaced(letter, guess, wordToGuess, i)) {
             results.push({letter, result: 'misplaced'});
         } else {
             results.push({letter, result: 'incorrect'});
@@ -21,9 +21,9 @@ export default function checkGuess(guess, wordToGuess) {
     return results;
 }
 
-function isMisplaced(letter, guess, wordToGuess) {
-    let index = wordToGuess.indexOf(letter);
+function isMisplaced(letter, guess, wordToGuess, pos) {
 
+    let index = wordToGuess.indexOf(letter);
     while (index !== -1) {
         if (guess.charAt(index) !== letter) {
             return true;

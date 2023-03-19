@@ -1,7 +1,7 @@
 import checkGuess from './rules.js';
 
 /*
-    These tests assumes the wordToGuess is always correct and therefore only validated the guess from user.
+    These tests assumes the wordToGuess is always correct and therefore only validates the guess from user.
 
     STRATEGY
     it('Should return letters in correct order'): This test verifies that the letters in the response are in the correct order, which should match the order of the letters in the original guess.

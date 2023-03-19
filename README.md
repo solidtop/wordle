@@ -1,11 +1,8 @@
 # Wordle
 
-## Define
 Spelet väljer ut ett ord med fem bokstäver. Spelaren ska gissa vilket ord det är genom att mata in något ord. Om ordet är korrekt har spelaren vunnit. Om det är fel ord ger spelet feedback som indikerar huruvida några bokstäver i det gissade ordet finns med i det hemliga ordet, och huruvida spelaren placerat dem på rätt plats. Spelaren gissar sedan på nytt.
 
 
-
-## Seperate
 - Funktion som tar emot två strängar (gissning och korrekta ordet)
 - Funktionalitet: Kontrollera vilka bokstäver från det ena ordet som förekommer i det andra och i så fall var
 
