@@ -1,28 +1,25 @@
 export default function checkGuess(guess, wordToGuess) {    
-    
     guess = guess.toUpperCase();
     const regex = /^[A-ZÄÖÅ]+$/;
+
     if (guess.length !== wordToGuess.length || !regex.test(guess)) {
         return 'invalid guess';
     }
 
     const results = [];
     for (let i = 0; i < guess.length; i++) {
-        const letter = guess.charAt(i);
-        if (letter === wordToGuess.charAt(i)) {
-            results.push({letter, result: 'correct'});
-        } else if (isMisplaced(letter, guess, wordToGuess, i)) {
-            results.push({letter, result: 'misplaced'});
-        } else {
-            results.push({letter, result: 'incorrect'});
-        }
+        const letter = guess[i];
+        const targetLetter = wordToGuess[i];
+        const isCorrect = letter === targetLetter;
+        const isMisplaced = !isCorrect && hasMisplaced(letter, guess, wordToGuess);
+        
+        results.push({ letter, result: isCorrect ? 'correct' : isMisplaced ? 'misplaced' : 'incorrect' });
     }
     
     return results;
 }
 
-function isMisplaced(letter, guess, wordToGuess, pos) {
-
+function hasMisplaced(letter, guess, wordToGuess) {
     let index = wordToGuess.indexOf(letter);
     while (index !== -1) {
         if (guess.charAt(index) !== letter) {

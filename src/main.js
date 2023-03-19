@@ -1,4 +1,7 @@
 import checkGuess from './rules.js';
+import getWord from './getWord.js';
 
-console.log(checkGuess('hallå', 'cykla'));
-//console.log(checkGuess('analallaa', 'analkanal'));
+const wordList = ['cykla', 'kaffe', 'hund', 'blomma', 'bokstav'];
+const wordToGuess = getWord(wordList, 5, true);
+const guess = 'cykla';
+console.log(checkGuess(guess, wordToGuess));
