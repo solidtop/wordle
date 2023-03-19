@@ -1,4 +1,4 @@
-export default function getWord(wordList, wordLength, allowRepeats) {
+export default function getRandomWord(wordList, wordLength, allowRepeats) {
     const excludedIndices = [];
     let chosenWord = '';
     while (!chosenWord && excludedIndices.length < wordList.length) {

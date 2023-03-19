@@ -1,4 +1,4 @@
-import checkGuess from './rules.js';
+import checkGuess from './checkGuess.js';
 
 /*
 These tests assumes the wordToGuess is always correct with uppercase and therefore only validates the guess from user.
