@@ -1,20 +1,17 @@
 export default function getWord(wordList, wordLength, allowRepeats) {
-    let safety = 0;
-    let isValid = false;
+    const excludedIndices = [];
     let chosenWord = '';
-    while(!isValid && safety++ < wordList.length) {
-        const i = Math.floor(Math.random() * wordList.length);
-        const potentialWord = wordList[i];
-        if (potentialWord.length === wordLength && !allowRepeats ? !hasRepeats(potentialWord) : true) {
-            isValid = true;
+    while (!chosenWord && excludedIndices.length < wordList.length) {
+        const index = Math.floor(Math.random() * wordList.length);
+        if (excludedIndices.includes(index)) continue;
+
+        const potentialWord = wordList[index];
+        if (potentialWord.length === wordLength && (allowRepeats || !hasRepeats(potentialWord))) {
             chosenWord = potentialWord;
         }
+        excludedIndices.push(index);
     }
-
-    if (!chosenWord) {
-        throw new Error('Could not find word with matching criteria');
-    }
-
+    if (!chosenWord) throw new Error('Could not find word with matching criteria');
     return chosenWord;
 }
 
