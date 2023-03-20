@@ -47,6 +47,14 @@ describe('checkGuess()', () => {
         });
     });
 
+    it('returns results with "incorrect", "incorrect", "correct", "correct", "incorrect", "correct", "correct", "incorrect", "incorrect", "incorrect", "incorrect"', () => {
+        const expected = ['incorrect', 'incorrect', 'correct', 'correct', 'incorrect', 'correct', 'correct', 'incorrect', 'incorrect', 'incorrect', 'incorrect'];
+        const response = checkGuess("sssssssssss", "MISSISSIPPI");
+        response.forEach((obj, i) => {
+            expect(obj).toEqual({...obj, result: expected[i]});
+        });
+    });
+
     it('returns results with "incorrect", "misplaced", "incorrect", "correct", "incorrect"', () => {
         const expected = ['incorrect', 'misplaced', 'incorrect', 'correct', 'incorrect'];
         const response = checkGuess('HALLÅ', mockWord);
