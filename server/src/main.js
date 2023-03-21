@@ -1,4 +1,4 @@
-import checkGuess from './checkGuess.js';
+import checkGuess from './controllers/checkGuess.js';
 import getRandomWord from './randomWord.js';
 
 const wordList = ['cykla', 'kaffe', 'hund', 'blomma', 'bokstav'];

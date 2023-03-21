@@ -18,7 +18,7 @@ TESTING OBJECTIVES
 const mockWord = 'CYKLA';
 
 describe('checkGuess()', () => {
-    it('returns letters in correct order', () => { 
+    it('returns letters in order', () => { 
         const expected = ['C', 'Y', 'K', 'L', 'A'];
         const response = checkGuess('CYKLA', mockWord);
         response.forEach((obj, i) => {
