@@ -4,7 +4,6 @@ import checkGuess from './checkGuess.js';
 These tests assumes the wordToGuess is always correct with uppercase and therefore only validates the guess from user.
 
 TESTING OBJECTIVES
-- "returns letters in correct order": This test ensures that the function returns the correct letters in the correct order as they appear in the guess.
 - "returns all results with 'correct'": This test ensures that the function returns 'correct' for all letters in the guess that are in the correct position.
 - "returns all results with 'incorrect'": This test ensures that the function returns 'incorrect' for all letters in the guess that are not in the correct position.
 - "returns all results with 'misplaced'": This test ensures that the function returns 'misplaced' for all letters in the guess that are in the wrong position.
@@ -15,69 +14,100 @@ TESTING OBJECTIVES
 - "handles whitespace": This test ensures that the function returns 'invalid guess' if the guess contains any whitespace.
 */
 
-const mockWord = 'CYKLA';
-
 describe('checkGuess()', () => {
-    it('returns letters in correct order', () => { 
-        const expected = ['C', 'Y', 'K', 'L', 'A'];
-        const response = checkGuess('CYKLA', mockWord);
-        response.forEach((obj, i) => {
-            expect(obj).toEqual({...obj, letter: expected[i]});
-        });
-    });
-
+   
     it('returns all results with "correct"', () => {
-        const response = checkGuess('CYKLA', mockWord);
-        response.forEach(obj => {
-            expect(obj).toEqual({...obj, result: 'correct'});
-        });
+        const expected = [
+            { letter: 'C', result: 'correct'},
+            { letter: 'Y', result: 'correct'},
+            { letter: 'K', result: 'correct'},
+            { letter: 'L', result: 'correct'},
+            { letter: 'A', result: 'correct'},
+        ];
+        const results = checkGuess('CYKLA', 'CYKLA');
+        expect(results).toStrictEqual(expected);
     });
 
     it('returns all results with "incorrect"', () => {
-        const response = checkGuess('FJORD', mockWord);
-        response.forEach(obj => {
-            expect(obj).toEqual({...obj, result: 'incorrect'});
-        });
+        const expected = [
+            { letter: 'F', result: 'incorrect'},
+            { letter: 'J', result: 'incorrect'},
+            { letter: 'O', result: 'incorrect'},
+            { letter: 'R', result: 'incorrect'},
+            { letter: 'D', result: 'incorrect'},
+        ];
+        const results = checkGuess('FJORD', 'CYKLA');
+        expect(results).toStrictEqual(expected);
     });
 
     it('returns all results with "misplaced"', () => {
-        const response = checkGuess('ISMISPPSIIS', 'MISSISSIPPI');
-        response.forEach(obj => {
-            expect(obj).toEqual({...obj, result: 'misplaced'});
-        });
+        const expected = [
+            { letter: 'I', result: 'misplaced'},
+            { letter: 'S', result: 'misplaced'},
+            { letter: 'M', result: 'misplaced'},
+            { letter: 'I', result: 'misplaced'},
+            { letter: 'S', result: 'misplaced'},
+            { letter: 'P', result: 'misplaced'},
+            { letter: 'P', result: 'misplaced'},
+            { letter: 'S', result: 'misplaced'},
+            { letter: 'I', result: 'misplaced'},
+            { letter: 'I', result: 'misplaced'},
+            { letter: 'S', result: 'misplaced'},
+        ];
+        const results = checkGuess('ISMISPPSIIS', 'MISSISSIPPI');
+        expect(results).toStrictEqual(expected);
     });
 
     it('returns results with "incorrect", "incorrect", "correct", "correct", "incorrect", "correct", "correct", "incorrect", "incorrect", "incorrect", "incorrect"', () => {
-        const expected = ['incorrect', 'incorrect', 'correct', 'correct', 'incorrect', 'correct', 'correct', 'incorrect', 'incorrect', 'incorrect', 'incorrect'];
-        const response = checkGuess("sssssssssss", "MISSISSIPPI");
-        response.forEach((obj, i) => {
-            expect(obj).toEqual({...obj, result: expected[i]});
-        });
+        const expected = [
+            { letter: 'S', result: 'incorrect'},
+            { letter: 'S', result: 'incorrect'},
+            { letter: 'S', result: 'correct'},
+            { letter: 'S', result: 'correct'},
+            { letter: 'S', result: 'incorrect'},
+            { letter: 'S', result: 'correct'},
+            { letter: 'S', result: 'correct'},
+            { letter: 'S', result: 'incorrect'},
+            { letter: 'S', result: 'incorrect'},
+            { letter: 'S', result: 'incorrect'},
+            { letter: 'S', result: 'incorrect'},
+        ];
+        const results = checkGuess("SSSSSSSSSSS", "MISSISSIPPI");
+        expect(results).toStrictEqual(expected);
     });
 
     it('returns results with "incorrect", "misplaced", "incorrect", "correct", "incorrect"', () => {
-        const expected = ['incorrect', 'misplaced', 'incorrect', 'correct', 'incorrect'];
-        const response = checkGuess('HALLÅ', mockWord);
-        response.forEach((obj, i) => {
-            expect(obj).toEqual({...obj, result: expected[i]});
-        });
+        const expected = [
+            { letter: 'H', result: 'incorrect'},
+            { letter: 'A', result: 'misplaced'},
+            { letter: 'L', result: 'incorrect'},
+            { letter: 'L', result: 'correct'},
+            { letter: 'Å', result: 'incorrect'},
+        ];
+        const results = checkGuess('HALLÅ', 'CYKLA');
+        expect(results).toStrictEqual(expected);
     });
 
     it('handles guesses with incorrect number of letters', () => {
-        const response = checkGuess('CYKL', mockWord);
+        const response = checkGuess('CYKL', 'CYKLA');
         expect(response).toBe('invalid guess');
     });
 
     it('handles guesses with special characters', () => {
-        const response = checkGuess('!?*-+', mockWord); 
+        const response = checkGuess('!?*-+', 'CYKLA'); 
         expect(response).toBe('invalid guess');
     });
 
     it('handles lowercase', () => {
-        const response = checkGuess('cykla', mockWord);
-        response.forEach(obj => {
-            expect(obj).toEqual({...obj, result: 'correct'});
-        });
+        const expected = [
+            { letter: 'C', result: 'correct'},
+            { letter: 'Y', result: 'correct'},
+            { letter: 'K', result: 'correct'},
+            { letter: 'L', result: 'correct'},
+            { letter: 'A', result: 'correct'},
+        ];
+        const results = checkGuess('cykla', 'CYKLA');
+        expect(results).toStrictEqual(expected);
     });
 
     it('handles whitespace', () => {
@@ -85,4 +115,6 @@ describe('checkGuess()', () => {
         expect(response).toBe('invalid guess');
     });
 });
+
+
 
