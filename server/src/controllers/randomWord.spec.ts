@@ -1,4 +1,5 @@
-import getRandomWord, { hasRepeats } from './randomWord.js';
+import { describe, it, expect } from '@jest/globals';
+import getRandomWord, { hasRepeats } from './randomWord';
 
 /*
     TESTING OBJECTIVES
