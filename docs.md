@@ -40,12 +40,12 @@
         "message": "Invalid guess format"
     }    
 
-### /api/word
+### /api/secret-word
 * ```GET``` returns a randomly generated word.
 
 ##### Query Parameters
-* length=5 (optional): the length of the random word. Must be an integer between 3 and 10 (inclusive). Defaults to 5 if not specified.
-
+* length=5 (optional): the length of the secret word. Must be an integer between 3 and 10 (inclusive). Defaults to 5 if not specified.
+* allowRepeats (optional): if the secret word allows repeated or unique letters.
 
 ### /api/guess
 * ```POST``` submits a guess for the secret word.
