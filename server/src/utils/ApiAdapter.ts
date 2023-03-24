@@ -13,4 +13,3 @@ class APIAdapter {
 }
 
 export default APIAdapter;
-
