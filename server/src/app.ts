@@ -2,6 +2,8 @@ import express from 'express';
 import { engine } from 'express-handlebars';
 import bodyParser from 'body-parser';
 import router from './routers';
+import cookieParser from 'cookie-parser';
+import jsonwebtoken from 'jsonwebtoken';
 
 export default function initApp() {
     const app = express();
