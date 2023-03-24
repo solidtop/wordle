@@ -6,7 +6,7 @@ class APIAdapter {
 
     async fetchWords() {
         const res = await fetch(API_URL);
-        const data = await res.json();
+        const data: string = await res.json();
         return data;
     }
 

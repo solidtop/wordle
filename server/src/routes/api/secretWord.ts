@@ -14,7 +14,7 @@ router.get('/secret-word', async (req, res) => {
     const secretWord = getRandomWord(wordList, length, allowRepeats); 
    
     if (secretWord) {
-        res.json({ secretWord });
+        res.json({ secretWord }); //TODO: make this more secure by only sending the wordlength to client.
     } else {
         res.status(500).send({ message: 'Could not find word with matching criteria' });
     }
