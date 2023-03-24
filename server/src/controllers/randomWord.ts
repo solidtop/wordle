@@ -1,4 +1,4 @@
-export default function getRandomWord(wordList: string[], wordLength: number, allowRepeats: boolean): string {
+export default function getRandomWord(wordList: string[], wordLength = 5, allowRepeats = true): string {
     const excludedIndices: number[] = [];
     let chosenWord = '';
     while (!chosenWord && excludedIndices.length < wordList.length) {
@@ -18,3 +18,5 @@ export default function getRandomWord(wordList: string[], wordLength: number, al
 export function hasRepeats(word: string): boolean {
     return /(.).*\1/.test(word);
 }
+
+//TODO: The wordList needs some length sorting so lookups is more efficient 
