@@ -27,7 +27,7 @@ describe('checkGuess()', () => {
             { letter: 'L', result: 'correct'},
             { letter: 'A', result: 'correct'},
         ];
-        const results = checkGuess('CYKLA', 'CYKLA');
+        const {results} = checkGuess('CYKLA', 'CYKLA');
         expect(results).toStrictEqual(expected);
     });
 
@@ -39,7 +39,7 @@ describe('checkGuess()', () => {
             { letter: 'R', result: 'incorrect'},
             { letter: 'D', result: 'incorrect'},
         ];
-        const results = checkGuess('FJORD', 'CYKLA');
+        const {results} = checkGuess('FJORD', 'CYKLA');
         expect(results).toStrictEqual(expected);
     });
 
@@ -57,7 +57,7 @@ describe('checkGuess()', () => {
             { letter: 'I', result: 'misplaced'},
             { letter: 'S', result: 'misplaced'},
         ];
-        const results = checkGuess('ISMISPPSIIS', 'MISSISSIPPI');
+        const {results} = checkGuess('ISMISPPSIIS', 'MISSISSIPPI');
         expect(results).toStrictEqual(expected);
     });
 
@@ -75,7 +75,7 @@ describe('checkGuess()', () => {
             { letter: 'S', result: 'incorrect'},
             { letter: 'S', result: 'incorrect'},
         ];
-        const results = checkGuess('SSSSSSSSSSS', 'MISSISSIPPI');
+        const {results} = checkGuess('SSSSSSSSSSS', 'MISSISSIPPI');
         expect(results).toStrictEqual(expected);
     });
 
@@ -87,18 +87,20 @@ describe('checkGuess()', () => {
             { letter: 'L', result: 'correct'},
             { letter: 'Å', result: 'incorrect'},
         ];
-        const results = checkGuess('HALLÅ', 'CYKLA');
+        const {results} = checkGuess('HALLÅ', 'CYKLA');
         expect(results).toStrictEqual(expected);
     });
 
     it('handles guesses with incorrect number of letters', () => {
-        const response = checkGuess('CYKL', 'CYKLA');
-        expect(response).toBe('invalid guess');
+        const status = checkGuess('CYKL', 'CYKLA');
+        expect(status.isValid).toBeFalsy();
+        expect(status.message).toBe('invalid guess');
     });
 
     it('handles guesses with special characters', () => {
-        const response = checkGuess('!?*-+', 'CYKLA'); 
-        expect(response).toBe('invalid guess');
+        const status = checkGuess('!?*-+', 'CYKLA'); 
+        expect(status.isValid).toBeFalsy();
+        expect(status.message).toBe('invalid guess');
     });
 
     it('handles lowercase', () => {
@@ -109,13 +111,14 @@ describe('checkGuess()', () => {
             { letter: 'L', result: 'correct'},
             { letter: 'A', result: 'correct'},
         ];
-        const results = checkGuess('cykla', 'CYKLA');
+        const {results} = checkGuess('cykla', 'CYKLA');
         expect(results).toStrictEqual(expected);
     });
 
     it('handles whitespace', () => {
-        const response = checkGuess('cyk aa', mockWord); 
-        expect(response).toBe('invalid guess');
+        const status = checkGuess('cyk aa', mockWord); 
+        expect(status.isValid).toBeFalsy();
+        expect(status.message).toBe('invalid guess');
     });
 });
 
