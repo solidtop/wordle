@@ -51,7 +51,6 @@
 * ```POST``` submits a guess for the secret word.
 
     ##### Request
-        200 OK
         {
             "guess": "word"
         }    
