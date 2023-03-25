@@ -37,7 +37,7 @@
 ### Error Handling
     400 Bad Request
     {
-        "message": "Invalid guess format"
+        "error": "Invalid guess format"
     }    
 
 ### /api/secret-word

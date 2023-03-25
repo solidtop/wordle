@@ -5,7 +5,7 @@ type Result = {
 
 type Status = {
     isValid: boolean;
-    message?: string;
+    error?: string;
     results?: Result[];
 }
 
@@ -14,7 +14,7 @@ export default function checkGuess(guess: string, wordToGuess: string): Status {
     const regex = /^[A-ZÄÖÅ]+$/;
 
     if (guess.length !== wordToGuess.length || !regex.test(guess)) {
-        return { isValid: false, message: 'invalid guess' };
+        return { isValid: false, error: 'invalid guess' };
     }
     
     const results: Result[] = [];

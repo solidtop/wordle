@@ -14,15 +14,12 @@ router.post('/secret-word', async (req, res) => {
     const wordList = Object.keys(words);   
     const secretWord = getRandomWord(wordList, length, allowRepeats); 
 
-    console.log(req.session);
-    req.session.secretWord = 'yoowoedaw';
-
-    res.send(req.session.secretWord);
-    /*if (secretWord) {
-        res.json({ secretWord }); //TODO: make this more secure by only sending the wordlength to client.
+    if (secretWord) {
+        req.session.secretWord = secretWord; //Save secret word on server
+        res.json({ wordLength: secretWord.length}); 
     } else {
-        res.status(500).send({ message: 'Could not find word with matching criteria' });
-    }*/
+        res.status(500).send({ error: 'Could not find word with matching criteria' });
+    }
 });
 
 export default router;
