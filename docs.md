@@ -55,9 +55,9 @@
             "guess": "word"
         }    
     ##### Response
-        200 OK
+        200 OK 
         {
-            "isCorrect": false,
+            "gameIsFinished: false,
             "results": [
                 { 
                     "letter: "s", 
@@ -65,6 +65,15 @@
                 }
             ]
         }    
+        Game is finished
+        {
+            gameIsFinished: true, 
+            playerHasWon: true, 
+            message: 'Congratulations, you have won!',
+            results: [],
+            score: 0,
+            gameDuration: 1000,
+        }
 
 ### /api/highscores
 * ```GET``` retrieves a list of all highscores
