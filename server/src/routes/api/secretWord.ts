@@ -20,7 +20,6 @@ router.post('/secret-word', async (req, res) => {
     
     if (secretWord) {
         req.session.secretWord = secretWord; // Save secret word in session
-        console.log(secretWord);
         req.session.numGuesses = NUM_GUESSES;
         req.session.gameStartTimestamp = new Date().toString(); // Save start time of game
         res.json({ wordLength: secretWord.length}); // NOTE: Return word length for now 
