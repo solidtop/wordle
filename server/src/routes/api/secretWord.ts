@@ -17,7 +17,6 @@ router.post('/secret-word', async (req, res) => {
     const api = new APIAdapter();
     const wordList = await api.fetchWords(length);
     const secretWord = getRandomWord(wordList, length, allowRepeats); 
-    console.log(secretWord);
     
     if (secretWord) {
         req.session.secretWord = secretWord; // Save secret word in session
