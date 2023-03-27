@@ -9,10 +9,16 @@ router.post('/secret-word', async (req, res) => {
     const length = parseInt(req.query.length as string) || 5;
     const allowRepeats = req.query.allowRepeats ? req.query.allowRepeats === 'true' : true;
 
+    if (length < 5 || length > 10) {
+        res.status(400).send({ error: 'Invalid length' });
+        return;
+    }
+
     const api = new APIAdapter();
     const wordList = await api.fetchWords(length);
     const secretWord = getRandomWord(wordList, length, allowRepeats); 
-
+    console.log(secretWord);
+    
     if (secretWord) {
         req.session.secretWord = secretWord; // Save secret word in session
         res.json({ wordLength: secretWord.length}); // NOTE: Return word length for now 
