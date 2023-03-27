@@ -1,7 +1,6 @@
 import express from 'express';
 import APIAdapter from '../../utils/ApiAdapter';
 import getRandomWord from '../../controllers/randomWord';
-import GameTimer from '../../controllers/GameTimer';
 
 const router = express.Router();
 
@@ -20,7 +19,8 @@ router.post('/secret-word', async (req, res) => {
     
     if (secretWord) {
         req.session.secretWord = secretWord; // Save secret word in session
-        new GameTimer(req.session).start(); // Start game timer
+        console.log(secretWord);
+        req.session.gameStartTimestamp = new Date().toString(); // Save start time of game
         res.json({ wordLength: secretWord.length}); // NOTE: Return word length for now 
     } else {
         res.status(500).send({ error: 'Could not find word with matching criteria' });
