@@ -20,6 +20,7 @@ router.post('/guess', (req, res) => {
                 gameIsFinished: true, 
                 playerHasWon: true, 
                 message: 'Congratulations, you have won!',
+                secretWord,
                 results,
                 score: 0,
                 gameDuration,

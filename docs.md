@@ -60,19 +60,20 @@
             "gameIsFinished: false,
             "results": [
                 { 
-                    "letter: "s", 
+                    "letter: "S", 
                     "result": "incorrect",
                 }
             ]
         }    
         Game is finished
         {
-            gameIsFinished: true, 
-            playerHasWon: true, 
-            message: 'Congratulations, you have won!',
-            results: [],
-            score: 0,
-            gameDuration: 1000,
+            "gameIsFinished": true, 
+            "playerHasWon": true, 
+            "message": 'Congratulations, you have won!',
+            "secretWord": "HELLO",
+            "results": [],
+            "score": 0,
+            "gameDuration": 1000,
         }
 
 ### /api/highscores
