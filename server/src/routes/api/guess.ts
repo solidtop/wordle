@@ -1,5 +1,5 @@
 import express from 'express';
-import checkGuess, { Result } from '../../controllers/checkGuess';
+import checkGuess from '../../controllers/checkGuess';
 import { getGameState } from '../../controllers/gameController';
 
 const router = express.Router();
