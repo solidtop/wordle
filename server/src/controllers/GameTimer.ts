@@ -6,14 +6,14 @@ export default class GameTimer {
 
     constructor(session: SessionData) {
         this.session = session;
-        this.session.gameTimer = 0;
+        this.session.gameDuration = 0;
     }
 
     start() {
         this.interval = setInterval(() => {
-            if (this.session.gameTimer !== undefined) {
-                this.session.gameTimer ++;
-                console.log(this.session.gameTimer);
+            if (this.session.gameDuration !== undefined) {
+                this.session.gameDuration ++;
+                console.log(this.session.gameDuration);
             }
         }, 1000);
     }
