@@ -1,12 +1,23 @@
-export default function checkGuess(guess: string, wordToGuess: string) {
+type Result = {
+    letter: string;
+    result: string;
+}
+
+type Status = {
+    isValid: boolean;
+    error?: string;
+    results?: Result[];
+}
+
+export default function checkGuess(guess: string, wordToGuess: string): Status {
     guess = guess.toUpperCase();
     const regex = /^[A-ZÄÖÅ]+$/;
 
     if (guess.length !== wordToGuess.length || !regex.test(guess)) {
-        return 'invalid guess';
+        return { isValid: false, error: 'invalid guess' };
     }
     
-    const results = [];
+    const results: Result[] = [];
     for (let i = 0; i < guess.length; i++) {
         const letter = guess.charAt(i);
         const targetLetter = wordToGuess.charAt(i);
@@ -16,7 +27,7 @@ export default function checkGuess(guess: string, wordToGuess: string) {
         results.push({ letter, result: isCorrect ? 'correct' : isMisplaced ? 'misplaced' : 'incorrect' });
     }
 
-    return results;
+    return { isValid: true, results };
 }
 
 function checkMisplaced(letter: string, guess: string, wordToGuess: string): boolean {

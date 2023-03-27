@@ -37,7 +37,7 @@
 ### Error Handling
     400 Bad Request
     {
-        "message": "Invalid guess format"
+        "error": "Invalid guess format"
     }    
 
 ### /api/secret-word
@@ -51,7 +51,6 @@
 * ```POST``` submits a guess for the secret word.
 
     ##### Request
-        200 OK
         {
             "guess": "word"
         }    
