@@ -1,4 +1,4 @@
-type Result = {
+export type Result = {
     letter: string;
     result: string;
 }
