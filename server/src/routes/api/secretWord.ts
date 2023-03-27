@@ -10,11 +10,9 @@ router.post('/secret-word', async (req, res) => {
     const allowRepeats = req.query.allowRepeats ? req.query.allowRepeats === 'true' : true;
 
     const api = new APIAdapter();
-    const words = await api.fetchWords();
-    const wordList = Object.keys(words);   
+    const wordList = await api.fetchWords(length);
     const secretWord = getRandomWord(wordList, length, allowRepeats); 
 
-    console.log(secretWord);
     if (secretWord) {
         req.session.secretWord = secretWord; // Save secret word in session
         res.json({ wordLength: secretWord.length}); // NOTE: Return word length for now 
