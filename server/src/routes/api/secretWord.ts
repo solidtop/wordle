@@ -3,7 +3,7 @@ import APIAdapter from '../../utils/ApiAdapter';
 import getRandomWord from '../../controllers/randomWord';
 
 const router = express.Router();
-
+const NUM_GUESSES = 5;
 
 router.post('/secret-word', async (req, res) => {
     const length = parseInt(req.query.length as string) || 5;
@@ -20,6 +20,8 @@ router.post('/secret-word', async (req, res) => {
     
     if (secretWord) {
         req.session.secretWord = secretWord; // Save secret word in session
+        req.session.numGuesses = NUM_GUESSES;
+        req.session.gameStartTimestamp = new Date().toString(); // Save start time of game
         res.json({ wordLength: secretWord.length}); // NOTE: Return word length for now 
     } else {
         res.status(500).send({ error: 'Could not find word with matching criteria' });

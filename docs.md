@@ -35,7 +35,7 @@
 # API Documentation
 
 ### Error Handling
-    400 Bad Request
+    400 Bad Request, 500 Internal Server Error
     {
         "error": "Invalid guess format"
     }    
@@ -55,16 +55,26 @@
             "guess": "word"
         }    
     ##### Response
-        200 OK
+        200 OK 
         {
-            "isCorrect": false,
+            "gameIsFinished: false,
             "results": [
                 { 
-                    "letter: "s", 
+                    "letter: "S"s, 
                     "result": "incorrect",
                 }
             ]
         }    
+        Game is finished
+        {
+            "gameIsFinished": true, 
+            "playerHasWon": true, 
+            "message": 'Congratulations, you have won!',
+            "secretWord": "HELLO",
+            "results": [],
+            "score": 0,
+            "gameDuration": 1000,
+        }
 
 ### /api/highscores
 * ```GET``` retrieves a list of all highscores
