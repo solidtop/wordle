@@ -60,7 +60,7 @@
             "gameIsFinished: false,
             "results": [
                 { 
-                    "letter: "S", 
+                    "letter: "S"s, 
                     "result": "incorrect",
                 }
             ]
