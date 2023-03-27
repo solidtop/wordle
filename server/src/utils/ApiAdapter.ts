@@ -1,15 +1,11 @@
-import fetch from 'node-fetch';
-
-const API_URL: string = 'https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json';
+import fs from 'fs/promises';
 
 class APIAdapter {
-
-    async fetchWords() {
-        const res = await fetch(API_URL);
-        const data: string = await res.json();
-        return data;
+    async fetchWords(wordLength: number): Promise<string[]> {
+        const content = await fs.readFile(`./data/words${wordLength}.json`);
+        const data = JSON.parse(content.toString());
+        return data.words;
     }
-
 }
 
 export default APIAdapter;
