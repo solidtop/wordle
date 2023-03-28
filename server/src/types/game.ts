@@ -3,7 +3,7 @@ import { Result } from './guess';
 export interface GameState {
     gameIsFinished: boolean;
     results: Result[] | undefined;
-    numGuesses: number;
+    guessesRemaining: number;
     playerHasWon?: boolean;
     message?: string;
     secretWord?: string;
@@ -16,5 +16,5 @@ export interface StateData {
     secretWord: string;
     isExactMatch: boolean | undefined;
     gameStartTimestamp: string;
-    numGuesses: number;
+    guessesRemaining: number;
 }
