@@ -1,5 +1,6 @@
 import express from 'express';
 import filterHighscores from '../middlewares/scoreFilter';
+import { getActiveMenu, getMainNav } from '../utils/menus';
 
 const highscores = [
     {
@@ -43,7 +44,10 @@ router.get('/highscores/:wordLength/:uniqueLetters', (req, res) => {
     const allowRepeats = req.params.uniqueLetters === 'uniqueLetters' ? false : true;
 
     const filteredHighscores = filterHighscores(highscores, wordLength, allowRepeats);
-    res.render('highscores', { highscores: filteredHighscores });
+    res.render('highscores', { 
+        menu: getActiveMenu(getMainNav(), `/highscores/${req.params.wordLength}/${req.params.uniqueLetters}`),
+        highscores,
+    });
 });
 
 export default router;

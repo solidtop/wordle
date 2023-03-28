@@ -1,0 +1,21 @@
+<div class="container">
+    <h2 class="headline headline--center">HIGHSCORES</h2>
+
+    <div class="col-headers">
+        <h3>RANK</h3>
+        <h3>NAME</h3>
+        <h3>SCORE</h3>
+    </div>
+
+    <ol class="highscore-list">
+        {{#each highscores}}
+        <li class="highscore">
+            <p class="highscore__stat">{{@index}}</p>
+            <p class="highscore__stat">{{this.name}}</p>
+            <p class="highscore__stat">{{this.score}}</p>
+        </li>
+        {{/each}}
+    </ol>
+</div>
+
+
