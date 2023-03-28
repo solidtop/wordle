@@ -76,12 +76,30 @@
             "gameDuration": 1000,
         }
 
-### /api/highscores
-* ```GET``` retrieves a list of all highscores
+### /api/highscores 
+* ```GET``` retrieves a list of all highscores (Not neccessary)
+
 * ```POST``` creates a new highscore
 
+    ##### Request
+        {
+            "name": "string",
+            "gameDuration": 0,
+            "results": [],
+            "settings": {
+                "wordLength": 0,
+                "allowRepeats": false
+            }
+        }
+    
+    ##### Response
+        200 OK
+        {
+            "message": "Your score was posted successfully"
+        }
 
-### /api/highscores/{id}
+
+### /api/highscores/{id} (Not Neccessary)
 * ```GET``` 
 * ```PUT``` 
 * ```DELETE``` 
