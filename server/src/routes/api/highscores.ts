@@ -5,7 +5,6 @@ import validateHighscore from '../../validators/scoreValidator';
 import { getElapsedTime } from '../../controllers/gameController';
 
 const router = express.Router();
-
 router.post('/highscores', async (req, res) => {
     const  { name, results, settings } = req.body;
 

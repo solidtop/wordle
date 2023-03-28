@@ -1,28 +1,9 @@
-import { Result } from './checkGuess';
+import { GameState, StateData } from '../types/game';
 
 export function getElapsedTime(dateStr: string): number {
     const startDate = new Date(dateStr);
     const endDate = new Date();
     return (endDate.getTime() - startDate.getTime());
-}
-
-interface GameState {
-    gameIsFinished: boolean;
-    results: Result[] | undefined;
-    numGuesses: number;
-    playerHasWon?: boolean;
-    message?: string;
-    secretWord?: string;
-    score?: number;
-    gameDuration?: number;
-}
-
-interface StateData {
-    results: Result[] | undefined;
-    secretWord: string;
-    isExactMatch: boolean | undefined;
-    gameStartTimestamp: string;
-    numGuesses: number;
 }
 
 export function getGameState(stateData: StateData): GameState {

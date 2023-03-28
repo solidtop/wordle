@@ -1,14 +1,4 @@
-export type Result = {
-    letter: string;
-    result: string;
-}
-
-type Status = {
-    isValid: boolean;
-    isExactMatch?: boolean;
-    error?: string;
-    results?: Result[];
-}
+import { Result, Status } from '../types/guess';
 
 export default function checkGuess(guess: string, wordToGuess: string): Status {
     guess = guess.toUpperCase();
