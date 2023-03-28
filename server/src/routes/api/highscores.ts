@@ -1,7 +1,7 @@
 import express from 'express';
 import fs from 'fs/promises';
-import APIAdapter from '../../utils/ApiAdapter';
-import { validateHighscore } from '../../controllers/validation';
+import APIAdapter from '../../controllers/ApiAdapter';
+import validateHighscore from '../../validators/scoreValidator';
 import { getElapsedTime } from '../../controllers/gameController';
 
 const router = express.Router();

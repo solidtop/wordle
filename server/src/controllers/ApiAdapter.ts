@@ -1,5 +1,5 @@
 import fs from 'fs/promises';
-import { Result } from '../controllers/checkGuess';
+import { Result } from './checkGuess';
 
 interface HighScore {
     name: string;

@@ -3,7 +3,7 @@ interface ValidationStatus {
     error?: string;
 }
 
-export function validateHighscore(name: string): ValidationStatus {
+export default function validateHighscore(name: string): ValidationStatus {
     if (!name) {
         return {
             isValid: false,
