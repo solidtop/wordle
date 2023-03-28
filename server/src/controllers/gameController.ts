@@ -56,11 +56,10 @@ export function getGameState(stateData: StateData): GameState {
 
 export function calculateScore(numGuesses: number, gameDuration: number, wordLength: number): number {
     const timeInSeconds = gameDuration / 1000;
-    
+
     let score =numGuesses * 1000;
     score -= timeInSeconds; // Small time penalty 
     score += wordLength * 100; // Bonus for longer words
     score = Math.max(score, 0);
-    console.log(score);
     return Math.round(score);
 }
