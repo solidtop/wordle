@@ -94,13 +94,13 @@ describe('checkGuess()', () => {
     it('handles guesses with incorrect number of letters', () => {
         const status = checkGuess('CYKL', 'CYKLA');
         expect(status.isValid).toBeFalsy();
-        expect(status.message).toBe('invalid guess');
+        expect(status.error).toBe('invalid guess');
     });
 
     it('handles guesses with special characters', () => {
         const status = checkGuess('!?*-+', 'CYKLA'); 
         expect(status.isValid).toBeFalsy();
-        expect(status.message).toBe('invalid guess');
+        expect(status.error).toBe('invalid guess');
     });
 
     it('handles lowercase', () => {
@@ -118,7 +118,7 @@ describe('checkGuess()', () => {
     it('handles whitespace', () => {
         const status = checkGuess('cyk aa', mockWord); 
         expect(status.isValid).toBeFalsy();
-        expect(status.message).toBe('invalid guess');
+        expect(status.error).toBe('invalid guess');
     });
 });
 
