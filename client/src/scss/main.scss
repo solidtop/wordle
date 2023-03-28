@@ -5,15 +5,19 @@
 body, html {
     margin: 0;
     padding: 0;
-    background-color: darkgray;
+    background-color: black;
+
+    @include container;
 }
 
 * {
     font-family: sans-serif;
+    color: $text-color1;
 }
 
 /* Sections */
 @import 'sections/header.scss';
 @import 'sections/main-nav.scss';
+@import 'sections/highscores.scss';
 
 

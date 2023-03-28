@@ -1,0 +1,40 @@
+.container {
+    margin: 1em;
+    padding: 1em;
+    border-radius: 10px;
+    background-color: $container-color;
+
+    * {
+        color: $text-color2;
+    }
+}
+
+.col-headers {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 1em;
+
+    h3 {
+        margin: 0;
+    }
+}
+
+.highscore-list {
+    margin: 0;
+    padding: 0 1em;
+    overflow-y: scroll;
+    max-height: 500px;
+}
+
+.highscore {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin: 1em 0;
+
+    &__stat {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+}
