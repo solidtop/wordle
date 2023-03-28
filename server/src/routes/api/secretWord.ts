@@ -1,6 +1,7 @@
 import express from 'express';
-import APIAdapter from '../../utils/ApiAdapter';
+import APIAdapter from '../../controllers/ApiAdapter';
 import getRandomWord from '../../controllers/randomWord';
+import { NUM_GUESSES } from '../../constants';
 
 const router = express.Router();
 
@@ -20,6 +21,7 @@ router.post('/secret-word', async (req, res) => {
     if (secretWord) {
         req.session.secretWord = secretWord; // Save secret word in session
         console.log(secretWord);
+        req.session.guessesRemaining = NUM_GUESSES;
         req.session.gameStartTimestamp = new Date().toString(); // Save start time of game
         res.json({ wordLength: secretWord.length}); // NOTE: Return word length for now 
     } else {

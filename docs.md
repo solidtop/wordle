@@ -55,23 +55,53 @@
             "guess": "word"
         }    
     ##### Response
-        200 OK
+        200 OK 
         {
-            "isCorrect": false,
+            "gameIsFinished: false,
             "results": [
                 { 
-                    "letter: "s", 
+                    "letter: "S"s, 
                     "result": "incorrect",
                 }
-            ]
+            ],
+            "guessesRemaining": 4
         }    
+        Game is finished
+        {
+            "gameIsFinished": true, 
+            "playerHasWon": true, 
+            "message": 'Congratulations, you have won!',
+            "secretWord": "HELLO",
+            "results": [],
+            "score": 0,
+            "gameDuration": 1000,
+        }
 
-### /api/highscores
-* ```GET``` retrieves a list of all highscores
+### /api/highscores 
+* ```GET``` retrieves a list of all highscores (Not neccessary)
+
 * ```POST``` creates a new highscore
 
+    ##### Request
+        {
+            "name": "string",
+            "gameDuration": 0,
+            "numGuesses": 0,
+            "score": 0,
+            "settings": {
+                "wordLength": 0,
+                "allowRepeats": false
+            }
+        }
+    
+    ##### Response
+        200 OK
+        {
+            "message": "Your score was posted successfully"
+        }
 
-### /api/highscores/{id}
+
+### /api/highscores/{id} (Not Neccessary)
 * ```GET``` 
 * ```PUT``` 
 * ```DELETE``` 

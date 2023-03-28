@@ -1,13 +1,4 @@
-type Result = {
-    letter: string;
-    result: string;
-}
-
-type Status = {
-    isValid: boolean;
-    error?: string;
-    results?: Result[];
-}
+import { Result, Status } from '../types/guess';
 
 export default function checkGuess(guess: string, wordToGuess: string): Status {
     guess = guess.toUpperCase();
@@ -17,17 +8,19 @@ export default function checkGuess(guess: string, wordToGuess: string): Status {
         return { isValid: false, error: 'invalid guess' };
     }
     
+    let isExactMatch = true;
     const results: Result[] = [];
     for (let i = 0; i < guess.length; i++) {
         const letter = guess.charAt(i);
         const targetLetter = wordToGuess.charAt(i);
         const isCorrect = letter === targetLetter;
         const isMisplaced = !isCorrect && checkMisplaced(letter, guess, wordToGuess);
+        isExactMatch = isExactMatch && isCorrect;
         
         results.push({ letter, result: isCorrect ? 'correct' : isMisplaced ? 'misplaced' : 'incorrect' });
     }
 
-    return { isValid: true, results };
+    return { isValid: true, isExactMatch, results };
 }
 
 function checkMisplaced(letter: string, guess: string, wordToGuess: string): boolean {
@@ -38,4 +31,3 @@ function checkMisplaced(letter: string, guess: string, wordToGuess: string): boo
     }
     return false;
 }
-
