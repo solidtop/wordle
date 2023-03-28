@@ -1,6 +1,6 @@
 import { Result } from './guess';
 
-interface GameState {
+export interface GameState {
     gameIsFinished: boolean;
     results: Result[] | undefined;
     numGuesses: number;
@@ -11,7 +11,7 @@ interface GameState {
     gameDuration?: number;
 }
 
-interface StateData {
+export interface StateData {
     results: Result[] | undefined;
     secretWord: string;
     isExactMatch: boolean | undefined;
