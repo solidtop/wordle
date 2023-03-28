@@ -5,7 +5,7 @@ import { getGameState } from '../../controllers/gameController';
 const router = express.Router();
 
 router.post('/guess', (req, res) => {
-    const { secretWord, gameStartTimestamp = '', numGuesses = 0 } = req.session;
+    const { secretWord, gameStartTimestamp = '', guessesRemaining = 0 } = req.session;
     if (!secretWord) {
         res.status(500).send('Secret word is not defined');
         return;
@@ -22,9 +22,9 @@ router.post('/guess', (req, res) => {
         secretWord, 
         isExactMatch, 
         gameStartTimestamp, 
-        numGuesses,
+        guessesRemaining,
     });
-    req.session.numGuesses = gameState.numGuesses;
+    req.session.guessesRemaining = gameState.guessesRemaining;
     
     if (gameState.gameIsFinished) {
         req.session.destroy(err => { if (err) throw err }); //Clear the session when game finishes

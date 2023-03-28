@@ -1,15 +1,5 @@
 import fs from 'fs/promises';
-import { Result } from '../controllers/checkGuess';
-
-interface HighScore {
-    name: string;
-    gameDuration: number;
-    results: Result[];
-    settings: {
-        wordLength: number;
-        allowRepeats: boolean;
-    }
-}
+import HighScore from '../types/highscore';
 
 class APIAdapter {
     async fetchWords(wordLength: number): Promise<string[]> {

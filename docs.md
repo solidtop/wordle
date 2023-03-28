@@ -63,7 +63,8 @@
                     "letter: "S"s, 
                     "result": "incorrect",
                 }
-            ]
+            ],
+            "guessesRemaining": 4
         }    
         Game is finished
         {
@@ -85,7 +86,8 @@
         {
             "name": "string",
             "gameDuration": 0,
-            "results": [],
+            "numGuesses": 0,
+            "score": 0,
             "settings": {
                 "wordLength": 0,
                 "allowRepeats": false

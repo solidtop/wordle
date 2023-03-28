@@ -1,4 +1,4 @@
-import { Result } from './checkGuess';
+import { GameState, StateData } from '../types/game';
 
 export function getElapsedTime(dateStr: string): number {
     const startDate = new Date(dateStr);
@@ -6,34 +6,15 @@ export function getElapsedTime(dateStr: string): number {
     return (endDate.getTime() - startDate.getTime());
 }
 
-interface GameState {
-    gameIsFinished: boolean;
-    results: Result[] | undefined;
-    numGuesses: number;
-    playerHasWon?: boolean;
-    message?: string;
-    secretWord?: string;
-    score?: number;
-    gameDuration?: number;
-}
-
-interface StateData {
-    results: Result[] | undefined;
-    secretWord: string;
-    isExactMatch: boolean | undefined;
-    gameStartTimestamp: string;
-    numGuesses: number;
-}
-
 export function getGameState(stateData: StateData): GameState {
-    const { results, secretWord, isExactMatch, gameStartTimestamp, numGuesses } = stateData;
+    const { results, secretWord, isExactMatch, gameStartTimestamp, guessesRemaining } = stateData;
     const playerHasWon = isExactMatch;
-    const gameIsFinished = playerHasWon || numGuesses <= 1;
-    const updatedNumGuesses = gameIsFinished && playerHasWon ? numGuesses : numGuesses - 1;
+    const gameIsFinished = playerHasWon || guessesRemaining <= 1;
+    const updatedNumGuesses = gameIsFinished && playerHasWon ? guessesRemaining : guessesRemaining - 1;
    
     if (gameIsFinished) {
         const gameDuration = getElapsedTime(gameStartTimestamp);
-        const score = calculateScore(numGuesses, gameDuration, secretWord.length);
+        const score = calculateScore(guessesRemaining, gameDuration, secretWord.length);
         const message = playerHasWon ? 'Congratulations, you have won!' : 'You lose! Booo';
         return {
             gameIsFinished,
@@ -41,7 +22,7 @@ export function getGameState(stateData: StateData): GameState {
             message,
             results,
             score,
-            numGuesses: updatedNumGuesses,
+            guessesRemaining: updatedNumGuesses,
             secretWord,
             gameDuration,
         };
@@ -50,14 +31,14 @@ export function getGameState(stateData: StateData): GameState {
     return {
         gameIsFinished,
         results,
-        numGuesses: updatedNumGuesses,
+        guessesRemaining: updatedNumGuesses,
     }
 } 
 
-export function calculateScore(numGuesses: number, gameDuration: number, wordLength: number): number {
+export function calculateScore(guessesRemaining: number, gameDuration: number, wordLength: number): number {
     const timeInSeconds = gameDuration / 1000;
 
-    let score =numGuesses * 1000;
+    let score = guessesRemaining * 1000;
     score -= timeInSeconds; // Small time penalty 
     score += wordLength * 100; // Bonus for longer words
     score = Math.max(score, 0);

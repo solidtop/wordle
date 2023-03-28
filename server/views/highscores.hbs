@@ -1,0 +1,21 @@
+<div class="container">
+    <h1>Highscores</h1>
+
+    <div class="col-headers">
+        <h3>RANK</h3>
+        <h3>NAME</h3>
+        <h3>SCORE</h3>
+    </div>
+
+    <ol class="highscore-list">
+        {{#each highscores}}
+        <li class="highscore">
+            <p class="highscore__name">{{this.name}}</p>
+            <p class="highscore__score">{{this.score}}</p>
+        </li>
+        {{/each}}
+    </ol>
+</div>
+
+<a class="btn primary" href="/game">PLAY</a>
+
