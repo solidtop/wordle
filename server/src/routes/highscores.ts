@@ -43,7 +43,7 @@ router.get('/highscores/:wordLength/:uniqueLetters', (req, res) => {
     const allowRepeats = req.params.uniqueLetters === 'uniqueLetters' ? false : true;
 
     const filteredHighscores = filterHighscores(highscores, wordLength, allowRepeats);
-    res.render('highscores', { filteredHighscores });
+    res.render('highscores', { highscores: filteredHighscores });
 });
 
 export default router;
