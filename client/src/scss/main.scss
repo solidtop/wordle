@@ -1,0 +1,19 @@
+@import 'variables.scss';
+@import 'misc.scss';
+@import 'mixins.scss';
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: darkgray;
+}
+
+* {
+    font-family: sans-serif;
+}
+
+/* Sections */
+@import 'sections/header.scss';
+@import 'sections/main-nav.scss';
+
+
