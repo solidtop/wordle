@@ -1,6 +1,6 @@
 import express from 'express';
 import fs from 'fs/promises';
-import APIAdapter from '../../utils/ApIAdapter';
+import APIAdapter from '../../utils/ApiAdapter';
 import { validateHighscore } from '../../controllers/validation';
 import { getElapsedTime } from '../../controllers/gameController';
 

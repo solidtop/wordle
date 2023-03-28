@@ -1,5 +1,5 @@
 import express from 'express';
-import APIAdapter from '../../utils/ApIAdapter';
+import APIAdapter from '../../utils/ApiAdapter';
 import getRandomWord from '../../controllers/randomWord';
 
 const router = express.Router();
