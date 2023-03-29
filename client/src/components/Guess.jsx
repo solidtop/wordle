@@ -5,7 +5,7 @@ export default function Guess({ results }) {
                 const { letter, result } = res;
                 return(
                     <div key={index} className={`${result} tile`}>
-                        {letter.toUpperCase()}
+                        {letter.toLocaleUpperCase()}
                     </div>
                 );
             })}
