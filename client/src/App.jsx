@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <Board results={results}/>
-      <GuessForm onGuess={handleGuess}/> 
+      <GuessForm onGuess={handleGuess} length={results[0].length}/> 
     </div>
   )
 }
@@ -34,7 +34,7 @@ function mockResponse(guess) {
     return guess.split('').map(letter => {
       return {
         letter,
-        result: 'incorrect',
+        result: Math.random() <= .33 ? 'correct' : Math.random() <= .33 ? 'incorrect' : 'misplaced'
       }
     });
 }

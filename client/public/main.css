@@ -95,15 +95,45 @@ body, html {
   text-align: center;
 }
 .tile.correct {
+  animation: tile-reveal-correct 0.5s;
   background-color: #538d4e;
 }
 .tile.incorrect {
+  animation: tile-reveal-incorrect 0.5s;
   background-color: #3a3a3c;
 }
 .tile.misplaced {
+  animation: tile-reveal-misplaced 0.2s 3 ease-in-out;
   background-color: #b59f3b;
 }
 
+@keyframes tile-reveal-correct {
+  from {
+    transform: scale(-1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes tile-reveal-incorrect {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes tile-reveal-misplaced {
+  0% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 .guess-form {
   width: 100%;
   display: flex;

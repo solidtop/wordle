@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function GuessForm({ onGuess }) {
+export default function GuessForm({ onGuess, length }) {
     const [text, setText] = useState('');
 
     return (
@@ -13,6 +13,9 @@ export default function GuessForm({ onGuess }) {
                 type="text" 
                 id="guessInput"
                 onChange={e => setText(e.target.value)}
+                minLength={length}
+                maxLength={length}
+                required
             />
             <button type="submit" className="btn primary">ENTER</button>
         </form>
