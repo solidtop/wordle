@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import Board from './components/Board';
+import SettingsModal from './components/SettingsModal';
+import GuessForm from './components/GuessForm';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [results, setResults] = useState(initResults(5, 5));
+  const [currentGuess, setCurrentGuess] = useState(0);
+
+  function handleGuess(guess) {
+    // Send guess to server
+
+      //get response
+
+      const newResults = mockResponse(guess);
+      const updatedResults = [...results];
+      updatedResults[currentGuess] = newResults; 
+      setResults(updatedResults);
+      setCurrentGuess(currentGuess + 1);
+  };
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <Board results={results}/>
+
+      <GuessForm onGuess={handleGuess}/> 
     </div>
   )
 }
 
-export default App
+function mockResponse(guess) {
+    return guess.split('').map(letter => {
+      return {
+        letter,
+        result: 'misplaced',
+      }
+    });
+}
+
+function initResults(rows, cols) {
+  const totalResults = [];
+  for (let i = 0; i < cols; i++) {
+    totalResults.push(emptyResults(rows));
+  }
+
+  return totalResults;
+}
+
+function emptyResults(num) {
+  let arr = [];
+  for (let i = 0; i < num; i++) {
+    arr.push({
+      letter: '',
+      result: '',
+    })
+  }
+  return arr;
+}
+
+export default App;
