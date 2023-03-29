@@ -7,6 +7,7 @@ import GuessForm from './components/GuessForm';
 function App() {
   const [results, setResults] = useState(initResults(5, 5));
   const [currentGuess, setCurrentGuess] = useState(0);
+  const [guessesRemaining, setGuessesRemaining] = useState(5);
 
   function handleGuess(guess) {
     // Send guess to server
@@ -18,13 +19,12 @@ function App() {
       updatedResults[currentGuess] = newResults; 
       setResults(updatedResults);
       setCurrentGuess(currentGuess + 1);
+      setGuessesRemaining(guessesRemaining - 1);
   };
 
   return (
     <div className="App">
-
       <Board results={results}/>
-
       <GuessForm onGuess={handleGuess}/> 
     </div>
   )
@@ -34,7 +34,7 @@ function mockResponse(guess) {
     return guess.split('').map(letter => {
       return {
         letter,
-        result: 'misplaced',
+        result: 'incorrect',
       }
     });
 }
