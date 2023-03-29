@@ -21,9 +21,10 @@
     height: 62px;
     border-radius: 0;
     background-color: $tile-color;
-    border: 2px solid $tile-border-color;
+    border: 2px solid $border-color;
     border-radius: 5px;
-    font-size: 2.5rem;
+    font-size: $tile-font-size;
+    text-align: center;
 
     &.correct {
         background-color: $tile-correct-color;
@@ -35,6 +36,20 @@
 
     &.misplaced {
         background-color: $tile-misplaced-color;
+    }
+}
+
+.guess-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    width: fit-content;
+    max-height: 50px;
+    margin: 4em auto;
+
+    input, button {
+        height: 100%;
     }
 }
 

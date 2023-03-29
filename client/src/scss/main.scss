@@ -7,6 +7,10 @@ body, html {
     padding: 0;
     background-color: black;
 
+    @media (min-width: $bp-medium) {
+        font-size: 24px;    
+    }
+
     @include container;
 }
 
@@ -17,7 +21,7 @@ body, html {
 
 /* Sections */
 @import 'sections/header.scss';
-@import 'sections/board.scss';
+@import 'sections/game.scss';
 @import 'sections/main-nav.scss';
 @import 'sections/highscores.scss';
 

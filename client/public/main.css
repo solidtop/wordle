@@ -8,8 +8,29 @@ a {
   text-decoration: none;
 }
 
+input {
+  margin: 1em auto;
+  padding: 0.3em 1em;
+  outline: none;
+  border: solid 2px #3a3a3c;
+  border-radius: 5px;
+  background-color: #121213;
+  font-size: 1.2rem;
+}
+
 .headline--center {
   text-align: center;
+}
+
+.btn {
+  padding: 0.6em 1em;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.btn.primary {
+  background-color: #3a3a3c;
 }
 
 body, html {
@@ -19,6 +40,11 @@ body, html {
   max-width: 720px;
   margin-left: auto;
   margin-right: auto;
+}
+@media (min-width: 600px) {
+  body, html {
+    font-size: 24px;
+  }
 }
 
 * {
@@ -65,7 +91,8 @@ body, html {
   background-color: #121213;
   border: 2px solid #3a3a3c;
   border-radius: 5px;
-  font-size: 2.5rem;
+  font-size: 42px;
+  text-align: center;
 }
 .tile.correct {
   background-color: #538d4e;
@@ -75,6 +102,19 @@ body, html {
 }
 .tile.misplaced {
   background-color: #b59f3b;
+}
+
+.guess-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  width: fit-content;
+  max-height: 50px;
+  margin: 4em auto;
+}
+.guess-form input, .guess-form button {
+  height: 100%;
 }
 
 .nav-list {
