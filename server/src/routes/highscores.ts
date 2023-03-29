@@ -40,12 +40,11 @@ const router = express.Router();
 
 // Note: There problably is a better way of handling uniqueLetters param
 router.get('/highscores/:wordLength/:uniqueLetters', (req, res) => {
-    const wordLength = parseInt(req.params.wordLength as string) || 5;
-    const allowRepeats = req.params.uniqueLetters === 'uniqueLetters' ? false : true;
-
-    const filteredHighscores = filterHighscores(highscores, wordLength, allowRepeats);
+    const { wordLength, uniqueLetters } = req.params; 
+    const allowRepeats = uniqueLetters !== 'uniqueLetters';
+    const filteredHighscores = filterHighscores(highscores, parseInt(wordLength) || 5, allowRepeats);
     res.render('highscores', { 
-        menu: getActiveMenu(getMainNav(), `/highscores/${req.params.wordLength}/${req.params.uniqueLetters}`),
+        menu: getActiveMenu(getMainNav(), `/highscores/${wordLength}/${uniqueLetters}`),
         highscores,
     });
 });
