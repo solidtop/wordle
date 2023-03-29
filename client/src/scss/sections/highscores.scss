@@ -10,9 +10,9 @@
 }
 
 .col-headers {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
     padding: 1em;
 
     h3 {
@@ -24,17 +24,20 @@
     margin: 0;
     padding: 0 1em;
     overflow-y: scroll;
-    max-height: 500px;
+    height: 500px;
 }
 
 .highscore {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     margin: 1em 0;
+    padding: .5em;
 
     &__stat {
         margin: 0;
         font-size: 1.5rem;
+        text-align: center;
     }
+
+    @include line-break;
 }
