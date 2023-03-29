@@ -1,3 +1,4 @@
+/* Wordle colors */
 ul, ol {
   list-style: none;
   list-style-position: inside;
@@ -39,6 +40,43 @@ body, html {
     gap: 4em;
   }
 }
+.board {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+}
+
+.board-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 0;
+  background-color: #121213;
+  border: 2px solid #3a3a3c;
+  border-radius: 5px;
+  font-size: 2.5rem;
+}
+.tile.correct {
+  background-color: #538d4e;
+}
+.tile.incorrect {
+  background-color: #3a3a3c;
+}
+.tile.misplaced {
+  background-color: #b59f3b;
+}
+
 .nav-list {
   display: flex;
   justify-content: center;
