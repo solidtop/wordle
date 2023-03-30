@@ -27,12 +27,14 @@ select {
   padding: 0.5em 1em;
   border: none;
   border-radius: 5px;
-  background-color: #121213;
+  background-color: #3a3a3c;
   font-size: 0.7rem;
 }
 
 input[type=checkbox] {
   margin: 0;
+  width: 1em;
+  height: 1em;
 }
 
 .headline--center {
@@ -47,7 +49,8 @@ input[type=checkbox] {
   font-weight: bold;
 }
 .btn.primary {
-  background-color: #3a3a3c;
+  color: black;
+  background-color: white;
 }
 
 .btn-open,
@@ -91,7 +94,7 @@ body, html {
   position: absolute;
   inset: 0;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-content {
@@ -101,7 +104,8 @@ body, html {
   margin: 4em 2em;
   padding: 1em;
   border-radius: 10px;
-  background-color: rgb(221, 221, 221);
+  background-color: #121213;
+  box-shadow: 0 0 20px black;
 }
 
 /* Sections */
@@ -196,21 +200,24 @@ body, html {
   max-height: 50px;
   margin: 2em auto;
 }
-.guess-form input, .guess-form button {
+.guess-form input, .guess-form .btn {
   height: 100%;
+  background-color: #121213;
+  color: white;
 }
 
 .settings-menu {
   display: block;
-  width: 100%;
   height: 100%;
 }
 .settings-menu .btn-close {
   position: absolute;
   top: 1em;
   right: 1em;
+  width: 1.8em;
 }
 .settings-menu h2 {
+  font-size: 1.1rem;
   margin: 0;
 }
 .settings-menu .btn {
@@ -218,21 +225,29 @@ body, html {
   bottom: 1em;
   right: 1em;
 }
-.settings-menu .toggle-settings::before {
-  background-image: url("/public/xmark-solid.svg");
-  width: 3rem;
-}
 
 .menu-row {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  margin: 1em 0;
+  gap: 4em;
+  margin: 2em 0;
+  position: relative;
+}
+.menu-row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5em;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
 }
 .menu-row label {
-  margin-left: 1em;
   font-size: 0.8rem;
   text-align: left;
-  color: black;
+  color: white;
 }
 
 .nav-list {
@@ -254,7 +269,7 @@ body, html {
   margin: 1em;
   padding: 1em;
   border-radius: 10px;
-  background-color: rgb(221, 221, 221);
+  background-color: #121213;
 }
 .container * {
   color: black;
@@ -298,4 +313,5 @@ body, html {
   width: 100%;
   height: 5px;
   background-color: black;
+  border-radius: 5px;
 }

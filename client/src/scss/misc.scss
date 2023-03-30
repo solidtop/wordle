@@ -26,12 +26,14 @@ select {
     padding: .5em 1em;
     border: none;
     border-radius: 5px;
-    background-color: $input-color;
+    background-color: $select-color;
     font-size: .7rem;
 }
 
 input[type='checkbox'] {
     margin: 0;
+    width: 1em;
+    height: 1em;
 }
 
 .headline--center {
@@ -46,6 +48,7 @@ input[type='checkbox'] {
     font-weight: bold;
 
     &.primary {
+        color: $text-color2;
         background-color: $btn-primary-color;
     }
 }

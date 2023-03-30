@@ -15,21 +15,20 @@ export default function SettingsMenu( { wordLengths, onSave } ) {
 
                     <h2>SETTINGS</h2>
                     <div className="menu-row">
+                        <label htmlFor="select-word-length">Word length</label>
                         <select name="wordLength" id="select-word-length">
                         {wordLengths.map((length, index) => {
                                 return <option key={index} value={length}>{length} LETTERS</option>
                         })}
                         </select>
-
-                        <label htmlFor="select-word-length">Word length</label>
                     </div>
 
                     <div className="menu-row">
-                        <input name="uniqueLetters" type="checkbox"/>
                         <label htmlFor="">Unique Letters</label>
+                        <input name="uniqueLetters" type="checkbox"/>
                     </div>
 
-                    <button type="submit" className="btn primary" >APPLY</button>
+                    <button type="submit" className="btn primary" >SAVE</button>
                 </form>
             </div>
         </div>
