@@ -1,0 +1,19 @@
+.modal-container {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    justify-content: center;
+
+    background-color: rgba(black, .5);
+}
+
+.modal-content {
+    position: relative;
+    max-width: 500px;
+    max-height: 500px;
+    margin: 4em 2em;
+    padding: 1em;
+    border-radius: 10px;
+
+    background-color: $container-color;
+}

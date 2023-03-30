@@ -7,6 +7,10 @@ a {
     text-decoration: none;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 input {
     margin: 1em auto;
     padding: .3em 1em;
@@ -16,6 +20,18 @@ input {
     background-color: $input-color;
     font-size: 1.2rem;
     text-transform: uppercase;
+}
+
+select {
+    padding: .5em 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: $input-color;
+    font-size: .7rem;
+}
+
+input[type='checkbox'] {
+    margin: 0;
 }
 
 .headline--center {
@@ -34,4 +50,19 @@ input {
     }
 }
 
- 
+.btn-open,
+.btn-close {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    background-color: initial;
+    background-repeat: no-repeat;
+}
+
+.btn-open {
+    background-image: url('/public/gear-solid.svg');
+}
+
+.btn-close {
+    background-image: url('/public/xmark-solid.svg');
+}

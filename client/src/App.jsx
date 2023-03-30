@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react'
 import Board from './components/Board';
-import SettingsModal from './components/SettingsModal';
+import SettingsMenu from './components/SettingsMenu';
 import GuessForm from './components/GuessForm';
 
+const settingsData = localStorage.getItem('settings');
+console.log(settingsData);
 
 function App() {
-  const [results, setResults] = useState(initResults(5, 5));
+  const [results, setResults] = useState(initResults(10, 6));
   const [currentGuess, setCurrentGuess] = useState(0);
   const [guessesRemaining, setGuessesRemaining] = useState(5);
+  const [menuActive, setMenuActive] = useState(false);
 
   function handleGuess(guess) {
     // Send guess to server
@@ -22,10 +25,27 @@ function App() {
       setGuessesRemaining(guessesRemaining - 1);
   };
 
+  function toggleMenu() {
+    setMenuActive(!menuActive);
+    console.log(menuActive)
+  }
+
   return (
     <div className="App">
-      <Board results={results}/>
-      <GuessForm onGuess={handleGuess} length={results[0].length}/> 
+      <section className='game-panel'>
+        <button className='btn-open' onClick={toggleMenu}></button>
+      </section>
+
+      {menuActive && (
+        <SettingsMenu 
+          wordLengths={[5, 6, 7, 8, 9, 10]} 
+          onSave={data => {
+              localStorage.setItem('settings', data);
+              setMenuActive(false);
+          }}/>
+      )}
+        <Board results={results}/>
+        <GuessForm onGuess={handleGuess} length={results[0].length}/> 
     </div>
   )
 }

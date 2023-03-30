@@ -8,6 +8,10 @@ a {
   text-decoration: none;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 input {
   margin: 1em auto;
   padding: 0.3em 1em;
@@ -17,6 +21,18 @@ input {
   background-color: #121213;
   font-size: 1.2rem;
   text-transform: uppercase;
+}
+
+select {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #121213;
+  font-size: 0.7rem;
+}
+
+input[type=checkbox] {
+  margin: 0;
 }
 
 .headline--center {
@@ -34,6 +50,23 @@ input {
   background-color: #3a3a3c;
 }
 
+.btn-open,
+.btn-close {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background-color: initial;
+  background-repeat: no-repeat;
+}
+
+.btn-open {
+  background-image: url("/public/gear-solid.svg");
+}
+
+.btn-close {
+  background-image: url("/public/xmark-solid.svg");
+}
+
 body, html {
   margin: 0;
   padding: 0;
@@ -42,7 +75,7 @@ body, html {
   margin-left: auto;
   margin-right: auto;
 }
-@media (min-width: 600px) {
+@media (min-width: 750px) {
   body, html {
     font-size: 24px;
   }
@@ -53,6 +86,24 @@ body, html {
   color: white;
 }
 
+.modal-container {
+  display: flex;
+  position: absolute;
+  inset: 0;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  position: relative;
+  max-width: 500px;
+  max-height: 500px;
+  margin: 4em 2em;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: rgb(221, 221, 221);
+}
+
 /* Sections */
 .header {
   padding: 1em;
@@ -61,7 +112,7 @@ body, html {
   margin: auto 0;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 750px) {
   .header {
     display: flex;
     gap: 4em;
@@ -71,7 +122,7 @@ body, html {
   display: grid;
   grid-template-columns: 1fr;
   gap: 5px;
-  margin: auto;
+  margin: 2em auto;
   width: fit-content;
   height: fit-content;
 }
@@ -86,6 +137,7 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: 1;
   width: 62px;
   height: 62px;
   border-radius: 0;
@@ -142,10 +194,45 @@ body, html {
   gap: 0.5em;
   width: fit-content;
   max-height: 50px;
-  margin: 4em auto;
+  margin: 2em auto;
 }
 .guess-form input, .guess-form button {
   height: 100%;
+}
+
+.settings-menu {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.settings-menu .btn-close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+.settings-menu h2 {
+  margin: 0;
+}
+.settings-menu .btn {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
+.settings-menu .toggle-settings::before {
+  background-image: url("/public/xmark-solid.svg");
+  width: 3rem;
+}
+
+.menu-row {
+  display: flex;
+  align-items: center;
+  margin: 1em 0;
+}
+.menu-row label {
+  margin-left: 1em;
+  font-size: 0.8rem;
+  text-align: left;
+  color: black;
 }
 
 .nav-list {

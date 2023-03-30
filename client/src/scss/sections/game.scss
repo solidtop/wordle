@@ -1,8 +1,9 @@
 .board {
     display: grid;
     grid-template-columns: 1fr;
+    
     gap: 5px;
-    margin: auto;
+    margin: 2em auto;
     width: fit-content;
     height: fit-content;
 }
@@ -17,6 +18,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 1;
     width: 62px;
     height: 62px;
     border-radius: 0;
@@ -79,7 +81,7 @@
     gap: .5em;
     width: fit-content;
     max-height: 50px;
-    margin: 4em auto;
+    margin: 2em auto;
 
     input, button {
         height: 100%;

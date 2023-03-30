@@ -1,4 +1,4 @@
-export default function Guess({ results }) {
+export default function GuessRow({ results }) {
     return (
         <div className="board-row">
             {results.map((res, index) => {

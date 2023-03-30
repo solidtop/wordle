@@ -19,9 +19,12 @@ body, html {
     color: $text-color1;
 }
 
+@import 'modal.scss';
+
 /* Sections */
 @import 'sections/header.scss';
 @import 'sections/game.scss';
+@import 'sections/settings-menu.scss';
 @import 'sections/main-nav.scss';
 @import 'sections/highscores.scss';
 
