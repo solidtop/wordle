@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Board from './components/Board';
 import SettingsMenu from './components/SettingsMenu';
 import GuessForm from './components/GuessForm';
+import { loadSettings, saveSettings } from './settings';
 
 const settingsData = localStorage.getItem('settings');
 console.log(settingsData);
@@ -11,6 +12,8 @@ function App() {
   const [currentGuess, setCurrentGuess] = useState(0);
   const [guessesRemaining, setGuessesRemaining] = useState(5);
   const [menuActive, setMenuActive] = useState(false);
+  const [settings, setSettings] = useState(loadSettings() || {});
+  //console.log(settings);
 
   function handleGuess(guess) {
     // Send guess to server
@@ -27,7 +30,7 @@ function App() {
 
   function toggleMenu() {
     setMenuActive(!menuActive);
-    console.log(menuActive)
+    //console.log(menuActive)
   }
 
   return (
@@ -39,8 +42,10 @@ function App() {
       {menuActive && (
         <SettingsMenu 
           wordLengths={[5, 6, 7, 8, 9, 10]} 
+          settings={settings}
           onSave={data => {
-              localStorage.setItem('settings', data);
+              saveSettings(data);
+              setSettings(data);
               setMenuActive(false);
           }}/>
       )}

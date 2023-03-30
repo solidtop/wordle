@@ -1,8 +1,7 @@
 export function saveSettings(settings) {
-    localStorage.setItem('settings', settings.wordLength);
-    localStorage.setItem('settings', settings.uniqueLetters);
+    localStorage.setItem('settings', JSON.stringify(settings));
 }
 
 export function loadSettings(settings) {
-    return localStorage.getItem('settings');
+    return JSON.parse(localStorage.getItem('settings'));
 }
