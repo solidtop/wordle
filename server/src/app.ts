@@ -25,7 +25,7 @@ export default function initApp() {
       saveUninitialized: false,
     }));
     app.use(express.json());
-    app.use(express.static('../client/public'));
+    app.use(express.static('../client/dist'));
     app.use(router);
 
     return app;

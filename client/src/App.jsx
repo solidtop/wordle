@@ -1,29 +1,50 @@
 import { useEffect, useState } from 'react'
+import APIAdapter from './api.js';
 import Board from './components/Board';
-import SettingsMenu from './components/SettingsMenu';
 import GuessForm from './components/GuessForm';
 import MenuBar from './components/MenuBar';
-import { loadSettings, saveSettings } from './settings';
-
-const settingsData = localStorage.getItem('settings');
-console.log(settingsData);
 
 function App() {
-  const [results, setResults] = useState(initResults(10, 6));
+  const [results, setResults] = useState(initResults(5, 6));
   const [currentGuess, setCurrentGuess] = useState(0);
   const [guessesRemaining, setGuessesRemaining] = useState(5);
 
-  function handleGuess(guess) {
+  useEffect(() => {
+    async function startGame() {
+      const api = new APIAdapter();
+      const res = await api.fetchSecretWord(`?length=${length}&allowRepeats=${true}`);
+      if (res.error) {
+        console.log(res.error);
+        return;
+      }
+
+      setResults(initResults(length, 6));
+    }
+
+    startGame();
+    
+  }, []);
+  
+  async function handleGuess(guess) {
     // Send guess to server
-
+    const res = await fetch('/api/guess', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify({guess}),
+    });
       //get response
+      const data = await res.json();
+      console.log(data);
 
-      const newResults = mockResponse(guess);
+      /*const newResults = mockResponse(guess);
       const updatedResults = [...results];
       updatedResults[currentGuess] = newResults; 
       setResults(updatedResults);
       setCurrentGuess(currentGuess + 1);
       setGuessesRemaining(guessesRemaining - 1);
+      */
   };
 
   return (

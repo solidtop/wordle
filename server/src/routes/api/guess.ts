@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/guess', (req, res) => {
     const { secretWord, gameStartTimestamp = '', guessesRemaining = 0 } = req.session;
     if (!secretWord) {
-        res.status(500).send('Secret word is not defined');
+        res.status(500).json({ error: 'Secret word is not defined' });
         return;
     }
     const guess:string = req.body.guess;
