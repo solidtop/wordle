@@ -3,21 +3,26 @@ import APIAdapter from './api.js';
 import Board from './components/Board';
 import GuessForm from './components/GuessForm';
 import MenuBar from './components/MenuBar';
+import { loadSettings } from './settings.js';
 
 function App() {
+  const [settings, setSettings] = useState(loadSettings());
   const [results, setResults] = useState([[]]);
   const [currentGuess, setCurrentGuess] = useState(0);
   const [guessesRemaining, setGuessesRemaining] = useState(5);
+  const [gameHasStarted, setGameHasStarted] = useState(false);
   const [gameIsFinished, setGameIsFinished] = useState(false);
 
   useEffect(() => {
     async function startGame() {
       const api = new APIAdapter();
-      const res = await api.fetchSecretWord(`?length=${5}&allowRepeats=${true}`);
+      const wordLength = settings.wordLength;
+      const uniqueLetters = settings.uniqueLetters ? true : false;
+      const res = await api.fetchSecretWord(`?wordLength=${wordLength}&uniqueLetters=${uniqueLetters}`);
       if (res.error) {
         throw new Error(res.error);
       }
-
+      setGameHasStarted(res.gameHasStarted);
       setResults(initResults(res.wordLength, res.guessesRemaining));
       setCurrentGuess(res.currentGuess);
       setGuessesRemaining(res.guessesRemaining);
@@ -51,7 +56,7 @@ function App() {
 
   return (
     <div className="App">
-      <MenuBar/>
+      <MenuBar settings={settings} setSettings={setSettings}/>
       <Board results={results}/>
       <GuessForm onGuess={handleGuess} length={results[0].length}/> 
     </div>

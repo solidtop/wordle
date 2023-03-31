@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import SettingsMenu from './SettingsMenu';
-import { loadSettings, saveSettings } from '../settings';
+import { saveSettings } from '../settings';
 
-
-function MenuBar({ onClick }) {
+function MenuBar({ settings, setSettings }) {
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
-  const [settings, setSettings] = useState(loadSettings() || {});
 
   function handleSettingsMenu() {
     setShowSettingsMenu(!showSettingsMenu);
