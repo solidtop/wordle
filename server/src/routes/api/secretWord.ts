@@ -19,11 +19,17 @@ router.post('/secret-word', async (req, res) => {
     const secretWord = getRandomWord(wordList, length, allowRepeats); 
     
     if (secretWord) {
+        const timestamp = new Date().toString(); 
         req.session.secretWord = secretWord; // Save secret word in session
         console.log(secretWord);
         req.session.guessesRemaining = NUM_GUESSES;
-        req.session.gameStartTimestamp = new Date().toString(); // Save start time of game
-        res.json({ wordLength: secretWord.length}); // NOTE: Return word length for now 
+        req.session.gameStartTimestamp = timestamp; // Save start time of game
+        res.json({ 
+            wordLength: secretWord.length,
+            guessesRemaining: NUM_GUESSES,
+            gameStartTimestamp: timestamp,
+            gameHasStarted: true,
+        }); 
     } else {
         res.status(500).send({ error: 'Could not find word with matching criteria' });
     }
