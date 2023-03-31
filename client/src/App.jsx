@@ -8,17 +8,19 @@ function App() {
   const [results, setResults] = useState([[]]);
   const [currentGuess, setCurrentGuess] = useState(0);
   const [guessesRemaining, setGuessesRemaining] = useState(5);
+  const [gameIsFinished, setGameIsFinished] = useState(false);
 
   useEffect(() => {
     async function startGame() {
       const api = new APIAdapter();
       const res = await api.fetchSecretWord(`?length=${5}&allowRepeats=${true}`);
       if (res.error) {
-        console.log(res.error);
-        return;
+        throw new Error(res.error);
       }
 
       setResults(initResults(res.wordLength, res.guessesRemaining));
+      setCurrentGuess(res.currentGuess);
+      setGuessesRemaining(res.guessesRemaining);
     }
 
     startGame();
@@ -26,24 +28,25 @@ function App() {
   }, []);
   
   async function handleGuess(guess) {
-    // Send guess to server
-    const res = await fetch('/api/guess', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json', 
-      },
-      body: JSON.stringify({guess}),
-    });
-      //get response
-      const data = await res.json();
-      console.log(data);
+    const api = new APIAdapter();
+    const res = await api.postGuess(guess);
 
-      const newResults = res.results;
-      const updatedResults = [...results];
-      updatedResults[currentGuess] = newResults; 
-      setResults(updatedResults);
-      setCurrentGuess(currentGuess + 1);
-      setGuessesRemaining(guessesRemaining - 1);
+    if (res.error) {
+      throw new Error(res.error);
+    }
+
+    setGameIsFinished(res.gameIsFinished);
+    setCurrentGuess(res.currentGuess);
+    setGuessesRemaining(res.guessesRemaining);
+
+    const newResults = res.results;
+    const updatedResults = [...results];
+    updatedResults[currentGuess] = newResults; 
+    setResults(updatedResults);
+
+    if (gameIsFinished) {
+      //TODO: Show end screen
+    }
   };
 
   return (
