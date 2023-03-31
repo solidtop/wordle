@@ -27,6 +27,7 @@ router.post('/secret-word', async (req, res) => {
         res.json({ 
             wordLength: secretWord.length,
             guessesRemaining: NUM_GUESSES,
+            currentGuess: 0,
             gameStartTimestamp: timestamp,
             gameHasStarted: true,
         }); 
