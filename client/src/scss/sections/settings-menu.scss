@@ -13,6 +13,12 @@
         font-size: 1.1rem;
         margin: 0;
     }
+
+    .btn {
+        position: absolute;
+        right: 1em;
+        bottom: 1em;
+    }
 }
 
 .menu-row {
@@ -23,7 +29,7 @@
     margin: 2em 0;
     @include line-break(1px, rgba(white, .5));
 
-    label {
+    label, p {
         font-size: .8rem;
         text-align: left;
         color: $text-color1;

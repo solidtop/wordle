@@ -206,10 +206,21 @@ body, html {
   color: white;
 }
 
+.btn-restart {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background-color: initial;
+  background-image: url("/assets/arrow-rotate-left-solid.svg");
+  background-repeat: no-repeat;
+}
+
 .menu-bar {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 0.5em;
   margin: 0.5em;
   position: relative;
 }
@@ -247,6 +258,11 @@ body, html {
   font-size: 1.1rem;
   margin: 0;
 }
+.settings-menu .btn {
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+}
 
 .menu-row {
   display: flex;
@@ -266,7 +282,7 @@ body, html {
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
 }
-.menu-row label {
+.menu-row label, .menu-row p {
   font-size: 0.8rem;
   text-align: left;
   color: white;

@@ -44,6 +44,10 @@ export default function SettingsMenu( { wordLengths, settings, onSave } ) {
                             onChange= {e => setChecked(e.target.checked)}
                         />
                     </div>
+
+                    <div className="menu-row">
+                        <p>The changes will take effect after the game has been restarted.</p>
+                    </div>
                 </form>
             </div>
         </div>

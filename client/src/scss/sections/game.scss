@@ -90,4 +90,12 @@
     }
 }
 
-
+.btn-restart {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    background-color: initial;
+    background-image: url('/assets/arrow-rotate-left-solid.svg');
+    background-repeat: no-repeat;
+}

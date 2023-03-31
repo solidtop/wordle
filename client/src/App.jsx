@@ -13,7 +13,6 @@ function App() {
   const [gameHasStarted, setGameHasStarted] = useState(false);
   const [gameIsFinished, setGameIsFinished] = useState(false);
 
-  useEffect(() => {
     async function startGame() {
       const api = new APIAdapter();
       const wordLength = settings.wordLength;
@@ -22,15 +21,22 @@ function App() {
       if (res.error) {
         throw new Error(res.error);
       }
+      
       setGameHasStarted(res.gameHasStarted);
       setResults(initResults(res.wordLength, res.guessesRemaining));
       setCurrentGuess(res.currentGuess);
       setGuessesRemaining(res.guessesRemaining);
     }
 
+
+  useEffect(() => {
     startGame();
     
   }, []);
+
+  function handleRestart() {
+    startGame();
+  }
   
   async function handleGuess(guess) {
     const api = new APIAdapter();
@@ -56,21 +62,13 @@ function App() {
 
   return (
     <div className="App">
-      <MenuBar settings={settings} setSettings={setSettings}/>
+      <MenuBar settings={settings} setSettings={setSettings} onRestart={handleRestart}/>
       <Board results={results}/>
       <GuessForm onGuess={handleGuess} length={results[0].length}/> 
     </div>
   )
 }
 
-function mockResponse(guess) {
-    return guess.split('').map(letter => {
-      return {
-        letter,
-        result: Math.random() <= .33 ? 'correct' : Math.random() <= .33 ? 'incorrect' : 'misplaced'
-      }
-    });
-}
 
 function initResults(rows, cols) {
   const totalResults = [];
