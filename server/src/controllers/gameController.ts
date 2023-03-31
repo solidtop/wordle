@@ -7,12 +7,13 @@ export function getElapsedTime(dateStr: string): number {
 }
 
 export function getGameState(stateData: StateData): GameState {
-    const { results, secretWord, isExactMatch, gameStartTimestamp, guessesRemaining } = stateData;
+    const { results, secretWord, isExactMatch, gameStartTimestamp, guessesRemaining, currentGuess } = stateData;
     const playerHasWon = isExactMatch;
     const gameIsFinished = playerHasWon || guessesRemaining <= 1;
     const updatedNumGuesses = gameIsFinished && playerHasWon ? guessesRemaining : guessesRemaining - 1;
+    const updatedCurrentGuess = gameIsFinished && playerHasWon ? currentGuess : currentGuess + 1;
    
-    if (gameIsFinished) {
+    if (gameIsFinished) { //TODO: if run out of guesses, don't send secretWord, score etc...
         const gameDuration = getElapsedTime(gameStartTimestamp);
         const score = calculateScore(guessesRemaining, gameDuration, secretWord.length);
         const message = playerHasWon ? 'Congratulations, you have won!' : 'You lose! Booo';
@@ -23,6 +24,7 @@ export function getGameState(stateData: StateData): GameState {
             results,
             score,
             guessesRemaining: updatedNumGuesses,
+            currentGuess: updatedCurrentGuess,
             secretWord,
             gameDuration,
         };
@@ -32,6 +34,7 @@ export function getGameState(stateData: StateData): GameState {
         gameIsFinished,
         results,
         guessesRemaining: updatedNumGuesses,
+        currentGuess: updatedCurrentGuess,
     }
 } 
 

@@ -4,6 +4,7 @@ export interface GameState {
     gameIsFinished: boolean;
     results: Result[] | undefined;
     guessesRemaining: number;
+    currentGuess: number;
     playerHasWon?: boolean;
     message?: string;
     secretWord?: string;
@@ -17,4 +18,5 @@ export interface StateData {
     isExactMatch: boolean | undefined;
     gameStartTimestamp: string;
     guessesRemaining: number;
+    currentGuess: number;
 }

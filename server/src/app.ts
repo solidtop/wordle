@@ -9,6 +9,7 @@ declare module "express-session" {
     secretWord?: string;
     gameStartTimestamp?: string;
     guessesRemaining?: number;
+    currentGuess?: number;
   }
 }
 
