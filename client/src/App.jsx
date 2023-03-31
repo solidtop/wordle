@@ -5,20 +5,20 @@ import GuessForm from './components/GuessForm';
 import MenuBar from './components/MenuBar';
 
 function App() {
-  const [results, setResults] = useState(initResults(5, 6));
+  const [results, setResults] = useState([[]]);
   const [currentGuess, setCurrentGuess] = useState(0);
   const [guessesRemaining, setGuessesRemaining] = useState(5);
 
   useEffect(() => {
     async function startGame() {
       const api = new APIAdapter();
-      const res = await api.fetchSecretWord(`?length=${length}&allowRepeats=${true}`);
+      const res = await api.fetchSecretWord(`?length=${5}&allowRepeats=${true}`);
       if (res.error) {
         console.log(res.error);
         return;
       }
 
-      setResults(initResults(length, 6));
+      setResults(initResults(res.wordLength, res.guessesRemaining));
     }
 
     startGame();
@@ -38,13 +38,12 @@ function App() {
       const data = await res.json();
       console.log(data);
 
-      /*const newResults = mockResponse(guess);
+      const newResults = res.results;
       const updatedResults = [...results];
       updatedResults[currentGuess] = newResults; 
       setResults(updatedResults);
       setCurrentGuess(currentGuess + 1);
       setGuessesRemaining(guessesRemaining - 1);
-      */
   };
 
   return (
