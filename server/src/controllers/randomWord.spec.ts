@@ -3,13 +3,13 @@ import getRandomWord, { hasDuplicates } from './randomWord';
 
 /*
     TESTING OBJECTIVES
-    - Ensure that getRandomWord() returns a word of the correct length with no repeated letters when allowRepeats is set to false.
-    - Ensure that getRandomWord() returns a word of the correct length with potentially repeated letters when allowRepeats is set to true.
+    - Ensure that getRandomWord() returns a word of the correct length with unique letters when uniqueLetters is set to true.
+    - Ensure that getRandomWord() returns a word of the correct length with duplicate letters when uniqueLetters is set to false.
     - Verify that an error is thrown if getRandomWord() cannot find a matching word.
     - Confirm that getRandomWord() returns a word from the input wordList.
-    - Verify that hasDuplicates() correctly identifies words with repeated letters.
+    - Verify that hasDuplicates() correctly identifies words with duplicate letters.
     - Ensure that hasDuplicates() returns false for an empty string or a single-character string.
-    - Verify that hasDuplicates() works correctly for strings with special characters or whitespace.
+    - Verify that hasDuplicates() works correctly with empty strings or strings with special characters.
 */
 
 describe('getRandomWord()', () => {
