@@ -1,0 +1,18 @@
+.menu-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: .5em;
+    @include line-break(2px, rgba(white, .2))
+}
+
+.btn-settings {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    background-color: initial;
+    background-image: url('/assets/gear-solid.svg');
+    background-repeat: no-repeat;
+}
+
+

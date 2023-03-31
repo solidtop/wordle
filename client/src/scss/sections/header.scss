@@ -1,0 +1,14 @@
+.header {
+    padding: 1em;
+
+    h1 {
+        margin: auto 0;
+    }
+}
+
+@media (min-width: $bp-medium) {
+    .header {
+        display: flex;
+        gap: 4em;
+    }
+}

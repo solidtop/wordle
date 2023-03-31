@@ -1,0 +1,31 @@
+.settings-menu {
+    display: block;
+    height: 100%;
+
+    .btn-close {
+        position: absolute;
+        top: 1em;
+        right: 1em;
+        width: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+        margin: 0;
+    }
+}
+
+.menu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4em;
+    margin: 2em 0;
+    @include line-break(1px, rgba(white, .5));
+
+    label {
+        font-size: .8rem;
+        text-align: left;
+        color: $text-color1;
+    }
+}

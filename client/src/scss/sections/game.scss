@@ -1,0 +1,93 @@
+.board {
+    display: grid;
+    grid-template-columns: 1fr;
+    
+    gap: 5px;
+    margin: 1.5em auto;
+    width: fit-content;
+    height: fit-content;
+}
+
+.board-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    width: 62px;
+    height: 62px;
+    border-radius: 0;
+    background-color: $tile-color;
+    border: 2px solid $border-color;
+    border-radius: 5px;
+    font-size: $tile-font-size;
+    text-align: center;
+
+    &.correct {
+        animation: tile-reveal-correct .5s;
+        background-color: $tile-correct-color;
+    }
+
+    &.incorrect {
+        animation: tile-reveal-incorrect .5s;
+        background-color: $tile-incorrect-color;
+    }
+
+    &.misplaced {
+        animation: tile-reveal-misplaced .2s 3 ease-in-out;
+        background-color: $tile-misplaced-color;
+    }
+}
+
+@keyframes tile-reveal-correct {
+    from {
+        transform: scale(-1);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes tile-reveal-incorrect {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes tile-reveal-misplaced {
+    0% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.guess-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    width: fit-content;
+    max-height: 50px;
+    margin: 2em auto;
+
+    input, .btn {
+        height: 100%;
+        background-color: $tile-color;
+        color: $text-color1;
+    }
+}
+
+

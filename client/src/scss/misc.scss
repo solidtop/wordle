@@ -1,0 +1,71 @@
+ul, ol {
+    list-style: none;
+    list-style-position: inside;
+}
+
+a {
+    text-decoration: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+input {
+    margin: 1em auto;
+    padding: .3em 1em;
+    outline: none;
+    border: solid 2px $border-color;
+    border-radius: 5px;
+    background-color: $input-color;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+select {
+    padding: .5em 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: $select-color;
+    font-size: .7rem;
+}
+
+input[type='checkbox'] {
+    margin: 0;
+    width: 1em;
+    height: 1em;
+}
+
+.headline--center {
+    text-align: center;
+}
+
+.btn {
+    padding: .6em 1em;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+
+    &.primary {
+        color: $text-color2;
+        background-color: $btn-primary-color;
+    }
+}
+
+.btn-open,
+.btn-close {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    background-color: initial;
+    background-repeat: no-repeat;
+}
+
+.btn-open {
+    background-image: url('/assets/gear-solid.svg');
+}
+
+.btn-close {
+    background-image: url('/assets/xmark-solid.svg');
+}
