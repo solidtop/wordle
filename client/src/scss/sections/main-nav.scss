@@ -1,0 +1,18 @@
+.nav-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    padding: 0;
+}
+
+.nav-item {
+    a {
+        font-weight: bold;   
+    }
+    &.selected {
+        a {
+            color: blue;
+        }
+    }
+}

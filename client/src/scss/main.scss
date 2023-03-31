@@ -1,0 +1,23 @@
+@import 'variables.scss';
+@import 'misc.scss';
+@import 'mixins.scss';
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+
+    @include container;
+}
+
+* {
+    font-family: sans-serif;
+    color: $text-color1;
+}
+
+/* Sections */
+@import 'sections/header.scss';
+@import 'sections/main-nav.scss';
+@import 'sections/highscores.scss';
+
+
