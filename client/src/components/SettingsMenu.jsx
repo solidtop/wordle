@@ -44,8 +44,6 @@ export default function SettingsMenu( { wordLengths, settings, onSave } ) {
                             onChange= {e => setChecked(e.target.checked)}
                         />
                     </div>
-
-                    {/* <button type="submit" className="btn primary" >SAVE</button> */}
                 </form>
             </div>
         </div>

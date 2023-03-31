@@ -63,11 +63,11 @@ input[type=checkbox] {
 }
 
 .btn-open {
-  background-image: url("/public/gear-solid.svg");
+  background-image: url("/assets/gear-solid.svg");
 }
 
 .btn-close {
-  background-image: url("/public/xmark-solid.svg");
+  background-image: url("/assets/xmark-solid.svg");
 }
 
 body, html {
@@ -126,7 +126,7 @@ body, html {
   display: grid;
   grid-template-columns: 1fr;
   gap: 5px;
-  margin: 2em auto;
+  margin: 1.5em auto;
   width: fit-content;
   height: fit-content;
 }
@@ -206,6 +206,33 @@ body, html {
   color: white;
 }
 
+.menu-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0.5em;
+  position: relative;
+}
+.menu-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5em;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.btn-settings {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background-color: initial;
+  background-image: url("/assets/gear-solid.svg");
+  background-repeat: no-repeat;
+}
+
 .settings-menu {
   display: block;
   height: 100%;
@@ -219,11 +246,6 @@ body, html {
 .settings-menu h2 {
   font-size: 1.1rem;
   margin: 0;
-}
-.settings-menu .btn {
-  position: absolute;
-  bottom: 1em;
-  right: 1em;
 }
 
 .menu-row {
