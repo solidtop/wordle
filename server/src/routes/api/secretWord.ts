@@ -6,17 +6,18 @@ import { NUM_GUESSES } from '../../constants';
 const router = express.Router();
 
 router.post('/secret-word', async (req, res) => {
-    const length = parseInt(req.query.length as string) || 5;
-    const allowRepeats = req.query.allowRepeats ? req.query.allowRepeats === 'true' : true;
+    const wordLength = parseInt(req.query.wordLength as string) || 5;
+    const uniqueLetters = req.query.uniqueLetters ? req.query.uniqueLetters === 'true' : true;
+    console.log(uniqueLetters);
 
-    if (length < 5 || length > 10) {
+    if (wordLength < 5 || wordLength > 10) {
         res.status(400).send({ error: 'Invalid length' });
         return;
     }
 
     const api = new APIAdapter();
-    const wordList = await api.fetchWords(length);
-    const secretWord = getRandomWord(wordList, length, allowRepeats); 
+    const wordList = await api.fetchWords(wordLength);
+    const secretWord = getRandomWord(wordList, wordLength, uniqueLetters); 
     
     if (secretWord) {
         const timestamp = new Date().toString(); 
