@@ -101,6 +101,7 @@ body, html {
 }
 
 .modal-content {
+  animation: modal-reveal 0.2s;
   position: relative;
   max-width: 500px;
   max-height: 500px;
@@ -111,6 +112,16 @@ body, html {
   box-shadow: 0 0 20px black;
 }
 
+@keyframes modal-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 /* Sections */
 .header {
   padding: 1em;

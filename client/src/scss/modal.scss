@@ -3,18 +3,29 @@
     position: absolute;
     inset: 0;
     justify-content: center;
-
     background-color: rgba(black, .8);
 }
 
 .modal-content {
+    animation: modal-reveal .2s;
     position: relative;
     max-width: 500px;
     max-height: 500px;
     margin: 4em 2em;
     padding: 1em;
     border-radius: 10px;
-
     background-color: $container-color;
     box-shadow: 0 0 20px black;
+}
+
+@keyframes modal-reveal {
+    from {
+        opacity: 0;
+        transform: scale(.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

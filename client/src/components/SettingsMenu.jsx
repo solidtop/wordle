@@ -5,18 +5,21 @@ export default function SettingsMenu( { wordLengths, settings, onSave } ) {
     const [checked, setChecked] = useState(uniqueLetters ? true : false);
     const [value, setValue] = useState(wordLength);
 
+    function handleMenuClose(form) {
+        const formData = new FormData(form);
+        const settingsData = Object.fromEntries(formData.entries());
+        onSave(settingsData);
+    }
+
     return (
         <div className="modal-container" onClick={() => {
-            const formData = new FormData(document.querySelector('.settings-menu'));
-            const settingsData = Object.fromEntries(formData.entries());
-            onSave(settingsData);
+            const form = document.querySelector('.settings-menu');
+            handleMenuClose(form);
         }}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <form name="settings" className="settings-menu" onSubmit={e => {
                     e.preventDefault();
-                    const formData = new FormData(e.target);
-                    const settingsData = Object.fromEntries(formData.entries());
-                    onSave(settingsData);
+                    handleMenuClose(e.target);
                 }}>
                     <button type='submit' className="btn-close"></button>
 
