@@ -1,14 +1,17 @@
 import { useState } from 'react';
 
-
 export default function SettingsMenu( { wordLengths, settings, onSave } ) {
     const { wordLength, uniqueLetters } = settings;
     const [checked, setChecked] = useState(uniqueLetters ? true : false);
     const [value, setValue] = useState(wordLength);
 
     return (
-        <div className="modal-container">
-            <div className="modal-content">
+        <div className="modal-container" onClick={() => {
+            const formData = new FormData(document.querySelector('.settings-menu'));
+            const settingsData = Object.fromEntries(formData.entries());
+            onSave(settingsData);
+        }}>
+            <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <form name="settings" className="settings-menu" onSubmit={e => {
                     e.preventDefault();
                     const formData = new FormData(e.target);
@@ -46,7 +49,7 @@ export default function SettingsMenu( { wordLengths, settings, onSave } ) {
                     </div>
 
                     <div className="menu-row">
-                        <p>The changes will take effect after the game has been restarted.</p>
+                        <strong>The changes will take effect after the game has been restarted.</strong>
                     </div>
                 </form>
             </div>

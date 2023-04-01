@@ -85,9 +85,24 @@
 
     input, .btn {
         height: 100%;
-        background-color: $tile-color;
+        margin: 1em auto;
+        outline: none;
+        background-color: $input-color;
         color: $text-color1;
+        font-size: 1.2rem;
+        text-transform: uppercase;
     }
+}
+
+.guess-input {
+    margin: 1em auto;
+    padding: .3em 1em;
+    outline: none;
+    border: solid 2px $border-color;
+    border-radius: 5px;
+    background-color: $input-color;
+    font-size: 1.2rem;
+    text-transform: uppercase;
 }
 
 .btn-restart {

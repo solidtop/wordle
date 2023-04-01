@@ -13,6 +13,7 @@ function App() {
   const [guessesRemaining, setGuessesRemaining] = useState(5);
   const [gameHasStarted, setGameHasStarted] = useState(false);
   const [gameIsFinished, setGameIsFinished] = useState(false);
+  const [endResults, setEndResults] = useState(null);
 
     async function startGame() {
       const api = new APIAdapter();
@@ -36,6 +37,8 @@ function App() {
   }, []);
 
   function handleRestart() {
+    setGameIsFinished(false);
+    setGameHasStarted(false);
     startGame();
   }
   
@@ -56,27 +59,31 @@ function App() {
     updatedResults[currentGuess] = newResults; 
     setResults(updatedResults);
 
-    if (gameIsFinished) {
-      //TODO: Show end screen
-      // <GameEndMenu />
+    if (res.gameIsFinished) {
+      setEndResults({
+        isWin: res.playerHasWon,
+        score: res.score,
+        secretWord: res.secretWord,
+        numGuesses: res.currentGuess + 1,
+        time: new Date(res.gameDuration),
+      })
     }
   };
 
   return (
     <div className="App">
-      <GameEndMenu
-        isWin={true}
-        score={42069} 
-        secretWord={'CYKLA'}
-        numGuesses={3}
-        time={16535}
-        onRestart={handleRestart}
-      />
-
-
       <MenuBar settings={settings} setSettings={setSettings} onRestart={handleRestart}/>
       <Board results={results}/>
       <GuessForm onGuess={handleGuess} length={results[0].length}/> 
+
+      {gameIsFinished && endResults && (<GameEndMenu
+        isWin={endResults.isWin}
+        score={endResults.score} 
+        secretWord={endResults.secretWord}
+        numGuesses={endResults.numGuesses}
+        time={endResults.time}
+        onRestart={handleRestart}
+      />)}
     </div>
   )
 }

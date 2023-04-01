@@ -1,0 +1,50 @@
+.game-end-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+        width: 100%;
+        text-align: center;
+        @include line-break(2px, white);
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    .score {
+        margin: 0;
+        font-size: 2rem;
+    }
+
+    .time {
+        font-size: 1.3rem;
+    }
+
+    .secret-word {
+        color: orange;
+    }
+
+    .guesses {
+        color: rgb(84, 84, 139);
+    }
+
+    .highscore-form {
+        align-self: flex-start;
+        input, button {
+            display: block;
+        }
+    }
+
+    .btn.secondary {
+        font-size: .9rem;
+    }
+
+    .btn.primary {
+        position: absolute;
+        right: 1em;
+        bottom: 1em;
+    }
+}   

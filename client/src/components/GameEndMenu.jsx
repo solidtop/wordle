@@ -1,3 +1,5 @@
+import formatTime from '../utils/timeFormat.js';
+
 export default function GameEndMenu({ isWin, score, secretWord, numGuesses, time, onRestart }) {
  
     return (
@@ -9,9 +11,9 @@ export default function GameEndMenu({ isWin, score, secretWord, numGuesses, time
                         <>
                         <h2>YOU WON!</h2>
                         <h3>YOUR SCORE</h3>
-                        <p>{score}</p>
-                        <p>You managed to guess the secret word <span>{secretWord}</span> in <span>{numGuesses} tries</span></p>
-                        <p>TIME: {time}</p>
+                        <p className="score">{score}</p>
+                        <p className="time">{'TIME: ' + formatTime(time)}</p>
+                        <p>You managed to guess the secret word <span className="secret-word">{secretWord}</span> in <span className="guesses">{numGuesses} tries</span></p>
 
                         <form name="highscore" className="highscore-form" onSubmit={e => {
                             e.preventDefault();
@@ -30,7 +32,7 @@ export default function GameEndMenu({ isWin, score, secretWord, numGuesses, time
                         </>
                     )}
                     
-                    <button className="btn primary">PLAY AGAIN</button>
+                    <button className="btn primary" onClick={onRestart}>PLAY AGAIN</button>
                 </div>
 
               

@@ -11,6 +11,7 @@ export default function GuessForm({ onGuess, length }) {
         }}>
             <input 
                 type="text" 
+                className="guess-input"
                 id="guessInput"
                 onChange={e => setText(e.target.value)}
                 minLength={length}

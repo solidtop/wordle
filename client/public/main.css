@@ -19,8 +19,7 @@ input {
   border: solid 2px #3a3a3c;
   border-radius: 5px;
   background-color: #121213;
-  font-size: 1.2rem;
-  text-transform: uppercase;
+  font-size: 1rem;
 }
 
 select {
@@ -28,13 +27,13 @@ select {
   border: none;
   border-radius: 5px;
   background-color: #3a3a3c;
-  font-size: 0.7rem;
+  font-size: 1rem;
 }
 
 input[type=checkbox] {
   margin: 0;
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .headline--center {
@@ -51,6 +50,10 @@ input[type=checkbox] {
 .btn.primary {
   color: black;
   background-color: white;
+}
+.btn.secondary {
+  color: white;
+  background-color: #3a3a3c;
 }
 
 .btn-open,
@@ -80,7 +83,7 @@ body, html {
 }
 @media (min-width: 750px) {
   body, html {
-    font-size: 24px;
+    font-size: 18px;
   }
 }
 
@@ -202,8 +205,23 @@ body, html {
 }
 .guess-form input, .guess-form .btn {
   height: 100%;
+  margin: 1em auto;
+  outline: none;
   background-color: #121213;
   color: white;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.guess-input {
+  margin: 1em auto;
+  padding: 0.3em 1em;
+  outline: none;
+  border: solid 2px #3a3a3c;
+  border-radius: 5px;
+  background-color: #121213;
+  font-size: 1.2rem;
+  text-transform: uppercase;
 }
 
 .btn-restart {
@@ -244,6 +262,58 @@ body, html {
   background-repeat: no-repeat;
 }
 
+.game-end-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.game-end-menu h2 {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+.game-end-menu h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5em;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  border-radius: 5px;
+}
+.game-end-menu h3 {
+  margin: 0;
+}
+.game-end-menu .score {
+  margin: 0;
+  font-size: 2rem;
+}
+.game-end-menu .time {
+  font-size: 1.3rem;
+}
+.game-end-menu .secret-word {
+  color: orange;
+}
+.game-end-menu .guesses {
+  color: rgb(84, 84, 139);
+}
+.game-end-menu .highscore-form {
+  align-self: flex-start;
+}
+.game-end-menu .highscore-form input, .game-end-menu .highscore-form button {
+  display: block;
+}
+.game-end-menu .btn.secondary {
+  font-size: 0.9rem;
+}
+.game-end-menu .btn.primary {
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+}
+
 .settings-menu {
   display: block;
   height: 100%;
@@ -255,7 +325,6 @@ body, html {
   width: 1.8em;
 }
 .settings-menu h2 {
-  font-size: 1.1rem;
   margin: 0;
 }
 .settings-menu .btn {
@@ -278,14 +347,9 @@ body, html {
   left: 0;
   bottom: -0.5em;
   width: 100%;
-  height: 1px;
+  height: 2px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 5px;
-}
-.menu-row label, .menu-row p {
-  font-size: 0.8rem;
-  text-align: left;
-  color: white;
 }
 
 .nav-list {
