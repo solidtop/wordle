@@ -3,6 +3,7 @@ import APIAdapter from './api.js';
 import Board from './components/Board';
 import GuessForm from './components/GuessForm';
 import MenuBar from './components/MenuBar';
+import GameEndMenu from './components/GameEndMenu';
 import { loadSettings } from './settings.js';
 
 function App() {
@@ -57,11 +58,22 @@ function App() {
 
     if (gameIsFinished) {
       //TODO: Show end screen
+      // <GameEndMenu />
     }
   };
 
   return (
     <div className="App">
+      <GameEndMenu
+        isWin={true}
+        score={42069} 
+        secretWord={'CYKLA'}
+        numGuesses={3}
+        time={16535}
+        onRestart={handleRestart}
+      />
+
+
       <MenuBar settings={settings} setSettings={setSettings} onRestart={handleRestart}/>
       <Board results={results}/>
       <GuessForm onGuess={handleGuess} length={results[0].length}/> 
