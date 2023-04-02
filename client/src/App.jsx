@@ -36,7 +36,7 @@ function App() {
     
   }, []);
 
-  function handleRestart() {
+  function handleRestart() { //TODO: limit users ability to restart somehow
     setGameIsFinished(false);
     setGameHasStarted(false);
     startGame();
