@@ -6,7 +6,6 @@ export interface GameState {
     guessesRemaining: number;
     currentGuess: number;
     playerHasWon?: boolean;
-    message?: string;
     secretWord?: string;
     score?: number;
     gameDuration?: number;

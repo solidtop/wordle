@@ -20,7 +20,6 @@ export function getGameState(stateData: StateData): GameState {
         return {
             gameIsFinished,
             playerHasWon,
-            message,
             results,
             score,
             guessesRemaining: updatedNumGuesses,
