@@ -4,7 +4,7 @@
     margin-right: auto;
 }
 
-@mixin line-break() {
+@mixin line-break($height, $color) {
     position: relative;
 
     &::after {
@@ -13,7 +13,8 @@
         left: 0;
         bottom: -.5em;
         width: 100%;
-        height: 5px;
-        background-color: black;
+        height: $height;
+        background-color: $color;
+        border-radius: 5px;
     }
 }

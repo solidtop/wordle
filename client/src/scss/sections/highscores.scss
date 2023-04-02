@@ -40,5 +40,5 @@
         text-align: center;
     }
 
-    @include line-break;
+    @include line-break(5px, black);
 }

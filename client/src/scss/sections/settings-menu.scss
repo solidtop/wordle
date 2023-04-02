@@ -1,0 +1,30 @@
+.settings-menu {
+    display: block;
+    height: 100%;
+
+    .btn-close {
+        position: absolute;
+        top: 1em;
+        right: 1em;
+        width: 1.8em;
+    }
+
+    h2 {
+        margin: 0;
+    }
+
+    .btn {
+        position: absolute;
+        right: 1em;
+        bottom: 1em;
+    }
+}
+
+.menu-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4em;
+    margin: 2em 0;
+    @include line-break(2px, rgba(white, .5));
+}
