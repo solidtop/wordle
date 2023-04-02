@@ -3,5 +3,5 @@ export function saveSettings(settings) {
 }
 
 export function loadSettings() {
-    return JSON.parse(localStorage.getItem('settings'));
+    return JSON.parse(localStorage.getItem('settings')) || {};
 }

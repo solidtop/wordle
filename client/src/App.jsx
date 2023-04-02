@@ -19,7 +19,7 @@ function App() {
   async function startGame() {
     const api = new APIAdapter();
     const { wordLength, uniqueLetters } = settings;
-    const res = await api.fetchSecretWord(wordLength, uniqueLetters ? true : false);
+    const res = await api.fetchSecretWord(wordLength || 5, uniqueLetters ? true : false);
     if (res.error) {
       throw new Error(res.error);
     }
