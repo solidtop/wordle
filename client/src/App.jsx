@@ -4,6 +4,7 @@ import Board from './components/Board';
 import GuessForm from './components/GuessForm';
 import MenuBar from './components/MenuBar';
 import GameEndMenu from './components/GameEndMenu';
+import GameTimer from './components/GameTimer';
 import { loadSettings } from './settings.js';
 
 function App() {
@@ -73,17 +74,25 @@ function App() {
   return (
     <div className="App">
       <MenuBar settings={settings} setSettings={setSettings} onRestart={handleRestart}/>
-      <Board results={results}/>
-      <GuessForm onGuess={handleGuess} length={results[0].length}/> 
+      
+      
+      {gameHasStarted && (
+        <>
+          <GameTimer /> 
+          <Board results={results} /> 
+          <GuessForm onGuess={handleGuess} length={results[0].length} />
+        </>
+      )}
 
-      {gameIsFinished && endResults && (<GameEndMenu
-        isWin={endResults.isWin}
-        score={endResults.score} 
-        secretWord={endResults.secretWord}
-        numGuesses={endResults.numGuesses}
-        time={endResults.time}
-        onRestart={handleRestart}
-      />)}
+      {gameIsFinished && endResults && (
+        <GameEndMenu
+          isWin={endResults.isWin}
+          score={endResults.score} 
+          secretWord={endResults.secretWord}
+          numGuesses={endResults.numGuesses}
+          time={endResults.time}
+          onRestart={handleRestart} />
+      )}
     </div>
   )
 }

@@ -1,3 +1,9 @@
+.game-timer {
+    margin: 1em;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
 .board {
     display: grid;
     grid-template-columns: 1fr;
@@ -75,28 +81,19 @@
 }
 
 .guess-form {
-    width: 100%;
     display: flex;
     align-items: center;
     gap: .5em;
     width: fit-content;
-    max-height: 50px;
     margin: 2em auto;
 
-    input, .btn {
-        height: 100%;
-        margin: 1em auto;
-        outline: none;
+    .btn {
         background-color: $input-color;
         color: $text-color1;
-        font-size: 1.2rem;
-        text-transform: uppercase;
     }
 }
 
 .guess-input {
-    margin: 1em auto;
-    padding: .3em 1em;
     outline: none;
     border: solid 2px $border-color;
     border-radius: 5px;

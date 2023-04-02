@@ -11,13 +11,11 @@ export default function GameTimer() {
         return () => clearInterval(timer);
     }, []);
 
-    const hours = Math.floor(secondsElapsed / 60 / 60);
     const minutes = Math.floor(secondsElapsed / 60);
     const seconds = secondsElapsed % 60;
 
     return (
         <div className="game-timer">
-            {hours < 10 ? `0${hours}` : hours}: 
             {minutes < 10 ? `0${minutes}` : minutes}:
             {seconds < 10 ? `0${seconds}` : seconds}
         </div>
