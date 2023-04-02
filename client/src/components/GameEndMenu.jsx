@@ -6,7 +6,6 @@ export default function GameEndMenu({ isWin, score, secretWord, numGuesses, time
         <div className="modal-container">
             <div className="modal-content">
                 <div className="game-end-menu">
-
                     {isWin && (
                         <>
                         <h2>YOU WON!</h2>
@@ -34,8 +33,6 @@ export default function GameEndMenu({ isWin, score, secretWord, numGuesses, time
                     
                     <button className="btn primary" onClick={onRestart}>PLAY AGAIN</button>
                 </div>
-
-              
             </div>
         </div>
     );

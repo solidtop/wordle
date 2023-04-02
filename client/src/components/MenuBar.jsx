@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SettingsMenu from './SettingsMenu';
 import { saveSettings } from '../settings';
 
-function MenuBar({ settings, setSettings, onRestart }) {
+function MenuBar({ settings, setSettings }) {
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
 
   function handleSettingsMenu() {
@@ -12,7 +12,6 @@ function MenuBar({ settings, setSettings, onRestart }) {
   return (
     <>
       <section className='menu-bar'>
-        <button className="btn-restart" onClick={onRestart}></button>
         <button className='btn-settings' onClick={handleSettingsMenu}></button>
       </section>
 

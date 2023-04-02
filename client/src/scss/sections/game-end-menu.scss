@@ -24,15 +24,16 @@
     }
 
     .secret-word {
-        color: orange;
+        color: $tile-correct-color;
     }
 
     .guesses {
-        color: rgb(84, 84, 139);
+        color: $tile-misplaced-color;
     }
 
     .highscore-form {
         align-self: flex-start;
+
         input, button {
             display: block;
         }
@@ -43,9 +44,9 @@
     }
 
     .btn.primary {
-        position: absolute;
-        right: 1em;
-        bottom: 1em;
+        margin-top: 2em;
+        margin-left: auto;
+        margin-right: 0;
     }
 }   
 

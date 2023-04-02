@@ -3,10 +3,6 @@
     padding: 1em;
     border-radius: 10px;
     background-color: $container-color;
-
-    * {
-        color: $text-color2;
-    }
 }
 
 .col-headers {
@@ -40,5 +36,5 @@
         text-align: center;
     }
 
-    @include line-break(5px, black);
+    @include line-break(2px, $text-color1);
 }

@@ -104,8 +104,8 @@ body, html {
   animation: modal-reveal 0.2s;
   position: relative;
   max-width: 500px;
-  max-height: 500px;
-  margin: 4em 2em;
+  height: fit-content;
+  margin: 10em 2em;
   padding: 1em;
   border-radius: 10px;
   background-color: #121213;
@@ -211,6 +211,15 @@ body, html {
     transform: rotate(0deg);
   }
 }
+.game-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2em;
+  width: fit-content;
+  margin: auto;
+}
+
 .guess-form {
   display: flex;
   align-items: center;
@@ -233,13 +242,13 @@ body, html {
 }
 
 .btn-restart {
-  display: block;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2rem;
+  height: 2rem;
   border: none;
   background-color: initial;
   background-image: url("/assets/arrow-rotate-left-solid.svg");
   background-repeat: no-repeat;
+  object-fit: contain;
 }
 
 .menu-bar {
@@ -302,10 +311,10 @@ body, html {
   font-size: 1.3rem;
 }
 .game-end-menu .secret-word {
-  color: orange;
+  color: #538d4e;
 }
 .game-end-menu .guesses {
-  color: rgb(84, 84, 139);
+  color: #b59f3b;
 }
 .game-end-menu .highscore-form {
   align-self: flex-start;
@@ -317,9 +326,9 @@ body, html {
   font-size: 0.9rem;
 }
 .game-end-menu .btn.primary {
-  position: absolute;
-  right: 1em;
-  bottom: 1em;
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: 0;
 }
 
 .settings-menu {
@@ -372,7 +381,7 @@ body, html {
   font-weight: bold;
 }
 .nav-item.selected a {
-  color: blue;
+  text-decoration: underline;
 }
 
 .container {
@@ -380,9 +389,6 @@ body, html {
   padding: 1em;
   border-radius: 10px;
   background-color: #121213;
-}
-.container * {
-  color: black;
 }
 
 .col-headers {
@@ -421,7 +427,7 @@ body, html {
   left: 0;
   bottom: -0.5em;
   width: 100%;
-  height: 5px;
-  background-color: black;
+  height: 2px;
+  background-color: white;
   border-radius: 5px;
 }

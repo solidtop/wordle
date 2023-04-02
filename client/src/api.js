@@ -1,6 +1,6 @@
 export default class APIAdapter {
-    async fetchSecretWord(query) {
-        const res = await fetch('/api/secret-word' + query, {
+    async fetchSecretWord(wordLength, uniqueLetters) {
+        const res = await fetch(`/api/secret-word?wordLength=${wordLength}&uniqeLetters=${uniqueLetters}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', 

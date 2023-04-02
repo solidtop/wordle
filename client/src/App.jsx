@@ -16,20 +16,19 @@ function App() {
   const [gameIsFinished, setGameIsFinished] = useState(false);
   const [endResults, setEndResults] = useState(null);
 
-    async function startGame() {
-      const api = new APIAdapter();
-      const wordLength = settings.wordLength;
-      const uniqueLetters = settings.uniqueLetters ? true : false;
-      const res = await api.fetchSecretWord(`?wordLength=${wordLength}&uniqueLetters=${uniqueLetters}`);
-      if (res.error) {
-        throw new Error(res.error);
-      }
-      
-      setGameHasStarted(res.gameHasStarted);
-      setResults(initResults(res.wordLength, res.guessesRemaining));
-      setCurrentGuess(res.currentGuess);
-      setGuessesRemaining(res.guessesRemaining);
+  async function startGame() {
+    const api = new APIAdapter();
+    const { wordLength, uniqueLetters } = settings;
+    const res = await api.fetchSecretWord(wordLength, uniqueLetters ? true : false);
+    if (res.error) {
+      throw new Error(res.error);
     }
+    
+    setGameHasStarted(res.gameHasStarted);
+    setResults(initResults(res.wordLength, res.guessesRemaining));
+    setCurrentGuess(res.currentGuess);
+    setGuessesRemaining(res.guessesRemaining);
+  }
 
 
   useEffect(() => {
