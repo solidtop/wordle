@@ -74,12 +74,15 @@ function App() {
     <div className="App">
       <MenuBar settings={settings} setSettings={setSettings} onRestart={handleRestart}/>
       
-      
       {gameHasStarted && (
         <>
-          <GameTimer /> 
+          {!gameIsFinished && <GameTimer />} 
           <Board results={results} /> 
-          <GuessForm onGuess={handleGuess} length={results[0].length} />
+          
+          <div className="game-inputs">
+            <button className="btn-restart" onClick={handleRestart}></button>
+            <GuessForm onGuess={handleGuess} length={results[0].length} />
+          </div>
         </>
       )}
 
