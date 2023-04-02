@@ -3,10 +3,9 @@ import { Result } from './guess';
 export interface GameState {
     gameIsFinished: boolean;
     results: Result[] | undefined;
-    guessesRemaining: number;
-    currentGuess: number;
+    guessesRemaining?: number;
+    currentGuess?: number;
     playerHasWon?: boolean;
-    message?: string;
     secretWord?: string;
     score?: number;
     gameDuration?: number;
