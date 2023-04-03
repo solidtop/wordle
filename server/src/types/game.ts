@@ -1,8 +1,8 @@
 import { Result } from './guess';
 
 export interface GameState {
+    results: Result[][];
     gameIsFinished: boolean;
-    results: Result[] | undefined;
     guessesRemaining?: number;
     currentGuess?: number;
     playerHasWon?: boolean;
@@ -12,10 +12,11 @@ export interface GameState {
 }
 
 export interface StateData {
-    results: Result[] | undefined;
+    prevResults: Result[][];
+    newResults: Result[];
     secretWord: string;
     isExactMatch: boolean | undefined;
-    gameStartTimestamp: string;
+    startTime: string;
     guessesRemaining: number;
     currentGuess: number;
 }

@@ -5,26 +5,31 @@ import { getGameState } from '../../controllers/gameController';
 const router = express.Router();
 
 router.post('/guess', (req, res) => {
-    const { secretWord, gameStartTimestamp = '', guessesRemaining = 0, currentGuess = 0 } = req.session;
+    const { secretWord, startTime = '', guessesRemaining = 0, currentGuess = 0 } = req.session;
     if (!secretWord) {
         res.status(500).json({ error: 'Secret word is not defined' });
         return;
     }
+
     const guess:string = req.body.guess;
     const { isValid, isExactMatch, error, results } = checkGuess(guess, secretWord);
+
     if (!isValid) {
         res.status(400).json({ error });
         return;
     }
 
     const gameState = getGameState({
-        results, 
+        prevResults: req.session.results || [],
+        newResults: results || [],
         secretWord, 
         isExactMatch, 
-        gameStartTimestamp, 
+        startTime, 
         guessesRemaining,
         currentGuess, 
     });
+
+    req.session.results = gameState.results;
     req.session.guessesRemaining = gameState.guessesRemaining;
     req.session.currentGuess = gameState.currentGuess;
     
