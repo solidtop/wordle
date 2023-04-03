@@ -16,7 +16,7 @@ export interface StateData {
     newResults: Result[];
     secretWord: string;
     isExactMatch: boolean | undefined;
-    gameStartTimestamp: string;
+    startTime: string;
     guessesRemaining: number;
     currentGuess: number;
 }

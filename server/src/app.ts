@@ -8,7 +8,7 @@ declare module "express-session" {
     interface SessionData {
         results?: Result[][];
         secretWord?: string;
-        gameStartTimestamp?: string;
+        startTime?: string;
         guessesRemaining?: number;
         currentGuess?: number;
     }

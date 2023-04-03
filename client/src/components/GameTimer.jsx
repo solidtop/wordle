@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-export default function GameTimer() {
-    const [secondsElapsed, setSecondsElapsed] = useState(0);
+export default function GameTimer({ duration }) {
+    const [secondsElapsed, setSecondsElapsed] = useState(Math.floor(duration / 1000));
 
     useEffect(() => {
         const timer = setInterval(() => {

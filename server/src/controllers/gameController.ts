@@ -8,7 +8,7 @@ export function getElapsedTime(dateStr: string): number {
 }
 
 export function getGameState(stateData: StateData): GameState {
-    const { prevResults, newResults, secretWord, isExactMatch, gameStartTimestamp, guessesRemaining, currentGuess } = stateData;
+    const { prevResults, newResults, secretWord, isExactMatch, startTime, guessesRemaining, currentGuess } = stateData;
     const playerHasWon = isExactMatch;
     const gameIsFinished = playerHasWon || guessesRemaining <= 1;
     const updatedNumGuesses = gameIsFinished && playerHasWon ? guessesRemaining : guessesRemaining - 1;
@@ -25,7 +25,7 @@ export function getGameState(stateData: StateData): GameState {
             }
         }
 
-        const gameDuration = getElapsedTime(gameStartTimestamp);
+        const gameDuration = getElapsedTime(startTime);
         const score = calculateScore(guessesRemaining, gameDuration, secretWord.length);
         return {
             gameIsFinished,
