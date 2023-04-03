@@ -21,10 +21,11 @@ export default function initApp() {
     app.set('view engine', 'handlebars');
 
     app.use(session({
-      secret: 'sectret-key',
-      resave: false,
-      saveUninitialized: false,
+        secret: 'sectret-key',
+        resave: false,
+        saveUninitialized: false,
     }));
+    
     app.use(express.json());
     app.use(express.static('../client/dist'));
     app.use(router);

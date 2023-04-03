@@ -8,8 +8,8 @@ const router = express.Router();
 router.post('/highscores', async (req, res) => {
     const  { name, numGuesses, score, settings } = req.body;
 
-    const gameStartTimestamp = req.session.gameStartTimestamp || '';
-    const gameDuration = getElapsedTime(gameStartTimestamp);
+    const startTime = req.session.startTime || '';
+    const gameDuration = getElapsedTime(startTime);
     const { isValid, error } = validateHighscore(name);
     if (!isValid) {
         res.status(400).json( { error });
