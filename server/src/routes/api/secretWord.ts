@@ -39,7 +39,7 @@ router.post('/secret-word', async (req, res) => {
     res.json({ 
         guessesRemaining: req.session.guessesRemaining,
         currentGuess: req.session.currentGuess,
-        gameDuration: getElapsedTime(req.session.startTime || ''),
+        gameDuration: getElapsedTime(req.session.startTime || '', new Date().toString()),
         gameHasStarted: true,
         results: req.session.results,
     }); 

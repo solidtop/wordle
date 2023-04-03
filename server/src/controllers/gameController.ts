@@ -1,14 +1,24 @@
 import { GameState, StateData } from '../types/game';
 import { Result } from '../types/guess';
 
-export function getElapsedTime(dateStr: string): number {
-    const startDate = new Date(dateStr);
-    const endDate = new Date();
+export function getElapsedTime(startTime: string, endTime: string): number {
+    const startDate = new Date(startTime);
+    const endDate = new Date(endTime);
     return (endDate.getTime() - startDate.getTime());
 }
 
 export function getGameState(stateData: StateData): GameState {
-    const { prevResults, newResults, secretWord, isExactMatch, startTime, guessesRemaining, currentGuess } = stateData;
+    const { 
+        prevResults, 
+        newResults, 
+        secretWord, 
+        isExactMatch, 
+        startTime, 
+        endTime,
+        guessesRemaining, 
+        currentGuess 
+    } = stateData;
+
     const playerHasWon = isExactMatch;
     const gameIsFinished = playerHasWon || guessesRemaining <= 1;
     const updatedNumGuesses = gameIsFinished && playerHasWon ? guessesRemaining : guessesRemaining - 1;
@@ -25,7 +35,7 @@ export function getGameState(stateData: StateData): GameState {
             }
         }
 
-        const gameDuration = getElapsedTime(startTime);
+        const gameDuration = getElapsedTime(startTime, endTime);
         const score = calculateScore(guessesRemaining, gameDuration, secretWord.length);
         return {
             gameIsFinished,
@@ -35,6 +45,7 @@ export function getGameState(stateData: StateData): GameState {
             currentGuess: updatedCurrentGuess,
             secretWord,
             gameDuration,
+            endTime,
             results: updatedResults,
         };
     } 

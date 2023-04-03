@@ -9,6 +9,7 @@ export interface GameState {
     secretWord?: string;
     score?: number;
     gameDuration?: number;
+    endTime?: string;
 }
 
 export interface StateData {
@@ -17,6 +18,7 @@ export interface StateData {
     secretWord: string;
     isExactMatch: boolean | undefined;
     startTime: string;
+    endTime: string;
     guessesRemaining: number;
     currentGuess: number;
 }

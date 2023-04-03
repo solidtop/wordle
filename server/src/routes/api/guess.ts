@@ -25,6 +25,7 @@ router.post('/guess', (req, res) => {
         secretWord, 
         isExactMatch, 
         startTime, 
+        endTime: new Date().toString(),
         guessesRemaining,
         currentGuess, 
     });
@@ -32,9 +33,12 @@ router.post('/guess', (req, res) => {
     req.session.results = gameState.results;
     req.session.guessesRemaining = gameState.guessesRemaining;
     req.session.currentGuess = gameState.currentGuess;
+    req.session.gameIsFinished = gameState.gameIsFinished;
+    req.session.score = gameState.score;
+    req.session.endTime = gameState.endTime;
     
     if (gameState.gameIsFinished) {
-        req.session.destroy(err => { if (err) throw err }); //Clear the session when game finishes
+
     }
    
     res.json({ ...gameState });

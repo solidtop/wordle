@@ -3,14 +3,18 @@ import { engine } from 'express-handlebars';
 import router from './routers';
 import session from 'express-session';
 import { Result } from './types/guess';
+import mongoose from 'mongoose';
 
 declare module "express-session" {
     interface SessionData {
         results?: Result[][];
         secretWord?: string;
         startTime?: string;
+        endTime?: string;
         guessesRemaining?: number;
         currentGuess?: number;
+        score?: number;
+        gameIsFinished?: boolean;
     }
 }
 
@@ -32,3 +36,9 @@ export default function initApp() {
 
     return app;
 }
+
+async function run() {
+    await mongoose.connect('mongodb://127.0.0.1:27017/test');  
+} 
+
+run();

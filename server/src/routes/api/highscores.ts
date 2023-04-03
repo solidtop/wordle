@@ -1,26 +1,33 @@
 import express from 'express';
-import fs from 'fs/promises';
-import APIAdapter from '../../controllers/ApiAdapter';
-import validateHighscore from '../../validators/scoreValidator';
-import { getElapsedTime } from '../../controllers/gameController';
+import Highscore from '../../models/highscore';
+import { calculateScore, getElapsedTime } from '../../controllers/gameController';
 
 const router = express.Router();
 router.post('/highscores', async (req, res) => {
-    const  { name, numGuesses, score, settings } = req.body;
+    const { name, settings } = req.body;
+    const { score, gameIsFinished, currentGuess = 0, startTime = '', endTime = '' } = req.session;
 
-    const startTime = req.session.startTime || '';
-    const gameDuration = getElapsedTime(startTime);
-    const { isValid, error } = validateHighscore(name);
-    if (!isValid) {
-        res.status(400).json( { error });
+    if (!gameIsFinished) {
+        res.status(403).send('Highscore not allowed');
         return;
     }
 
-    const api = new APIAdapter();
-    const isSuccess = await api.saveHighscore({name, gameDuration, numGuesses, score, settings});
-    if (!isSuccess) {
-        res.status(500).json({ error: 'There was a problem saving your highscore' });
+    const time = getElapsedTime(startTime, endTime);
+    const highscore = new Highscore({
+        name,
+        time,
+        guesses: currentGuess + 1,
+        score,
+        settings,
+    });
+
+    const success = await highscore.save();
+    if (!success) {
+        res.status(500).send('There was a problem posting your highscore');
+        return;
     }
+
+    res.status(200).send('Highscore posted');
 });
 
 export default router;

@@ -1,10 +1,10 @@
-export default interface HighScore {
+export default interface Highscore {
     name: string;
-    gameDuration: number;
-    numGuesses: number;
+    time: number;
+    guesses: number;
     score: number;
     settings: {
         wordLength: number;
-        allowRepeats: boolean;
+        uniqueLetters: boolean;
     }
 }
