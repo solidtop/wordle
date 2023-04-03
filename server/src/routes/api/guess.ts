@@ -10,6 +10,7 @@ router.post('/guess', (req, res) => {
         res.status(500).json({ error: 'Secret word is not defined' });
         return;
     }
+
     const guess:string = req.body.guess;
     const { isValid, isExactMatch, error, results } = checkGuess(guess, secretWord);
     if (!isValid) {
@@ -18,13 +19,16 @@ router.post('/guess', (req, res) => {
     }
 
     const gameState = getGameState({
-        results, 
+        prevResults: req.session.results || [],
+        newResults: results || [],
         secretWord, 
         isExactMatch, 
         gameStartTimestamp, 
         guessesRemaining,
         currentGuess, 
     });
+
+    req.session.results = gameState.results;
     req.session.guessesRemaining = gameState.guessesRemaining;
     req.session.currentGuess = gameState.currentGuess;
     

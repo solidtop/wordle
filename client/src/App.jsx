@@ -7,6 +7,12 @@ import GameEndMenu from './components/GameEndMenu';
 import GameTimer from './components/GameTimer';
 import { loadSettings } from './settings.js';
 
+function getElapsedSeconds(dateStr) {
+    const startDate = new Date(dateStr);
+    const endDate = new Date();
+    return Math.round((endDate.getTime() - startDate.getTime()) / 1000);
+}
+
 function App() {
   const [settings, setSettings] = useState(loadSettings());
   const [results, setResults] = useState([[]]);
@@ -21,7 +27,7 @@ function App() {
     const { wordLength, uniqueLetters } = settings;
     const res = await api.fetchSecretWord(wordLength || 5, uniqueLetters ? true : false);
     if (res.error) {
-      throw new Error(res.error);
+      return alert(res.error);
     }
     
     setGameHasStarted(res.gameHasStarted);

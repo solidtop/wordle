@@ -1,4 +1,5 @@
 import { GameState, StateData } from '../types/game';
+import { Result } from '../types/guess';
 
 export function getElapsedTime(dateStr: string): number {
     const startDate = new Date(dateStr);
@@ -7,18 +8,20 @@ export function getElapsedTime(dateStr: string): number {
 }
 
 export function getGameState(stateData: StateData): GameState {
-    const { results, secretWord, isExactMatch, gameStartTimestamp, guessesRemaining, currentGuess } = stateData;
+    const { prevResults, newResults, secretWord, isExactMatch, gameStartTimestamp, guessesRemaining, currentGuess } = stateData;
     const playerHasWon = isExactMatch;
     const gameIsFinished = playerHasWon || guessesRemaining <= 1;
     const updatedNumGuesses = gameIsFinished && playerHasWon ? guessesRemaining : guessesRemaining - 1;
     const updatedCurrentGuess = gameIsFinished && playerHasWon ? currentGuess : currentGuess + 1;
-   
+    const updatedResults = [...prevResults];
+    updatedResults[currentGuess] = newResults; 
+
     if (gameIsFinished) { 
         if (updatedNumGuesses === 0) { // Out of guesses
             return {
                 gameIsFinished,
                 playerHasWon,
-                results,
+                results: updatedResults,
             }
         }
 
@@ -27,20 +30,20 @@ export function getGameState(stateData: StateData): GameState {
         return {
             gameIsFinished,
             playerHasWon,
-            results,
             score,
             guessesRemaining: updatedNumGuesses,
             currentGuess: updatedCurrentGuess,
             secretWord,
             gameDuration,
+            results: updatedResults,
         };
     } 
 
     return {
         gameIsFinished,
-        results,
         guessesRemaining: updatedNumGuesses,
         currentGuess: updatedCurrentGuess,
+        results: updatedResults,
     };
 } 
 
@@ -52,4 +55,25 @@ export function calculateScore(guessesRemaining: number, gameDuration: number, w
     score += wordLength * 100; // Bonus for longer words
     score = Math.max(score, 0);
     return Math.round(score);
+}
+
+export function initResults(rows: number, cols: number): Result[][] {
+    const totalResults = [];
+    for (let i = 0; i < cols; i++) {
+        totalResults.push(emptyResults(rows));
+    }
+
+    return totalResults;
+}
+
+function emptyResults(cols: number): Result[] {
+    let arr = [];
+    for (let i = 0; i < cols; i++) {
+        arr.push({
+            letter: '',
+            result: '',
+        })
+    }
+
+    return arr;
 }
