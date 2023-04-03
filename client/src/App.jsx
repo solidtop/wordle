@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import APIAdapter from "./api.js";
-import Board from "./components/Board";
-import GuessForm from "./components/GuessForm";
-import MenuBar from "./components/MenuBar";
-import GameEndMenu from "./components/GameEndMenu";
-import GameTimer from "./components/GameTimer";
-import { loadSettings } from "./settings.js";
+import { useEffect, useState } from 'react';
+import APIAdapter from './api.js';
+import Board from './components/Board';
+import GuessForm from './components/GuessForm';
+import MenuBar from './components/MenuBar';
+import GameEndMenu from './components/GameEndMenu';
+import GameTimer from './components/GameTimer';
+import { loadSettings } from './settings.js';
 
 function App() {
     const [settings, setSettings] = useState(loadSettings());

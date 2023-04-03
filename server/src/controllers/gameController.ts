@@ -58,22 +58,22 @@ export function calculateScore(guessesRemaining: number, gameDuration: number, w
 }
 
 export function initResults(rows: number, cols: number): Result[][] {
-    const totalResults = [];
+    const resultGrid = [];
     for (let i = 0; i < cols; i++) {
-        totalResults.push(emptyResults(rows));
+        resultGrid.push(emptyResults(rows));
     }
 
-    return totalResults;
+    return resultGrid;
 }
 
-function emptyResults(cols: number): Result[] {
-    let arr = [];
-    for (let i = 0; i < cols; i++) {
-        arr.push({
+function emptyResults(rows: number): Result[] {
+    const results = [];
+    for (let i = 0; i < rows; i++) {
+        results.push({
             letter: '',
             result: '',
-        })
+        });
     }
 
-    return arr;
+    return results;
 }
