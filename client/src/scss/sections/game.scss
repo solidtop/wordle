@@ -80,6 +80,15 @@
     }
 }
 
+.game-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+    width: fit-content;
+    margin: auto;
+}
+
 .guess-form {
     display: flex;
     align-items: center;
@@ -103,11 +112,11 @@
 }
 
 .btn-restart {
-    display: block;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2rem;
+    height: 2rem;
     border: none;
     background-color: initial;
     background-image: url('/assets/arrow-rotate-left-solid.svg');
     background-repeat: no-repeat;
+    object-fit: contain;
 }

@@ -10,8 +10,8 @@
     animation: modal-reveal .2s;
     position: relative;
     max-width: 500px;
-    max-height: 500px;
-    margin: 4em 2em;
+    height: fit-content;
+    margin: 10em 2em;
     padding: 1em;
     border-radius: 10px;
     background-color: $container-color;
