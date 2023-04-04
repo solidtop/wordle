@@ -9,7 +9,6 @@ export interface GameState {
     secretWord?: string;
     score?: number;
     gameDuration?: number;
-    endTime?: string;
 }
 
 export interface StateData {

@@ -4,11 +4,19 @@ import { calculateScore, getElapsedTime } from '../../controllers/gameController
 
 const router = express.Router();
 router.post('/highscores', async (req, res) => {
-    const { name, settings } = req.body;
-    const { score, gameIsFinished, currentGuess = 0, startTime = '', endTime = '' } = req.session;
+    const name  = req.body.name;
+    const { 
+        score, 
+        gameIsFinished, 
+        playerHasWon,
+        currentGuess = 0, 
+        startTime = '', 
+        endTime = '', 
+        settings 
+    } = req.session;
 
-    if (!gameIsFinished) {
-        res.status(403).send('Highscore not allowed');
+    if (!gameIsFinished || !playerHasWon) {
+        res.status(403).json({ error: 'Highscore forbidden' });
         return;
     }
 
@@ -21,12 +29,13 @@ router.post('/highscores', async (req, res) => {
         settings,
     });
 
-    const success = await highscore.save();
-    if (!success) {
-        res.status(500).send('There was a problem posting your highscore');
+    try {
+        await highscore.save(); 
+    } catch(err) {
+        res.status(500).json({ error: 'There was a problem posting your highscore' });
         return;
     }
-
+   
     res.status(200).send('Highscore posted');
 });
 

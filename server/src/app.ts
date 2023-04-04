@@ -15,6 +15,11 @@ declare module "express-session" {
         currentGuess?: number;
         score?: number;
         gameIsFinished?: boolean;
+        playerHasWon?: boolean;
+        settings?: {
+            wordLength: number;
+            uniqueLetters: boolean;
+        }
     }
 }
 
@@ -38,7 +43,11 @@ export default function initApp() {
 }
 
 async function run() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/test');  
+    try {
+        await mongoose.connect('mongodb://127.0.0.1:27017/wordle');  
+    } catch(err) {
+        throw err;
+    }
 } 
 
 run();

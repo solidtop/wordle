@@ -21,18 +21,18 @@ export function getGameState(stateData: StateData): GameState {
 
     const playerHasWon = isExactMatch;
     const gameIsFinished = playerHasWon || guessesRemaining <= 1;
-    const updatedNumGuesses = gameIsFinished && playerHasWon ? guessesRemaining : guessesRemaining - 1;
+    const updatedGuessesRemaining = gameIsFinished && playerHasWon ? guessesRemaining : guessesRemaining - 1;
     const updatedCurrentGuess = gameIsFinished && playerHasWon ? currentGuess : currentGuess + 1;
     const updatedResults = [...prevResults];
     updatedResults[currentGuess] = newResults; 
 
     if (gameIsFinished) { 
-        if (updatedNumGuesses === 0) { // Out of guesses
+        if (updatedGuessesRemaining === 0) {// Out of guesses
             return {
                 gameIsFinished,
                 playerHasWon,
                 results: updatedResults,
-            }
+            };
         }
 
         const gameDuration = getElapsedTime(startTime, endTime);
@@ -41,18 +41,17 @@ export function getGameState(stateData: StateData): GameState {
             gameIsFinished,
             playerHasWon,
             score,
-            guessesRemaining: updatedNumGuesses,
+            guessesRemaining: updatedGuessesRemaining,
             currentGuess: updatedCurrentGuess,
             secretWord,
             gameDuration,
-            endTime,
             results: updatedResults,
         };
     } 
 
     return {
         gameIsFinished,
-        guessesRemaining: updatedNumGuesses,
+        guessesRemaining: updatedGuessesRemaining,
         currentGuess: updatedCurrentGuess,
         results: updatedResults,
     };
