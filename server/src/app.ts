@@ -1,6 +1,7 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
 import router from './routers';
+import Handlebars from 'handlebars';
 import session from 'express-session';
 import { Result } from './types/guess';
 import mongoose from 'mongoose';
@@ -28,6 +29,9 @@ export default function initApp() {
 
     app.engine('handlebars', engine());
     app.set('view engine', 'handlebars');
+    Handlebars.registerHelper('inc', (value, options) => {
+        return parseInt(value) + 1;
+    });
 
     app.use(session({
         secret: 'sectret-key',
