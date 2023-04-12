@@ -48,6 +48,6 @@ async function run() {
     } catch(err) {
         throw err;
     }
-} 
+}
 
 run();

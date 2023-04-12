@@ -5,6 +5,11 @@ import { calculateScore, getElapsedTime } from '../../controllers/gameController
 const router = express.Router();
 router.post('/highscores', async (req, res) => {
     const name  = req.body.name;
+    if (!name) {
+        res.status(400).json({ error: "Please enter a name" });
+        return;
+    }
+
     const { 
         score, 
         gameIsFinished, 
@@ -36,7 +41,7 @@ router.post('/highscores', async (req, res) => {
         return;
     }
    
-    res.status(200).send('Highscore posted');
+    res.status(200).json({ success: 'Highscore posted!' });
 });
 
 export default router;
