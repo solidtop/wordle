@@ -12,7 +12,7 @@ export function getMainNav(): Menu[] {
         },
         {
             label: 'HIGHSCORES',
-            href: '/highscores/5/false',
+            href: '/highscores',
         },
     ];
 } 

@@ -4,10 +4,11 @@ import Highscore from '../models/highscore';
 
 const router = express.Router();
 
-// Note: There problably is a better way of handling uniqueLetters param
-router.get('/highscores/:wordLength/:uniqueLetters', async (req, res) => {
-    const wordLength = parseInt(req.params.wordLength) || 5;
-    const uniqueLetters = req.params.uniqueLetters ? req.params.uniqueLetters === 'true' : true;
+router.get('/highscores', async (req, res) => {
+    const wordLength = parseInt(req.query.wordLength as string) || 5;
+    const uniqueLetters = req.query.uniqueLetters
+        ? req.query.uniqueLetters === 'true'
+        : false;
 
     try {
         const highscores = await Highscore.find({
@@ -20,7 +21,7 @@ router.get('/highscores/:wordLength/:uniqueLetters', async (req, res) => {
         res.render("highscores", {
             menu: getActiveMenu(
                 getMainNav(),
-                `/highscores/${req.params.wordLength}/${req.params.uniqueLetters}`
+                `/highscores`
             ),
             highscores: highscores.map(highscore => highscore.toObject()),
         });
