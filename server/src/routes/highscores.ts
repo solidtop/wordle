@@ -16,7 +16,9 @@ router.get('/highscores', async (req, res) => {
                 wordLength,
                 uniqueLetters,
             },
-        }).sort({ score: -1 });
+        })
+        .sort({ score: -1 })
+        .limit(10);
 
         res.render("highscores", {
             menu: getActiveMenu(
