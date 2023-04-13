@@ -7,11 +7,12 @@
 
 .col-headers {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(5, 1fr);
     justify-items: center;
     padding: 1em;
 
     h3 {
+        font-size: 1rem;
         margin: 0;
         text-align: center;
     }
@@ -26,13 +27,13 @@
 
 .highscore {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(5, 1fr);
     margin: 1em 0;
     padding: .5em;
 
     &__stat {
         margin: 0;
-        font-size: 1.5rem;
+        font-size: 1.1rem;
         text-align: center;
     }
 

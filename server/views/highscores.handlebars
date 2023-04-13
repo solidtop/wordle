@@ -4,6 +4,8 @@
     <div class="col-headers">
         <h3>RANK</h3>
         <h3>NAME</h3>
+        <h3>TIME</h3>
+        <h3>GUESSES</h3>
         <h3>SCORE</h3>
     </div>
 
@@ -13,6 +15,8 @@
             <li class="highscore">
                 <p class="highscore__stat">{{inc @index}}</p>
                 <p class="highscore__stat">{{this.name}}</p>
+                <p class="highscore__stat">{{formatTime this.time}}</p>
+                <p class="highscore__stat">{{this.guesses}}</p>
                 <p class="highscore__stat">{{this.score}}</p>
             </li>
             {{/each}} 

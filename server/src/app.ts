@@ -29,10 +29,18 @@ export default function initApp() {
 
     app.engine('handlebars', engine());
     app.set('view engine', 'handlebars');
-    Handlebars.registerHelper('inc', (value, options) => {
+    
+    Handlebars.registerHelper('inc', (value: string) => {
         return parseInt(value) + 1;
     });
 
+    Handlebars.registerHelper('formatTime', (time: number) => {
+        const date = new Date(time);
+        const minutes = date.getMinutes().toString().padStart(2, "0");
+        const seconds = date.getSeconds().toString().padStart(2, "0");
+        return `${minutes}:${seconds}`;
+    });
+   
     app.use(session({
         secret: 'sectret-key',
         resave: false,
