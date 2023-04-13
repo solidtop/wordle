@@ -48,7 +48,7 @@ function App() {
         const res = await api.postGuess(guess);
 
         if (res.error) {
-          return alert(res.error);
+            return alert(res.error);
         }
 
         setGameIsFinished(res.gameIsFinished);
@@ -59,7 +59,7 @@ function App() {
                 isWin: res.playerHasWon,
                 score: res.score,
                 secretWord: res.secretWord,
-                numGuesses: res.currentGuess + 1,
+                guesses: res.currentGuess + 1,
                 time: new Date(res.gameDuration),
             });
         }
@@ -67,23 +67,23 @@ function App() {
 
   return (
     <div className="App">
-      <MenuBar
-        settings={settings}
-        setSettings={setSettings}
-        onRestart={handleRestart}
-      />
+        <MenuBar
+            settings={settings}
+            setSettings={setSettings}
+            onRestart={handleRestart}
+        />
 
-      {gameHasStarted && (
-        <>
-            {!gameIsFinished && <GameTimer duration={gameDuration} />}
-            <Board results={results} />
+        {gameHasStarted && (
+            <>
+                {!gameIsFinished && <GameTimer duration={gameDuration} />}
+                <Board results={results} />
 
-            <div className="game-inputs">
-                <button className="btn-restart" onClick={handleRestart}></button>
-                <GuessForm onGuess={handleGuess} length={results[0].length} />
-            </div>
-        </>
-      )}
+                <div className="game-inputs">
+                    <button className="btn-restart" onClick={handleRestart}></button>
+                    <GuessForm onGuess={handleGuess} length={results[0].length} />
+                </div>
+            </>
+        )}
 
     {gameIsFinished && endResults && (
         <GameEndMenu

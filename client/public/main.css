@@ -393,13 +393,14 @@ body, html {
 
 .col-headers {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   justify-items: center;
   padding: 1em;
 }
 .col-headers h3 {
   margin: 0;
   text-align: center;
+  color: blue;
 }
 
 .highscore-list {
@@ -411,7 +412,7 @@ body, html {
 
 .highscore {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   margin: 1em 0;
   padding: 0.5em;
   position: relative;

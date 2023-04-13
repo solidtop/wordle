@@ -1,37 +1,47 @@
 import { GameState, StateData } from '../types/game';
 import { Result } from '../types/guess';
 
-export function getElapsedTime(dateStr: string): number {
-    const startDate = new Date(dateStr);
-    const endDate = new Date();
+export function getElapsedTime(startTime: string, endTime: string): number {
+    const startDate = new Date(startTime);
+    const endDate = new Date(endTime);
     return (endDate.getTime() - startDate.getTime());
 }
 
 export function getGameState(stateData: StateData): GameState {
-    const { prevResults, newResults, secretWord, isExactMatch, startTime, guessesRemaining, currentGuess } = stateData;
+    const { 
+        prevResults, 
+        newResults, 
+        secretWord, 
+        isExactMatch, 
+        startTime, 
+        endTime,
+        guessesRemaining, 
+        currentGuess 
+    } = stateData;
+
     const playerHasWon = isExactMatch;
     const gameIsFinished = playerHasWon || guessesRemaining <= 1;
-    const updatedNumGuesses = gameIsFinished && playerHasWon ? guessesRemaining : guessesRemaining - 1;
+    const updatedGuessesRemaining = gameIsFinished && playerHasWon ? guessesRemaining : guessesRemaining - 1;
     const updatedCurrentGuess = gameIsFinished && playerHasWon ? currentGuess : currentGuess + 1;
     const updatedResults = [...prevResults];
     updatedResults[currentGuess] = newResults; 
 
     if (gameIsFinished) { 
-        if (updatedNumGuesses === 0) { // Out of guesses
+        if (updatedGuessesRemaining === 0) {// Out of guesses
             return {
                 gameIsFinished,
                 playerHasWon,
                 results: updatedResults,
-            }
+            };
         }
 
-        const gameDuration = getElapsedTime(startTime);
+        const gameDuration = getElapsedTime(startTime, endTime);
         const score = calculateScore(guessesRemaining, gameDuration, secretWord.length);
         return {
             gameIsFinished,
             playerHasWon,
             score,
-            guessesRemaining: updatedNumGuesses,
+            guessesRemaining: updatedGuessesRemaining,
             currentGuess: updatedCurrentGuess,
             secretWord,
             gameDuration,
@@ -41,7 +51,7 @@ export function getGameState(stateData: StateData): GameState {
 
     return {
         gameIsFinished,
-        guessesRemaining: updatedNumGuesses,
+        guessesRemaining: updatedGuessesRemaining,
         currentGuess: updatedCurrentGuess,
         results: updatedResults,
     };

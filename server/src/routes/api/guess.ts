@@ -19,12 +19,14 @@ router.post('/guess', (req, res) => {
         return;
     }
 
+    const endTime = new Date().toString();
     const gameState = getGameState({
         prevResults: req.session.results || [],
         newResults: results || [],
         secretWord, 
         isExactMatch, 
         startTime, 
+        endTime,
         guessesRemaining,
         currentGuess, 
     });
@@ -32,11 +34,14 @@ router.post('/guess', (req, res) => {
     req.session.results = gameState.results;
     req.session.guessesRemaining = gameState.guessesRemaining;
     req.session.currentGuess = gameState.currentGuess;
-    
+    req.session.gameIsFinished = gameState.gameIsFinished;
+
     if (gameState.gameIsFinished) {
-        req.session.destroy(err => { if (err) throw err }); //Clear the session when game finishes
+        req.session.playerHasWon = gameState.playerHasWon;
+        req.session.score = gameState.score;
+        req.session.endTime = endTime;
     }
-   
+       
     res.json({ ...gameState });
 });
 

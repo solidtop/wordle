@@ -17,6 +17,7 @@ export interface StateData {
     secretWord: string;
     isExactMatch: boolean | undefined;
     startTime: string;
+    endTime: string;
     guessesRemaining: number;
     currentGuess: number;
 }

@@ -1,6 +1,5 @@
 import Menu from '../types/menu';
 
-
 export function getMainNav(): Menu[] {
     return [
         {
@@ -13,7 +12,7 @@ export function getMainNav(): Menu[] {
         },
         {
             label: 'HIGHSCORES',
-            href: '/highscores/5/hasRepeats',
+            href: '/highscores',
         },
     ];
 } 

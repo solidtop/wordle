@@ -11,7 +11,7 @@ router.post('/secret-word', async (req, res) => {
 
     if (!req.session.secretWord || restart) {
         const wordLength = parseInt(req.query.wordLength as string) || 5;
-        const uniqueLetters = req.query.uniqueLetters ? req.query.uniqueLetters === 'true' : true;
+        const uniqueLetters = req.query.uniqueLetters ? req.query.uniqueLetters === 'true' : false;
 
         if (wordLength < 5 || wordLength > 10) {
             res.status(400).json({ error: 'Invalid length' });
@@ -31,15 +31,19 @@ router.post('/secret-word', async (req, res) => {
         const timestamp = new Date().toString(); 
         req.session.results = initResults(secretWord.length, NUM_GUESSES); 
         req.session.secretWord = secretWord; 
+        console.log(secretWord);
         req.session.guessesRemaining = NUM_GUESSES;
         req.session.currentGuess = 0;
         req.session.startTime = timestamp; 
+        req.session.settings = {
+            wordLength,
+            uniqueLetters,
+        };
     }
 
     res.json({ 
         guessesRemaining: req.session.guessesRemaining,
-        currentGuess: req.session.currentGuess,
-        gameDuration: getElapsedTime(req.session.startTime || ''),
+        gameDuration: getElapsedTime(req.session.startTime || '', new Date().toString()),
         gameHasStarted: true,
         results: req.session.results,
     }); 
