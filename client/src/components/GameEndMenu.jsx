@@ -1,5 +1,5 @@
-import { useState } from "react";
-import formatTime from "../utils/timeFormat.js";
+import { useState } from 'react';
+import formatTime from '../utils/timeFormat.js';
 
 export default function GameEndMenu({
     isWin,
@@ -8,25 +8,26 @@ export default function GameEndMenu({
     guesses,
     time,
     onRestart,
+    showForm,
 }) {
-	const [error, setError] = useState("");
-	const [success, setSuccess] = useState("");
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
     async function handleSubmit(e) {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        const res = await fetch("/api/highscores", {
-            method: "POST",
+        const res = await fetch('/api/highscores', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(Object.fromEntries(formData)),
         });
 
-        const { error = "", success= "" } = await res.json();
-		setError(error);
-		setSuccess(success);
+        const { error = '', success = '' } = await res.json();
+        setError(error);
+        setSuccess(success);
     }
 
     return (
@@ -39,18 +40,18 @@ export default function GameEndMenu({
                             <h3>YOUR SCORE</h3>
                             <p className="score">{score}</p>
                             <p className="time">
-                                {"TIME: " + formatTime(time)}
+                                {'TIME: ' + formatTime(time)}
                             </p>
                             <p>
-                                You managed to guess the secret word{" "}
+                                You managed to guess the secret word{' '}
                                 <span className="secret-word">
                                     {secretWord}
-                                </span>{" "}
-                                in{" "}
+                                </span>{' '}
+                                in{' '}
                                 <span className="guesses">{guesses} tries</span>
                             </p>
 
-                            {!success && (
+                            {!success && showForm && (
                                 <form
                                     name="highscore"
                                     className="highscore-form"

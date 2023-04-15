@@ -386,7 +386,7 @@ body, html {
 
 .container {
   margin: 1em;
-  padding: 1em;
+  padding: 1em 0;
   border-radius: 10px;
   background-color: #121213;
 }
@@ -398,9 +398,9 @@ body, html {
   padding: 1em;
 }
 .col-headers h3 {
+  font-size: 0.8rem;
   margin: 0;
-  text-align: center;
-  color: blue;
+  text-align: left;
 }
 
 .highscore-list {
@@ -413,14 +413,19 @@ body, html {
 .highscore {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
   margin: 1em 0;
   padding: 0.5em;
+  gap: 0.5em;
   position: relative;
 }
 .highscore__stat {
   margin: 0;
-  font-size: 1.5rem;
-  text-align: center;
+  font-size: 0.8rem;
+  text-align: left;
+  max-width: 50px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .highscore::after {
   content: "";

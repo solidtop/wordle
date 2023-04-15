@@ -1,5 +1,7 @@
-import { GameState, StateData } from '../types/game';
+import { SessionData } from 'express-session';
+import GameState from '../types/game';
 import { Result } from '../types/guess';
+import { Request } from 'express';
 
 export function getElapsedTime(startTime: string, endTime: string): number {
     const startDate = new Date(startTime);
@@ -7,58 +9,74 @@ export function getElapsedTime(startTime: string, endTime: string): number {
     return (endDate.getTime() - startDate.getTime());
 }
 
-export function getGameState(stateData: StateData): GameState {
-    const { 
-        prevResults, 
-        newResults, 
-        secretWord, 
-        isExactMatch, 
-        startTime, 
-        endTime,
-        guessesRemaining, 
-        currentGuess 
-    } = stateData;
+export function getGameState(sessionData: SessionData, newResults: Result[] = []): GameState {
+    let {
+        results,
+        secretWord,
+        startTime = '',
+        endTime = '',
+        guessesRemaining,
+        currentGuess,
+        gameHasStarted,
+        gameIsFinished,
+        playerHasWon,
+        highscorePosted,
+    } = sessionData;
 
-    const playerHasWon = isExactMatch;
-    const gameIsFinished = playerHasWon || guessesRemaining <= 1;
-    const updatedGuessesRemaining = gameIsFinished && playerHasWon ? guessesRemaining : guessesRemaining - 1;
-    const updatedCurrentGuess = gameIsFinished && playerHasWon ? currentGuess : currentGuess + 1;
-    const updatedResults = [...prevResults];
-    updatedResults[currentGuess] = newResults; 
-
-    if (gameIsFinished) { 
-        if (updatedGuessesRemaining === 0) {// Out of guesses
-            return {
-                gameIsFinished,
-                playerHasWon,
-                results: updatedResults,
-            };
-        }
-
-        const gameDuration = getElapsedTime(startTime, endTime);
-        const score = calculateScore(guessesRemaining, gameDuration, secretWord.length);
+    if (!gameHasStarted) {
         return {
-            gameIsFinished,
-            playerHasWon,
+            gameHasStarted: true,
+            guessesRemaining,
+            currentGuess,
+            gameTime: 0,
+            results,
+        };
+    }
+
+    const updatedResults = [...results];
+
+    if (newResults.length > 0) {
+        updatedResults[currentGuess] = newResults;
+        guessesRemaining --;
+        currentGuess ++;
+        gameIsFinished = playerHasWon || guessesRemaining < 1;
+    }
+
+    const gameTime = getElapsedTime(startTime, endTime);
+    if (gameIsFinished && playerHasWon) {
+        const score = calculateScore(guessesRemaining, gameTime, secretWord.length);
+        return {
+            gameIsFinished: true,
+            playerHasWon: true,
             score,
-            guessesRemaining: updatedGuessesRemaining,
-            currentGuess: updatedCurrentGuess,
+            guessesRemaining,
+            currentGuess,
             secretWord,
-            gameDuration,
+            gameTime,
+            highscorePosted,
             results: updatedResults,
         };
-    } 
+    }  
+
+    if (gameIsFinished && !playerHasWon) {
+        return {
+            gameIsFinished: true,
+            playerHasWon: false,
+            results: updatedResults,
+        };
+    }
 
     return {
-        gameIsFinished,
-        guessesRemaining: updatedGuessesRemaining,
-        currentGuess: updatedCurrentGuess,
+        gameIsFinished: false,
+        guessesRemaining,
+        currentGuess,
+        gameTime,
         results: updatedResults,
     };
 } 
 
-export function calculateScore(guessesRemaining: number, gameDuration: number, wordLength: number): number {
-    const timeInSeconds = gameDuration / 1000;
+export function calculateScore(guessesRemaining: number, gameTime: number, wordLength: number): number {
+    const timeInSeconds = gameTime / 1000;
 
     let score = guessesRemaining * 1000;
     score -= timeInSeconds; // Small time penalty 

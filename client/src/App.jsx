@@ -13,11 +13,12 @@ function App() {
     const [gameHasStarted, setGameHasStarted] = useState(false);
     const [gameIsFinished, setGameIsFinished] = useState(false);
     const [endResults, setEndResults] = useState(null);
-    const [gameDuration, setGameDuration] = useState(0);
+    const [gameTime, setGameTime] = useState(0);
 
     async function startGame(restart = false) {
-        const api = new APIAdapter();
         const { wordLength, uniqueLetters } = settings;
+
+        const api = new APIAdapter();
         const res = await api.fetchSecretWord(
             wordLength || 5,
             uniqueLetters ? true : false,
@@ -28,16 +29,21 @@ function App() {
             return alert(res.error);
         }
 
-        setGameHasStarted(res.gameHasStarted);
         setResults(res.results);
-        setGameDuration(res.gameDuration);
+        setGameHasStarted(res.gameHasStarted || true);
+        setGameIsFinished(res.gameIsFinished);
+        setGameTime(res.gameTime);
+
+        if (res.gameIsFinished) {
+            handleGameEnd(res);
+        }
     }
 
     useEffect(() => {
         startGame();
     }, []);
 
-    async function handleRestart() {
+    function handleRestart() {
         startGame(true);
         setGameHasStarted(false);
         setGameIsFinished(false);
@@ -55,48 +61,60 @@ function App() {
         setResults(res.results);
 
         if (res.gameIsFinished) {
-            setEndResults({
-                isWin: res.playerHasWon,
-                score: res.score,
-                secretWord: res.secretWord,
-                guesses: res.currentGuess + 1,
-                time: new Date(res.gameDuration),
-            });
+            handleGameEnd(res);
         }
-  }
+    }
 
-  return (
-    <div className="App">
-        <MenuBar
-            settings={settings}
-            setSettings={setSettings}
-            onRestart={handleRestart}
-        />
+    function handleGameEnd(res) {
+        setEndResults({
+            isWin: res.playerHasWon,
+            score: res.score,
+            secretWord: res.secretWord,
+            guesses: res.currentGuess + 1,
+            time: new Date(res.gameTime),
+            highscorePosted: res.highscorePosted,
+        });
+    }
 
-        {gameHasStarted && (
-            <>
-                {!gameIsFinished && <GameTimer duration={gameDuration} />}
-                <Board results={results} />
+    return (
+        <div className="App">
+            <MenuBar
+                settings={settings}
+                setSettings={setSettings}
+                onRestart={handleRestart}
+            />
 
-                <div className="game-inputs">
-                    <button className="btn-restart" onClick={handleRestart}></button>
-                    <GuessForm onGuess={handleGuess} length={results[0].length} />
-                </div>
-            </>
-        )}
+            {gameHasStarted && (
+                <>
+                    {!gameIsFinished && <GameTimer time={gameTime} />}
+                    <Board results={results} />
 
-    {gameIsFinished && endResults && (
-        <GameEndMenu
-            isWin={endResults.isWin}
-            score={endResults.score}
-            secretWord={endResults.secretWord}
-            numGuesses={endResults.numGuesses}
-            time={endResults.time}
-            onRestart={handleRestart}
-        />
-    )}
-    </div>
-  );
+                    <div className="game-inputs">
+                        <button
+                            className="btn-restart"
+                            onClick={handleRestart}
+                        ></button>
+                        <GuessForm
+                            onGuess={handleGuess}
+                            length={results[0].length}
+                        />
+                    </div>
+                </>
+            )}
+
+            {gameIsFinished && endResults && (
+                <GameEndMenu
+                    isWin={endResults.isWin}
+                    score={endResults.score}
+                    secretWord={endResults.secretWord}
+                    guesses={endResults.guesses}
+                    time={endResults.time}
+                    onRestart={handleRestart}
+                    showForm={!endResults.highscorePosted}
+                />
+            )}
+        </div>
+    );
 }
 
 export default App;
