@@ -1,23 +1,27 @@
 import { useState, useEffect } from 'react';
 
-export default function GameTimer({ duration }) {
-    const [secondsElapsed, setSecondsElapsed] = useState(Math.floor(duration / 1000));
+export default function GameTimer({ time }) {
+    const [secondsElapsed, setSecondsElapsed] = useState(
+        Math.floor(time / 1000)
+    );
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setSecondsElapsed(prevSeconds => prevSeconds + 1);
+            setSecondsElapsed((prevSeconds) => prevSeconds + 1);
         }, 1000);
 
         return () => clearInterval(timer);
     }, []);
 
-    const minutes = Math.floor(secondsElapsed / 60);
+    const hours = Math.floor(secondsElapsed / 3600);
+    const minutes = Math.floor((secondsElapsed % 3600) / 60);
     const seconds = secondsElapsed % 60;
 
     return (
         <div className="game-timer">
-            {minutes < 10 ? `0${minutes}` : minutes}:
-            {seconds < 10 ? `0${seconds}` : seconds}
+            {hours > 0 ? `${hours.toString().padStart(2, '0')}:` : ''}
+            {minutes.toString().padStart(2, '0')}:
+            {seconds.toString().padStart(2, '0')}
         </div>
     );
-} 
+}
