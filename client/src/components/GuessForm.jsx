@@ -9,13 +9,16 @@ export default function GuessForm({ onGuess, length }) {
     }
 
     return (
-        <form className="guess-form" onSubmit={e => {
-            e.preventDefault();
-            setText('');
-            onGuess(text);
-        }}>
-            <input 
-                type="text" 
+        <form
+            className="guess-form"
+            onSubmit={(e) => {
+                e.preventDefault();
+                setText('');
+                onGuess(text);
+            }}
+        >
+            <input
+                type="text"
                 value={text}
                 className="guess-input"
                 id="guessInput"
@@ -24,7 +27,9 @@ export default function GuessForm({ onGuess, length }) {
                 maxLength={length}
                 required
             />
-            <button type="submit" className="btn primary">ENTER</button>
+            <button type="submit" className="btn primary">
+                ENTER
+            </button>
         </form>
     );
 }

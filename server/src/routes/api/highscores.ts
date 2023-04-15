@@ -1,6 +1,5 @@
 import express from 'express';
 import Highscore from '../../models/highscore';
-import { calculateScore, getElapsedTime } from '../../controllers/gameController';
 
 const router = express.Router();
 router.post('/highscores', async (req, res) => {
@@ -15,8 +14,7 @@ router.post('/highscores', async (req, res) => {
         gameIsFinished, 
         playerHasWon,
         currentGuess = 0, 
-        startTime = '', 
-        endTime = '', 
+        gameTime,
         settings 
     } = req.session;
 
@@ -25,10 +23,9 @@ router.post('/highscores', async (req, res) => {
         return;
     }
 
-    const time = getElapsedTime(startTime, endTime);
     const highscore = new Highscore({
         name,
-        time,
+        time: gameTime,
         guesses: currentGuess + 1,
         score,
         settings,
@@ -40,7 +37,8 @@ router.post('/highscores', async (req, res) => {
         res.status(500).json({ error: 'There was a problem posting your highscore' });
         return;
     }
-   
+
+    req.session.highscorePosted = true;
     res.status(200).json({ success: 'Highscore posted!' });
 });
 

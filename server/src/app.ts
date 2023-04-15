@@ -3,26 +3,7 @@ import { engine } from 'express-handlebars';
 import router from './routers';
 import Handlebars from 'handlebars';
 import session from 'express-session';
-import { Result } from './types/guess';
 import mongoose from 'mongoose';
-
-declare module "express-session" {
-    interface SessionData {
-        results?: Result[][];
-        secretWord?: string;
-        startTime?: string;
-        endTime?: string;
-        guessesRemaining?: number;
-        currentGuess?: number;
-        score?: number;
-        gameIsFinished?: boolean;
-        playerHasWon?: boolean;
-        settings?: {
-            wordLength: number;
-            uniqueLetters: boolean;
-        }
-    }
-}
 
 export default function initApp() {
     const app = express();
