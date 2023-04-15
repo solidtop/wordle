@@ -35,7 +35,6 @@ router.post('/secret-word', async (req, res) => {
         const timestamp = new Date().toString();
         req.session.results = initResults(secretWord.length, NUM_GUESSES);
         req.session.secretWord = secretWord;
-        console.log(secretWord);
         req.session.gameHasStarted = false;
         req.session.gameIsFinished = false;
         req.session.startTime = timestamp;
