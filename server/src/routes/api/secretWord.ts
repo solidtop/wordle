@@ -7,17 +7,17 @@ import { SessionData } from 'express-session';
 
 const router = express.Router();
 
-router.post("/secret-word", async (req, res) => {
-    const restart = req.query.restart ? req.query.restart === "true" : false;
+router.post('/secret-word', async (req, res) => {
+    const restart = req.query.restart ? req.query.restart === 'true' : false;
 
     if (!req.session.secretWord || restart) {
         const wordLength = parseInt(req.query.wordLength as string) || 5;
         const uniqueLetters = req.query.uniqueLetters
-            ? req.query.uniqueLetters === "true"
+            ? req.query.uniqueLetters === 'true'
             : false;
 
         if (wordLength < 5 || wordLength > 10) {
-            res.status(400).json({ error: "Invalid length" });
+            res.status(400).json({ error: 'Invalid length' });
             return;
         }
 
@@ -27,7 +27,7 @@ router.post("/secret-word", async (req, res) => {
 
         if (!secretWord) {
             res.status(500).send({
-                error: "Could not find word with matching criteria",
+                error: 'Could not find word with matching criteria',
             });
             return;
         }

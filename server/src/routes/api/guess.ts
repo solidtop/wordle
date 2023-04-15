@@ -5,16 +5,19 @@ import { SessionData } from 'express-session';
 
 const router = express.Router();
 
-router.post("/guess", (req, res) => {
+router.post('/guess', (req, res) => {
     const { secretWord, gameHasStarted, gameIsFinished } = req.session;
 
     if (!secretWord || !gameHasStarted || gameIsFinished) {
-        res.status(403).json({ error: "Game session is not active" });
+        res.status(403).json({ error: 'Game session is not active' });
         return;
     }
 
     const guess: string = req.body.guess;
-    const { isValid, isExactMatch, error, results } = checkGuess(guess, secretWord);
+    const { isValid, isExactMatch, error, results } = checkGuess(
+        guess,
+        secretWord
+    );
 
     if (!isValid) {
         res.status(400).json({ error });
@@ -38,4 +41,3 @@ router.post("/guess", (req, res) => {
 });
 
 export default router;
-
