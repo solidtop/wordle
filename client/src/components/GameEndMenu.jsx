@@ -63,6 +63,7 @@ export default function GameEndMenu({
                                         name="name"
                                         id="name"
                                         placeholder="Enter your name..."
+                                        required
                                     />
                                     <button
                                         type="submit"
@@ -70,11 +71,11 @@ export default function GameEndMenu({
                                     >
                                         SUBMIT SCORE
                                     </button>
+                                    {error && <strong>{error}</strong>}
                                 </form>
                             )}
 
                             {success && <p>{success}</p>}
-                            {error && <strong>{error}</strong>}
                         </>
                     )}
 

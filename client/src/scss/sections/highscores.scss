@@ -13,6 +13,7 @@
 
     h3 {
         font-size: .8rem;
+        font-weight: bold;
         margin: 0;
         text-align: left;
     }
@@ -23,6 +24,10 @@
     padding: 0 1em;
     overflow-y: scroll;
     height: 500px;
+
+    h3 {
+        font-size: 1rem;
+    }
 }
 
 .highscore {
@@ -31,13 +36,12 @@
     justify-items: center;
     margin: 1em 0;
     padding: .5em;
-    gap: .5em;
+    gap: 2em;
 
     &__stat {
         margin: 0;
-        font-size: .8rem;
-        text-align: left;
-        max-width: 50px;
+        font-size: 1rem;
+        max-width: 200px;
         overflow: hidden;
         text-overflow: ellipsis;
     }
