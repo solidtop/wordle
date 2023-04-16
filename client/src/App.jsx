@@ -70,7 +70,7 @@ function App() {
             isWin: res.playerHasWon,
             score: res.score,
             secretWord: res.secretWord,
-            guesses: res.currentGuess + 1,
+            guesses: res.currentGuess,
             time: new Date(res.gameTime),
             highscorePosted: res.highscorePosted,
         });
