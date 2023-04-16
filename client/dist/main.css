@@ -1,0 +1,455 @@
+/* Wordle colors */
+ul, ol {
+  list-style: none;
+  list-style-position: inside;
+}
+
+a {
+  text-decoration: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+input {
+  margin: 1em auto;
+  padding: 0.3em 1em;
+  outline: none;
+  border: solid 2px #3a3a3c;
+  border-radius: 5px;
+  background-color: #121213;
+  font-size: 1rem;
+}
+
+select {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #3a3a3c;
+  font-size: 1rem;
+}
+select:hover {
+  cursor: pointer;
+}
+
+input[type=checkbox] {
+  margin: 0;
+  width: 1.5em;
+  height: 1.5em;
+}
+input[type=checkbox]:hover {
+  cursor: pointer;
+}
+
+.headline--center {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.btn {
+  padding: 0.6em 1em;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.btn.primary {
+  color: black;
+  background-color: white;
+}
+.btn.secondary {
+  color: white;
+  background-color: #3a3a3c;
+}
+
+.btn-open,
+.btn-close {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background-color: initial;
+  background-repeat: no-repeat;
+}
+
+.btn-open {
+  background-image: url("/assets/gear-solid.svg");
+}
+
+.btn-close {
+  background-image: url("/assets/xmark-solid.svg");
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 750px) {
+  body, html {
+    font-size: 18px;
+  }
+}
+
+* {
+  font-family: sans-serif;
+  color: white;
+}
+
+.modal-container {
+  display: flex;
+  position: absolute;
+  inset: 0;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  animation: modal-reveal 0.2s;
+  position: relative;
+  max-width: 500px;
+  height: fit-content;
+  margin: 10em 2em;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: #121213;
+  box-shadow: 0 0 20px black;
+}
+
+@keyframes modal-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* Sections */
+.header {
+  padding: 1em;
+}
+.header h1 {
+  margin: auto 0;
+}
+
+@media (min-width: 750px) {
+  .header {
+    display: flex;
+    gap: 4em;
+  }
+}
+.game-timer {
+  margin: 1em;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin: 1.5em auto;
+  width: 100%;
+}
+
+.board-row {
+  width: 100%;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 0;
+  background-color: #121213;
+  border: 2px solid #3a3a3c;
+  border-radius: 5px;
+  font-size: 42px;
+  text-align: center;
+}
+.tile.correct {
+  animation: tile-reveal-correct 0.5s;
+  background-color: #538d4e;
+}
+.tile.incorrect {
+  animation: tile-reveal-incorrect 0.5s;
+  background-color: #3a3a3c;
+}
+.tile.misplaced {
+  animation: tile-reveal-misplaced 0.2s 3 ease-in-out;
+  background-color: #b59f3b;
+}
+
+@keyframes tile-reveal-correct {
+  from {
+    transform: scale(-1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes tile-reveal-incorrect {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes tile-reveal-misplaced {
+  0% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.game-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  width: fit-content;
+  margin: auto;
+  padding: 0.5em;
+}
+
+.guess-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  width: fit-content;
+  margin: 2em auto;
+}
+.guess-form .btn {
+  background-color: #121213;
+  color: white;
+}
+
+.guess-input {
+  outline: none;
+  border: solid 2px #3a3a3c;
+  border-radius: 5px;
+  background-color: #121213;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.btn-restart {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-color: initial;
+  background-image: url("/assets/arrow-rotate-left-solid.svg");
+  background-repeat: no-repeat;
+  object-fit: contain;
+}
+
+.menu-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0.5em;
+  position: relative;
+}
+.menu-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5em;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+
+.btn-settings {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  background-color: initial;
+  background-image: url("/assets/gear-solid.svg");
+  background-repeat: no-repeat;
+}
+
+.game-end-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.game-end-menu h2 {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+.game-end-menu h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5em;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  border-radius: 5px;
+}
+.game-end-menu h3 {
+  margin: 0;
+}
+.game-end-menu .score {
+  margin: 0;
+  font-size: 2rem;
+}
+.game-end-menu .time {
+  font-size: 1.3rem;
+}
+.game-end-menu .secret-word {
+  color: #538d4e;
+}
+.game-end-menu .guesses {
+  color: #b59f3b;
+}
+.game-end-menu .highscore-form {
+  align-self: flex-start;
+}
+.game-end-menu .highscore-form input, .game-end-menu .highscore-form button {
+  display: block;
+}
+.game-end-menu .highscore-form strong {
+  color: rgb(222, 63, 63);
+  font-size: 0.8rem;
+}
+.game-end-menu .btn.secondary {
+  font-size: 0.9rem;
+}
+.game-end-menu .btn.primary {
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.settings-menu {
+  display: block;
+  height: 100%;
+}
+.settings-menu .btn-close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 1.8em;
+}
+.settings-menu h2 {
+  margin: 0;
+}
+.settings-menu .btn {
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+}
+
+.menu-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4em;
+  margin: 2em 0;
+  position: relative;
+}
+.menu-row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5em;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  padding: 0;
+}
+
+.nav-item a {
+  font-weight: bold;
+}
+.nav-item.selected a {
+  text-decoration: underline;
+}
+
+.container {
+  margin: 1em;
+  padding: 1em 0;
+  border-radius: 10px;
+  background-color: #121213;
+}
+
+.col-headers {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  padding: 1em;
+}
+.col-headers h3 {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin: 0;
+  text-align: left;
+}
+
+.highscore-list {
+  margin: 0;
+  padding: 0 1em;
+  overflow-y: scroll;
+  height: 500px;
+}
+.highscore-list h3 {
+  font-size: 1rem;
+}
+
+.highscore {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  margin: 1em 0;
+  padding: 0.5em;
+  gap: 2em;
+  position: relative;
+}
+.highscore__stat {
+  margin: 0;
+  font-size: 1rem;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.highscore::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5em;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  border-radius: 5px;
+}
