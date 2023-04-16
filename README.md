@@ -1,5 +1,16 @@
 # Wordle
 
+## Client
+To install all dependencies for the client, run the following command in the client directory:
+
+```
+npm install
+```
+Run all client related tests with following command:
+```
+npm test
+```
+
 ## Server
 To install all dependencies for the server, run the following command in the server directory:
 
@@ -12,17 +23,6 @@ npm start
 ```
 
 Run all server related tests with following command:
-```
-npm test
-```
-
-## Client
-To install all dependencies for the client, run the following command in the client directory:
-
-```
-npm install
-```
-Run all client related tests with following command:
 ```
 npm test
 ```
