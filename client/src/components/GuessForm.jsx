@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function GuessForm({ onGuess, length }) {
+export default function GuessForm({ onGuess, length, disabled }) {
     const [text, setText] = useState('');
 
     function handleChange(e) {
@@ -26,6 +26,7 @@ export default function GuessForm({ onGuess, length }) {
                 minLength={length}
                 maxLength={length}
                 required
+                disabled={disabled}
             />
             <button title="Enter guess" type="submit" className="btn primary">
                 ENTER
