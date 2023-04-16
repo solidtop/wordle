@@ -1,5 +1,5 @@
 import express from 'express';
-import APIAdapter from '../../controllers/ApiAdapter';
+import APIAdapter from '../../utils/api';
 import getRandomWord from '../../controllers/randomWord';
 import { NUM_GUESSES } from '../../constants';
 import { initResults, getGameState } from '../../controllers/gameController';
@@ -35,7 +35,6 @@ router.post('/secret-word', async (req, res) => {
         const timestamp = new Date().toString();
         req.session.results = initResults(secretWord.length, NUM_GUESSES);
         req.session.secretWord = secretWord;
-        console.log(secretWord)
         req.session.gameHasStarted = false;
         req.session.gameIsFinished = false;
         req.session.startTime = timestamp;
