@@ -29,14 +29,21 @@ select {
   background-color: #3a3a3c;
   font-size: 1rem;
 }
+select:hover {
+  cursor: pointer;
+}
 
 input[type=checkbox] {
   margin: 0;
   width: 1.5em;
   height: 1.5em;
 }
+input[type=checkbox]:hover {
+  cursor: pointer;
+}
 
 .headline--center {
+  font-size: 1.2rem;
   text-align: center;
 }
 
@@ -143,25 +150,25 @@ body, html {
 }
 
 .board {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 5px;
   margin: 1.5em auto;
-  width: fit-content;
-  height: fit-content;
+  width: 100%;
 }
 
 .board-row {
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
   gap: 5px;
+  justify-content: center;
 }
 
 .tile {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
   width: 62px;
   height: 62px;
   border-radius: 0;
@@ -215,9 +222,10 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2em;
+  gap: 1em;
   width: fit-content;
   margin: auto;
+  padding: 0.5em;
 }
 
 .guess-form {
@@ -239,6 +247,7 @@ body, html {
   background-color: #121213;
   font-size: 1.2rem;
   text-transform: uppercase;
+  width: 100%;
 }
 
 .btn-restart {
@@ -322,6 +331,10 @@ body, html {
 .game-end-menu .highscore-form input, .game-end-menu .highscore-form button {
   display: block;
 }
+.game-end-menu .highscore-form strong {
+  color: rgb(222, 63, 63);
+  font-size: 0.8rem;
+}
 .game-end-menu .btn.secondary {
   font-size: 0.9rem;
 }
@@ -399,6 +412,7 @@ body, html {
 }
 .col-headers h3 {
   font-size: 0.8rem;
+  font-weight: bold;
   margin: 0;
   text-align: left;
 }
@@ -409,6 +423,9 @@ body, html {
   overflow-y: scroll;
   height: 500px;
 }
+.highscore-list h3 {
+  font-size: 1rem;
+}
 
 .highscore {
   display: grid;
@@ -416,14 +433,13 @@ body, html {
   justify-items: center;
   margin: 1em 0;
   padding: 0.5em;
-  gap: 0.5em;
+  gap: 2em;
   position: relative;
 }
 .highscore__stat {
   margin: 0;
-  font-size: 0.8rem;
-  text-align: left;
-  max-width: 50px;
+  font-size: 1rem;
+  max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
 }

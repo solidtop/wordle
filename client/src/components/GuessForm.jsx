@@ -27,7 +27,7 @@ export default function GuessForm({ onGuess, length }) {
                 maxLength={length}
                 required
             />
-            <button type="submit" className="btn primary">
+            <button title="Enter guess" type="submit" className="btn primary">
                 ENTER
             </button>
         </form>

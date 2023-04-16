@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import APIAdapter from './api.js';
+import APIAdapter from './utils/api.js';
 import Board from './components/Board';
 import GuessForm from './components/GuessForm';
 import MenuBar from './components/MenuBar';
@@ -31,8 +31,8 @@ function App() {
 
         setResults(res.results);
         setGameHasStarted(res.gameHasStarted || true);
-        setGameIsFinished(res.gameIsFinished);
-        setGameTime(res.gameTime);
+        setGameIsFinished(res.gameIsFinished || false);
+        setGameTime(res.gameTime || 0);
 
         if (res.gameIsFinished) {
             handleGameEnd(res);
@@ -93,6 +93,7 @@ function App() {
                         <button
                             className="btn-restart"
                             onClick={handleRestart}
+                            title="Restart game"
                         ></button>
                         <GuessForm
                             onGuess={handleGuess}
