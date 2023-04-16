@@ -1,23 +1,21 @@
 .container {
     margin: 1em;
-    padding: 1em;
+    padding: 1em 0;
     border-radius: 10px;
     background-color: $container-color;
-
-    * {
-        color: $text-color2;
-    }
 }
 
 .col-headers {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(5, 1fr);
     justify-items: center;
     padding: 1em;
 
     h3 {
+        font-size: .8rem;
+        font-weight: bold;
         margin: 0;
-        text-align: center;
+        text-align: left;
     }
 }
 
@@ -26,19 +24,27 @@
     padding: 0 1em;
     overflow-y: scroll;
     height: 500px;
+
+    h3 {
+        font-size: 1rem;
+    }
 }
 
 .highscore {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
     margin: 1em 0;
     padding: .5em;
+    gap: 2em;
 
     &__stat {
         margin: 0;
-        font-size: 1.5rem;
-        text-align: center;
+        font-size: 1rem;
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
-    @include line-break(5px, black);
+    @include line-break(2px, $text-color1);
 }

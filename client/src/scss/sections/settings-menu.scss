@@ -10,8 +10,13 @@
     }
 
     h2 {
-        font-size: 1.1rem;
         margin: 0;
+    }
+
+    .btn {
+        position: absolute;
+        right: 1em;
+        bottom: 1em;
     }
 }
 
@@ -21,11 +26,5 @@
     align-items: center;
     gap: 4em;
     margin: 2em 0;
-    @include line-break(1px, rgba(white, .5));
-
-    label {
-        font-size: .8rem;
-        text-align: left;
-        color: $text-color1;
-    }
+    @include line-break(2px, rgba(white, .5));
 }

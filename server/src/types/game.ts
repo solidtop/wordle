@@ -1,20 +1,36 @@
 import { Result } from './guess';
 
-export interface GameState {
-    gameIsFinished: boolean;
-    results: Result[] | undefined;
-    guessesRemaining: number;
+export default interface GameState {
+    results: Result[][];
+    gameHasStarted?: boolean;
+    gameIsFinished?: boolean;
+    guessesRemaining?: number;
+    currentGuess?: number;
     playerHasWon?: boolean;
-    message?: string;
     secretWord?: string;
     score?: number;
-    gameDuration?: number;
+    gameTime?: number;
+    highscorePosted?: boolean;
 }
 
-export interface StateData {
-    results: Result[] | undefined;
-    secretWord: string;
-    isExactMatch: boolean | undefined;
-    gameStartTimestamp: string;
-    guessesRemaining: number;
+declare module "express-session" {
+    interface SessionData {
+        results: Result[][];
+        secretWord: string;
+        startTime?: string;
+        endTime?: string;
+        gameTime?: number;
+        guessesRemaining: number;
+        currentGuess: number;
+        score?: number;
+        gameHasStarted: boolean;
+        gameIsFinished: boolean;
+        playerHasWon?: boolean;
+        settings: {
+            wordLength: number;
+            uniqueLetters: boolean;
+        };
+        highscorePosted?: boolean;
+    }
 }
+

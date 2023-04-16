@@ -1,37 +1,43 @@
 import express from 'express';
 import checkGuess from '../../controllers/checkGuess';
 import { getGameState } from '../../controllers/gameController';
+import { SessionData } from 'express-session';
 
 const router = express.Router();
 
 router.post('/guess', (req, res) => {
-    const { secretWord, gameStartTimestamp = '', guessesRemaining = 0 } = req.session;
-    if (!secretWord) {
-        res.status(500).json({ error: 'Secret word is not defined' });
+    const { secretWord, gameHasStarted, gameIsFinished } = req.session;
+
+    if (!secretWord || !gameHasStarted || gameIsFinished) {
+        res.status(403).json({ error: 'Game session is not active' });
         return;
     }
-    const guess:string = req.body.guess;
-    const { isValid, isExactMatch, error, results } = checkGuess(guess, secretWord);
+
+    const guess: string = req.body.guess;
+    const { isValid, isExactMatch, error, results } = checkGuess(
+        guess,
+        secretWord
+    );
+
     if (!isValid) {
         res.status(400).json({ error });
         return;
     }
 
-    const gameState = getGameState({
-        results, 
-        secretWord, 
-        isExactMatch, 
-        gameStartTimestamp, 
-        guessesRemaining,
-    });
+    req.session.endTime = new Date().toString();
+    const sessionData = req.session as SessionData;
+    sessionData.playerHasWon = isExactMatch;
+    const gameState = getGameState(sessionData, results);
+
+    req.session.results = gameState.results;
+    req.session.gameIsFinished = gameState.gameIsFinished;
     req.session.guessesRemaining = gameState.guessesRemaining;
-    
-    if (gameState.gameIsFinished) {
-        req.session.destroy(err => { if (err) throw err }); //Clear the session when game finishes
-    }
-   
+    req.session.currentGuess = gameState.currentGuess;
+    req.session.playerHasWon = gameState.playerHasWon;
+    req.session.score = gameState.score;
+    req.session.gameTime = gameState.gameTime;
+
     res.json({ ...gameState });
 });
 
 export default router;
-

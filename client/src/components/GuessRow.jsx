@@ -3,7 +3,7 @@ export default function GuessRow({ results }) {
         <div className="board-row">
             {results.map((res, index) => {
                 const { letter, result } = res;
-                return(
+                return (
                     <div key={index} className={`${result} tile`}>
                         {letter.toLocaleUpperCase()}
                     </div>

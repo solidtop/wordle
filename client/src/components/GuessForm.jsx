@@ -3,21 +3,33 @@ import { useState } from 'react';
 export default function GuessForm({ onGuess, length }) {
     const [text, setText] = useState('');
 
+    function handleChange(e) {
+        const resultText = e.target.value.replace(/[^a-z]/gi, '');
+        setText(resultText);
+    }
+
     return (
-        <form className="guess-form" onSubmit={e => {
-            e.preventDefault();
-            e.target.reset();
-            onGuess(text);
-        }}>
-            <input 
-                type="text" 
+        <form
+            className="guess-form"
+            onSubmit={(e) => {
+                e.preventDefault();
+                setText('');
+                onGuess(text);
+            }}
+        >
+            <input
+                type="text"
+                value={text}
+                className="guess-input"
                 id="guessInput"
-                onChange={e => setText(e.target.value)}
+                onChange={handleChange}
                 minLength={length}
                 maxLength={length}
                 required
             />
-            <button type="submit" className="btn primary">ENTER</button>
+            <button title="Enter guess" type="submit" className="btn primary">
+                ENTER
+            </button>
         </form>
     );
 }

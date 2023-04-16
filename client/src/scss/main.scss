@@ -8,7 +8,7 @@ body, html {
     background-color: black;
 
     @media (min-width: $bp-medium) {
-        font-size: 24px;    
+        font-size: 18px;    
     }
 
     @include container;
@@ -25,6 +25,7 @@ body, html {
 @import 'sections/header.scss';
 @import 'sections/game.scss';
 @import 'sections/menu-bar.scss';
+@import 'sections/game-end-menu.scss';
 @import 'sections/settings-menu.scss';
 @import 'sections/main-nav.scss';
 @import 'sections/highscores.scss';

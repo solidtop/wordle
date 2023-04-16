@@ -2,6 +2,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    gap: .5em;
     margin: .5em;
     @include line-break(2px, rgba(white, .2))
 }

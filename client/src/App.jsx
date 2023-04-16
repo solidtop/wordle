@@ -1,88 +1,121 @@
-import { useEffect, useState } from 'react'
-import APIAdapter from './api.js';
+import { useEffect, useState } from 'react';
+import APIAdapter from './utils/api.js';
 import Board from './components/Board';
 import GuessForm from './components/GuessForm';
 import MenuBar from './components/MenuBar';
+import GameEndMenu from './components/GameEndMenu';
+import GameTimer from './components/GameTimer';
+import { loadSettings } from './settings.js';
 
 function App() {
-  const [results, setResults] = useState(initResults(5, 6));
-  const [currentGuess, setCurrentGuess] = useState(0);
-  const [guessesRemaining, setGuessesRemaining] = useState(5);
+    const [settings, setSettings] = useState(loadSettings());
+    const [results, setResults] = useState([[]]);
+    const [gameHasStarted, setGameHasStarted] = useState(false);
+    const [gameIsFinished, setGameIsFinished] = useState(false);
+    const [endResults, setEndResults] = useState(null);
+    const [gameTime, setGameTime] = useState(0);
 
-  useEffect(() => {
-    async function startGame() {
-      const api = new APIAdapter();
-      const res = await api.fetchSecretWord(`?length=${length}&allowRepeats=${true}`);
-      if (res.error) {
-        console.log(res.error);
-        return;
-      }
+    async function startGame(restart = false) {
+        const { wordLength, uniqueLetters } = settings;
 
-      setResults(initResults(length, 6));
+        const api = new APIAdapter();
+        const res = await api.fetchSecretWord(
+            wordLength || 5,
+            uniqueLetters ? true : false,
+            restart
+        );
+
+        if (res.error) {
+            return alert(res.error);
+        }
+
+        setResults(res.results);
+        setGameHasStarted(res.gameHasStarted || true);
+        setGameIsFinished(res.gameIsFinished || false);
+        setGameTime(res.gameTime || 0);
+
+        if (res.gameIsFinished) {
+            handleGameEnd(res);
+        }
     }
 
-    startGame();
-    
-  }, []);
-  
-  async function handleGuess(guess) {
-    // Send guess to server
-    const res = await fetch('/api/guess', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json', 
-      },
-      body: JSON.stringify({guess}),
-    });
-      //get response
-      const data = await res.json();
-      console.log(data);
+    useEffect(() => {
+        startGame();
+    }, []);
 
-      /*const newResults = mockResponse(guess);
-      const updatedResults = [...results];
-      updatedResults[currentGuess] = newResults; 
-      setResults(updatedResults);
-      setCurrentGuess(currentGuess + 1);
-      setGuessesRemaining(guessesRemaining - 1);
-      */
-  };
+    function handleRestart() {
+        startGame(true);
+        setGameHasStarted(false);
+        setGameIsFinished(false);
+    }
 
-  return (
-    <div className="App">
-      <MenuBar/>
-      <Board results={results}/>
-      <GuessForm onGuess={handleGuess} length={results[0].length}/> 
-    </div>
-  )
-}
+    async function handleGuess(guess) {
+        const api = new APIAdapter();
+        const res = await api.postGuess(guess);
 
-function mockResponse(guess) {
-    return guess.split('').map(letter => {
-      return {
-        letter,
-        result: Math.random() <= .33 ? 'correct' : Math.random() <= .33 ? 'incorrect' : 'misplaced'
-      }
-    });
-}
+        if (res.error) {
+            return alert(res.error);
+        }
 
-function initResults(rows, cols) {
-  const totalResults = [];
-  for (let i = 0; i < cols; i++) {
-    totalResults.push(emptyResults(rows));
-  }
+        setGameIsFinished(res.gameIsFinished);
+        setResults(res.results);
 
-  return totalResults;
-}
+        if (res.gameIsFinished) {
+            handleGameEnd(res);
+        }
+    }
 
-function emptyResults(num) {
-  let arr = [];
-  for (let i = 0; i < num; i++) {
-    arr.push({
-      letter: '',
-      result: '',
-    })
-  }
-  return arr;
+    function handleGameEnd(res) {
+        setEndResults({
+            isWin: res.playerHasWon,
+            score: res.score,
+            secretWord: res.secretWord,
+            guesses: res.currentGuess + 1,
+            time: new Date(res.gameTime),
+            highscorePosted: res.highscorePosted,
+        });
+    }
+
+    return (
+        <div className="App">
+            <MenuBar
+                settings={settings}
+                setSettings={setSettings}
+                onRestart={handleRestart}
+            />
+
+            {gameHasStarted && (
+                <>
+                    {!gameIsFinished && <GameTimer time={gameTime} />}
+                    <Board results={results} />
+
+                    <div className="game-inputs">
+                        <button
+                            className="btn-restart"
+                            onClick={handleRestart}
+                            title="Restart game"
+                        ></button>
+                        <GuessForm
+                            onGuess={handleGuess}
+                            length={results[0].length}
+                        />
+                    </div>
+                </>
+            )}
+
+            {gameIsFinished && endResults && (
+                <GameEndMenu
+                    isWin={endResults.isWin}
+                    score={endResults.score}
+                    secretWord={endResults.secretWord}
+                    guesses={endResults.guesses}
+                    time={endResults.time}
+                    onRestart={handleRestart}
+                    showForm={!endResults.highscorePosted}
+                />
+            )}
+        </div>
+    );
 }
 
 export default App;

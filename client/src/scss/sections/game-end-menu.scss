@@ -1,0 +1,57 @@
+.game-end-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+        width: 100%;
+        text-align: center;
+        @include line-break(2px, white);
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    .score {
+        margin: 0;
+        font-size: 2rem;
+    }
+
+    .time {
+        font-size: 1.3rem;
+    }
+
+    .secret-word {
+        color: $tile-correct-color;
+    }
+
+    .guesses {
+        color: $tile-misplaced-color;
+    }
+
+    .highscore-form {
+        align-self: flex-start;
+
+        input, button {
+            display: block;
+        }
+
+        strong {
+            color: rgb(222, 63, 63);
+            font-size: .8rem;
+        }
+    }
+
+    .btn.secondary {
+        font-size: .9rem;
+    }
+
+    .btn.primary {
+        margin-top: 2em;
+        margin-left: auto;
+        margin-right: 0;
+    }
+}   
+
