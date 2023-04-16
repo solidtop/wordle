@@ -35,7 +35,6 @@ function App() {
         setGameTime(res.gameTime || 0);
 
         if (res.gameIsFinished) {
-            setInputDisabled(true);
             handleGameEnd(res);
         }
     }
