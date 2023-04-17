@@ -5,6 +5,23 @@
     background-color: $container-color;
 }
 
+.filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1em;
+
+    input {
+        width: 1em;
+    }
+
+    label {
+        margin-left: 2em;
+        margin-right: .5em;
+        font-size: .8rem;
+    }
+}
+
 .col-headers {
     display: grid;
     grid-template-columns: repeat(5, 1fr);

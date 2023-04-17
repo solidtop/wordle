@@ -1,6 +1,24 @@
 <div class="container">
     <h2 class="headline headline--center">HIGHSCORES</h2>
 
+    <aside class="filters">
+        <div class="dropdown">
+            <button class="dropdown-toggle">{{dropdown.active}} letters</button>
+            <menu class="dropdown-menu">
+                {{#each dropdown.items}}
+                <li>
+                    <a href={{this.href}}>{{this.label}}</a>
+                </li>
+                {{/each}}
+            </menu>
+        </div>
+       
+        <label for="letters-checkbox">Unique letters</label>
+        <a href="/highscores?wordLength={{dropdown.active}}&uniqueLetters={{#if checkbox.checked}}false{{else}}true{{/if}}">
+            <input type="checkbox" id="letters-checkbox" {{#if checkbox.checked}}checked{{/if}}>
+        </a>
+    </aside>
+
     <div class="col-headers">
         <h3>RANK</h3>
         <h3>NAME</h3>
@@ -21,9 +39,11 @@
             </li>
             {{/each}} 
         {{else}}
-            <h3>No highscores yet</h3>
+            <h3 class="headline headline--center">No highscores yet</h3>
         {{/if}}
     </ol>
 </div>
+
+<script src="/dropdown.js" type="module"></script>
 
 

@@ -26,7 +26,7 @@ router.post('/highscores', async (req, res) => {
     const highscore = new Highscore({
         name,
         time: gameTime,
-        guesses: currentGuess + 1,
+        guesses: currentGuess,
         score,
         settings,
     });

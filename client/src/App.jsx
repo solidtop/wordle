@@ -5,7 +5,7 @@ import GuessForm from './components/GuessForm';
 import MenuBar from './components/MenuBar';
 import GameEndMenu from './components/GameEndMenu';
 import GameTimer from './components/GameTimer';
-import { loadSettings } from './settings.js';
+import { loadSettings } from './utils/settings.js';
 
 function App() {
     const [settings, setSettings] = useState(loadSettings());

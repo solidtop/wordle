@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SettingsMenu from './SettingsMenu';
-import { saveSettings } from '../settings';
+import { saveSettings } from '../utils/settings';
 
 function MenuBar({ settings, setSettings }) {
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);

@@ -1,5 +1,5 @@
 /* Wordle colors */
-ul, ol {
+ul, ol, menu {
   list-style: none;
   list-style-position: inside;
 }
@@ -129,6 +129,68 @@ body, html {
     transform: scale(1);
   }
 }
+.dropdown {
+  position: relative;
+  display: block;
+}
+
+.dropdown-toggle {
+  display: block;
+  margin: 0.5em 0;
+  padding: 0.5em 2em;
+  padding-left: 1em;
+  font-size: 16px;
+  color: white;
+  background-color: #3a3a3c;
+  border: none;
+  border-radius: 5px;
+}
+.dropdown-toggle::after {
+  content: "";
+  position: absolute;
+  width: 0.7em;
+  height: 0.5em;
+  margin: 0.3em 0.6em;
+  background-color: white;
+  clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+
+.dropdown-toggle.selected {
+  filter: brightness(150%);
+}
+.dropdown-toggle.selected::after {
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  z-index: 90;
+  border-radius: 5px;
+  background-color: #3a3a3c;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+.dropdown-menu a {
+  display: block;
+  padding: 0.3em 1em;
+  text-align: center;
+  word-wrap: normal;
+  font-size: 16px;
+  font-weight: 300;
+  border-radius: 5px;
+}
+.dropdown-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
 /* Sections */
 .header {
   padding: 1em;
@@ -402,6 +464,21 @@ body, html {
   padding: 1em 0;
   border-radius: 10px;
   background-color: #121213;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1em;
+}
+.filters input {
+  width: 1em;
+}
+.filters label {
+  margin-left: 2em;
+  margin-right: 0.5em;
+  font-size: 0.8rem;
 }
 
 .col-headers {

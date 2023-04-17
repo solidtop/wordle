@@ -1,14 +1,13 @@
 import express from 'express';
-import { getActiveMenu, getMainNav } from '../utils/menus';
+import { getActiveMenu, getMainNav, getDropdownFilter } from '../utils/menus';
 import Highscore from '../models/highscore';
 
 const router = express.Router();
 
 router.get('/highscores', async (req, res) => {
-    const wordLength = parseInt(req.query.wordLength as string) || 5;
-    const uniqueLetters = req.query.uniqueLetters
-        ? req.query.uniqueLetters === 'true'
-        : false;
+    const wordLength = parseInt(req.query.wordLength as string) || req.session.settings?.wordLength || 5;
+    const uniqueLetters =
+        req.query.uniqueLetters ? req.query.uniqueLetters === 'true' : req.session.settings?.uniqueLetters || false;
 
     try {
         const highscores = await Highscore.find({
@@ -20,12 +19,16 @@ router.get('/highscores', async (req, res) => {
         .sort({ score: -1 })
         .limit(10);
 
-        res.render("highscores", {
-            menu: getActiveMenu(
-                getMainNav(),
-                `/highscores`
-            ),
-            highscores: highscores.map(highscore => highscore.toObject()),
+        res.render('highscores', {
+            menu: getActiveMenu(getMainNav(), `/highscores`),
+            highscores: highscores.map((highscore) => highscore.toObject()),
+            dropdown: {
+                active: wordLength,
+                items: getDropdownFilter(uniqueLetters),
+            },
+            checkbox: {
+                checked: uniqueLetters,
+            }
         });
     } catch(err) {
         console.log(err);
