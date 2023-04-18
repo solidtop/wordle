@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SettingsMenu from './SettingsMenu';
 import { saveSettings } from '../utils/settings';
 
-function MenuBar({ settings, setSettings }) {
+function MenuBar({ settings, setSettings, onRestart }) {
     const [showSettingsMenu, setShowSettingsMenu] = useState(false);
 
     function handleSettingsMenu() {
@@ -27,6 +27,7 @@ function MenuBar({ settings, setSettings }) {
                         saveSettings(data);
                         setSettings(data);
                         setShowSettingsMenu(false);
+                        onRestart(data);
                     }}
                 />
             )}

@@ -420,9 +420,7 @@ body, html {
   margin: 0;
 }
 .settings-menu .btn {
-  position: absolute;
-  right: 1em;
-  bottom: 1em;
+  float: right;
 }
 
 .menu-row {

@@ -15,7 +15,7 @@ function App() {
     const [endResults, setEndResults] = useState(null);
     const [gameTime, setGameTime] = useState(0);
 
-    async function startGame(restart = false) {
+    async function startGame(restart, settings) {
         const { wordLength, uniqueLetters } = settings;
 
         const api = new APIAdapter();
@@ -40,11 +40,11 @@ function App() {
     }
 
     useEffect(() => {
-        startGame();
+        startGame(false, settings);
     }, []);
 
-    function handleRestart() {
-        startGame(true);
+    function handleRestart(settings) {
+        startGame(true, settings);
         setGameHasStarted(false);
         setGameIsFinished(false);
     }
@@ -92,7 +92,7 @@ function App() {
                     <div className="game-inputs">
                         <button
                             className="btn-restart"
-                            onClick={handleRestart}
+                            onClick={() => handleRestart(settings)}
                             title="Restart game"
                         ></button>
                         <GuessForm

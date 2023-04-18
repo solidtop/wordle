@@ -36,3 +36,4 @@ export function getDropdownFilter(uniqueLetters: boolean): Menu[] {
 
     return items;
 }
+

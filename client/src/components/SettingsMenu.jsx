@@ -59,12 +59,7 @@ export default function SettingsMenu({ wordLengths, settings, onSave }) {
                         />
                     </div>
 
-                    <div className="menu-row">
-                        <strong>
-                            The changes will take effect after the game has been
-                            restarted.
-                        </strong>
-                    </div>
+                    <button type="submit" className="btn btn primary">SAVE</button>
                 </form>
             </div>
         </div>
