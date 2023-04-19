@@ -1,15 +1,12 @@
 .container {
     margin: 1em;
-    padding: 1em 0;
     border-radius: 10px;
-    background-color: $container-color;
 }
 
 .filters {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 1em;
 
     input {
         width: 1em;
@@ -21,48 +18,40 @@
         font-size: .8rem;
         pointer-events: none;
     }
+
+    @include line-break(2px, $border-color);
 }
 
-.col-headers {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-items: center;
-    padding: 1em;
-
-    h3 {
-        font-size: .8rem;
-        font-weight: bold;
-        margin: 0;
-        text-align: left;
-    }
-}
-
-.highscore-list {
-    margin: 0;
-    padding: 0 1em;
+.highscore-table {
+    margin-top: 2em;
+    table-layout: fixed;
+    border-spacing: 0 5px;
+    width: 100%;
     overflow-y: scroll;
-    height: 500px;
+    text-align: center;
 
-    h3 {
-        font-size: 1rem;
+    caption {
+        display: none;
+    }
+
+    th {
+        padding: .5em 1em;
+        font-size: .8rem;
+    }
+
+    td {
+        padding: 1em 1em;
+        font-size: .7rem;
+        background-color: $container-color;
+
+        &:first-child {
+            border-radius: 5px 0 0 5px;
+        }
+
+        &:last-child {
+            border-radius: 0 5px 5px 0;
+        }
     }
 }
 
-.highscore {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-items: center;
-    margin: 1em 0;
-    padding: .5em;
-    gap: 2em;
 
-    &__stat {
-        margin: 0;
-        font-size: 1rem;
-        max-width: 200px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    @include line-break(2px, $text-color1);
-}

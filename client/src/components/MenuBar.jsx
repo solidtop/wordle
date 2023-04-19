@@ -24,10 +24,12 @@ function MenuBar({ settings, setSettings, onRestart }) {
                     wordLengths={[5, 6, 7, 8, 9, 10]}
                     settings={settings}
                     onSave={(data) => {
+                        if (JSON.stringify(data) !== JSON.stringify(settings)) {
+                            onRestart(data);
+                        }
                         saveSettings(data);
                         setSettings(data);
                         setShowSettingsMenu(false);
-                        onRestart(data);
                     }}
                 />
             )}

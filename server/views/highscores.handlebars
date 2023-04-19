@@ -1,6 +1,4 @@
 <div class="container">
-    <h2 class="headline headline--center">HIGHSCORES</h2>
-
     <aside class="filters">
         <div class="dropdown">
             <button class="dropdown-toggle">{{dropdown.active}} letters</button>
@@ -14,34 +12,37 @@
         </div>
        
         <label for="letters-checkbox">Unique letters</label>
+
         <a href="/highscores?wordLength={{dropdown.active}}&uniqueLetters={{#if checkbox.checked}}false{{else}}true{{/if}}">
             <input type="checkbox" id="letters-checkbox" {{#if checkbox.checked}}checked{{/if}}>
         </a>
     </aside>
 
-    <div class="col-headers">
-        <h3>RANK</h3>
-        <h3>NAME</h3>
-        <h3>TIME</h3>
-        <h3>GUESSES</h3>
-        <h3>SCORE</h3>
-    </div>
+    {{#if highscores}}
+        <table class="highscore-table">
+            <caption>HIGHSCORES</caption>
 
-    <ol class="highscore-list">
-        {{#if highscores}} 
-            {{#each highscores}}
-            <li class="highscore">
-                <p class="highscore__stat">{{inc @index}}</p>
-                <p class="highscore__stat">{{this.name}}</p>
-                <p class="highscore__stat">{{formatTime this.time}}</p>
-                <p class="highscore__stat">{{this.guesses}}</p>
-                <p class="highscore__stat">{{this.score}}</p>
-            </li>
-            {{/each}} 
-        {{else}}
-            <h3 class="headline headline--center">No highscores yet</h3>
-        {{/if}}
-    </ol>
+            <tr>
+                <th>RANK</th>
+                <th>NAME</th>
+                <th>TIME</th>
+                <th>GUESSES</th>
+                <th>SCORE</th>
+            </tr>
+
+                {{#each highscores}}
+                <tr>
+                    <td>{{inc @index}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{formatTime this.time}}</td>
+                    <td>{{this.guesses}}</td>
+                    <td>{{this.score}}</td>
+                </tr>
+                {{/each}} 
+        </table>
+    {{else}}
+        <h3 class="headline headline--center">No highscores yet</h3>
+    {{/if}}
 </div>
 
 <script src="../dropdown.js" type="module"></script>

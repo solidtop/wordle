@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
 @import 'variables.scss';
 @import 'misc.scss';
 @import 'mixins.scss';
@@ -5,7 +6,7 @@
 body, html {
     margin: 0;
     padding: 0;
-    background-color: black;
+    background-color: #222831;
 
     @media (min-width: $bp-medium) {
         font-size: 18px;    
@@ -15,12 +16,13 @@ body, html {
 }
 
 * {
-    font-family: sans-serif;
+    font-family: 'Noto Sans', sans-serif;
     color: $text-color1;
 }
 
 @import 'modal.scss';
 @import 'dropdown.scss';
+@import 'checkbox.scss';
 
 /* Sections */
 @import 'sections/header.scss';

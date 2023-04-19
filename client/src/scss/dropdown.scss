@@ -27,7 +27,7 @@
 }
 
 .dropdown-toggle.selected {
-    filter: brightness(150%);
+    outline: solid 2px $border-color;
 
     &::after {
         clip-path: polygon(50% 0, 100% 100%, 0 100%);
