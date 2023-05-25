@@ -1,4 +1,4 @@
 export default interface Menu {
-    label: string,
-    href: string,
+  label: string;
+  href: string;
 }
