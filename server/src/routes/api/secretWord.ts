@@ -1,8 +1,8 @@
 import express from 'express';
 import APIAdapter from '../../utils/api';
 import getRandomWord from '../../controllers/randomWord';
-import { NUM_GUESSES, TIME_LIMIT } from '../../constants';
-import { initResults, getGameState, getElapsedTime } from '../../controllers/gameController';
+import { NUM_GUESSES } from '../../constants';
+import { initResults, getGameState } from '../../controllers/gameController';
 import { SessionData } from 'express-session';
 
 const router = express.Router();
