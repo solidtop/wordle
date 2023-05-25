@@ -1,5 +1,5 @@
-import { describe, it, expect } from '@jest/globals';
-import getRandomWord, { hasDuplicates } from './randomWord';
+import { describe, it, expect } from "@jest/globals";
+import getRandomWord, { hasDuplicates } from "./randomWord";
 
 /*
     TESTING OBJECTIVES
@@ -12,57 +12,57 @@ import getRandomWord, { hasDuplicates } from './randomWord';
     - Verify that hasDuplicates() works correctly with empty strings or strings with special characters.
 */
 
-describe('getRandomWord()', () => {
-    it('returns an uppercase word', () => {
-        const wordList = ['apple', 'banana', 'cherry', 'grape'];
-        const wordLength = 5;
-        const word = getRandomWord(wordList, wordLength, false);
-        expect(word).toBe(word.toUpperCase());
-    });
+describe("getRandomWord()", () => {
+  it("returns an uppercase word", () => {
+    const wordList = ["apple", "banana", "cherry", "grape"];
+    const wordLength = 5;
+    const word = getRandomWord(wordList, wordLength, false);
+    expect(word).toBe(word.toUpperCase());
+  });
 
-    it('returns a word of the correct length with unique letters', () => {
-        const wordList = ['APPLE', 'BANANA', 'CHERRY', 'GRAPE'];
-        const wordLength = 5;
-        const word = getRandomWord(wordList, wordLength, true);
-        expect(word.length).toBe(wordLength);
-        expect(hasDuplicates(word)).toBe(false);
-    });
+  it("returns a word of the correct length with unique letters", () => {
+    const wordList = ["APPLE", "BANANA", "CHERRY", "GRAPE"];
+    const wordLength = 5;
+    const word = getRandomWord(wordList, wordLength, true);
+    expect(word.length).toBe(wordLength);
+    expect(hasDuplicates(word)).toBe(false);
+  });
 
-    it('returns a word of the correct length with duplicate letters', () => {
-        const wordList = ['APPLE', 'BANANA', 'CHERRY', 'GRAPE'];
-        const wordLength = 5;
-        const word = getRandomWord(wordList, wordLength, false);
-        expect(word.length).toBe(wordLength);
-    });
+  it("returns a word of the correct length with duplicate letters", () => {
+    const wordList = ["APPLE", "BANANA", "CHERRY", "GRAPE"];
+    const wordLength = 5;
+    const word = getRandomWord(wordList, wordLength, false);
+    expect(word.length).toBe(wordLength);
+  });
 
-    it('throws an error if it cannot find a matching word', () => {
-        const wordList = ['APPLE', 'BANANA', 'CHERRY', 'GRAPE'];
-        const wordLength = 7;
-        expect(() => getRandomWord(wordList, wordLength, false)).toThrow();
-    });
+  it("throws an error if it cannot find a matching word", () => {
+    const wordList = ["APPLE", "BANANA", "CHERRY", "GRAPE"];
+    const wordLength = 7;
+    expect(() => getRandomWord(wordList, wordLength, false)).toThrow();
+  });
 
-    it('returns a word from the input wordList', () => {
-        const wordList = ['APPLE', 'BANANA', 'CHERRY', 'GRAPE'];
-        const wordLength = 5;
-        const word = getRandomWord(wordList, wordLength, false);
-        expect(wordList).toContain(word);
-    });
+  it("returns a word from the input wordList", () => {
+    const wordList = ["APPLE", "BANANA", "CHERRY", "GRAPE"];
+    const wordLength = 5;
+    const word = getRandomWord(wordList, wordLength, false);
+    expect(wordList).toContain(word);
+  });
 });
 
-describe('hasDuplicates()', () => {
-    it('correctly identifies words with duplicate letters', () => {
-        const word1 = 'hello';
-        const word2 = 'mississippi';
-        const word3 = 'banana';
-        expect(hasDuplicates(word1)).toBe(true);
-        expect(hasDuplicates(word2)).toBe(true);
-        expect(hasDuplicates(word3)).toBe(true);
-    });
+describe("hasDuplicates()", () => {
+  it("correctly identifies words with duplicate letters", () => {
+    const word1 = "hello";
+    const word2 = "mississippi";
+    const word3 = "banana";
+    expect(hasDuplicates(word1)).toBe(true);
+    expect(hasDuplicates(word2)).toBe(true);
+    expect(hasDuplicates(word3)).toBe(true);
+  });
 
-    it('returns false for an empty string or a single-character string', () => {
-        const word1 = '';
-        const word2 = 'a';
-        expect(hasDuplicates(word1)).toBe(false);
-        expect(hasDuplicates(word2)).toBe(false);
-    });
+  it("returns false for an empty string or a single-character string", () => {
+    const word1 = "";
+    const word2 = "a";
+    expect(hasDuplicates(word1)).toBe(false);
+    expect(hasDuplicates(word2)).toBe(false);
+  });
 });

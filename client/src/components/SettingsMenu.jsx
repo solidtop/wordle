@@ -14,7 +14,6 @@ export default function SettingsMenu({
     const formData = new FormData(form);
     const settingsData = Object.fromEntries(formData.entries());
     onSave(settingsData);
-    console.log("saved");
   }
 
   return (
